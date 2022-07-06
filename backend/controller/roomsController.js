@@ -23,7 +23,7 @@ const createRoom = asyncHandler(async (req, res) => {
   })
 
   const savedRoom = await room.save()
-  room.json(savedRoom)
+  res.json(savedRoom)
 })
 
 module.exports = {
