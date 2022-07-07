@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./styles.css">
+
+    <title>Hotel Management System</title>
+  </head>
+  <body>
+    <header>
+      <!-- hotel logo and page name -->
+      <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+          <img
+          src="./images/logowhite.png"
+            width="30"
+            height="30"
+            class="d-inline-block align-top"
+            alt=""
+          />
+          Room Management
+        </a>
+        
+        <nav class="navbar-back">
+          <a button="back" href="./dashboard.html">
+         Back to Dashboard
+          </button>
+        </a>
+      </nav>
+    </header>
+    <main>
+      <div class="container">
+        <!-- select monitoring to view -->
+        <div class="col-md-4 mb-3">
+          <select
+            class="form-select"
+            onchange="location=this.value;"
+            aria-label="Monitoring"
+          >
+            <option value="room-management.html">Choose Monitoring...</option>
+            <option value="room-monitoring.html">Room Monitoring</option>
+            <option value="bed-monitoring.html">Bed Monitoring</option>
+            <option value="#" selected>Payment Monitoring</option>
+          </select>
+        </div>
+        This is payment monitoring
+      </div>
+    </main>
+    <!-- Optional JavaScript; choose one of the two! -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+      integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
+      integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

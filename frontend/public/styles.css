@@ -1,0 +1,237 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body{
+        background-color: black;
+        color: white;
+    }
+    .navbar.navbar-dark.bg-dark{
+        letter-spacing: 1px;
+    }
+    .navbar-back{
+        padding-right: 10px;
+        padding-left: 5px;
+    }
+    .navbar-logout{
+        padding-right: 10px;
+        padding-left: 5px;
+    }
+
+    /* DASHBOARD */
+    .rounded.float-left{
+        padding-bottom: 30px;
+        text-align: center;
+        width: 654px;
+        height: 300px;
+    }
+/* 2 ROWS BELOW DASHBOARD PIC */
+    .tb.col-md-6{
+        border: 4px solid white;
+        text-align: center;
+        border-radius: 2
+    }
+    .tb.col-md-6 h5{
+        margin-top: 8px;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        line-height: 1.2;
+    }
+    .row.row-secondary{
+        height: 250px;
+        width: 1300px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .table, .roomsavailable{
+        margin-top: 20px;
+    }
+    .roomsAvailable h1{
+        font-size: 100px;
+    }
+     
+/* ACCORDION */
+        
+    .accordion-body{
+        text-align: center;
+        background-color: black;
+    }
+    .accordion-body button a{
+        color: black;
+    }
+    .accordion-button{
+        position: relative;
+        display: flex;
+        width: 100%;
+        padding-right: 20px;
+        font-size: 18px;
+        border: 0;
+        border-radius: 0;
+        overflow-anchor: none;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,border-radius .15s ease;
+        flex-direction: row;
+        align-content: center;
+        align-items: center;
+        background-color: darkcyan;
+        color: white;
+        letter-spacing: 1px;        
+    }
+    /* Accordion BUTTONS */
+    .accordion-body button.btn.btn-secondary{
+        margin-left: 5px;
+        padding-left: 10px;
+        border: 2px solid darkgrey;
+        width: 200px;
+        height: 100px;
+        color: black;
+        background-color: #b8e3ff;
+    }
+    .accordion-body button.btn.btn-secondary a{
+        text-decoration: none;
+    }
+
+/* LOGIN FORM */
+.input-container{
+    padding: 16px 50px 16px 50px;
+    height: 100px;
+    font-size: medium;
+}
+.login-form{
+    padding-top: 30px;
+    border: 3px solid #f1f1f1;
+    width: 520px;
+    height: 580px;
+    margin-left: 35vw;
+    background-color: #000000c9;
+    border-radius: 25px;
+}
+  .login-box{
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    }
+  .login-box h2{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    }
+  .wrapper{
+    background-image: url("./images/3.png");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100vw; min-height: 100vh;
+    background-size: cover;
+    } 
+  input[type=text], input[type=password] {
+    width: 100%;
+    padding: 14px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 2px solid black;
+    box-sizing: border-box;
+    font-size: medium;
+    border-radius: 20px;
+  }
+  /* Set a style for all buttons */
+  .input-container button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 100%;
+    font-size: medium;
+    font-weight: 700;
+  }
+.psw a{
+    color: white;
+  }
+  .input-container button:hover {
+    opacity: 0.9;
+  }
+  .input-container button.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+  }
+  .imglogo {
+    text-align: center;
+    margin: 20px 0 12px 0;
+  }
+  .logosize{
+    width: 30%;
+    border-radius: 50%;
+  }
+  /* The "Forgot password" text */
+  span.psw {
+    float: right;
+    padding-top: 16px;
+  }
+  .cancelbtn {
+      width: 100%;
+}
+
+/* FORMS - CHECK-IN and RESERVATION*/
+.col-md-4.mb-3{
+    margin-top: 20px;
+    margin-left: 15px;
+}
+.row.g-3{
+    color: black;
+    background-color: lightgrey;
+    border: 4px solid black;
+    border-radius: 25px;
+    margin: 10px;
+    padding: 30px;
+    width: 1100px;
+}
+.row.mb-3{
+   width: 500px;
+   align-items: center;
+   border-radius: 25px;
+   float: right;
+   
+}
+.btn-primary{
+    border: 2px solid darkcyan;
+    border-radius: 25px;
+    background-color: darkcyan;
+}
+.btn-primary.col-md-4 a{
+    color: white;
+    text-decoration: none;
+}
+.btn-primary.col-md-4 a:hover{
+    color: black;
+}
+.btn-primary:hover{
+    background-color: whitesmoke;
+    color: black;
+    border: 2px solid darkcyan;
+}
+.col-sm-9 input{
+    border-radius: 10px;
+    border: 1px solid gray;
+    margin: 0;
+    padding: 10px;
+    align-items: center;
+    color: lightslategrey;
+}
+.col-sm-9 select{
+    border-radius: 10px;
+    border: 1px solid gray;
+    margin: 0;
+    padding: 10px;
+    align-items: center;
+    color: black;
+}
+.col-md-6{
+    width: 300;
+}
+.col-sm-3.col-form-label{
+    font-size: large;
+}
