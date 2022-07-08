@@ -1,4 +1,4 @@
-# Hotel Reservation System
+# Hotel Reservation/Management System
 
 Group members:
 Acorda, Balaguer, Catalan, Gerona, Paingas, and Rayos
