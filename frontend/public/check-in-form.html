@@ -19,310 +19,259 @@
   <body>
     <header>
       <!-- hotel logo and page name -->
-      <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">
-          <img
-          src="./images/logowhite.png"
-            width="30"
-            height="30"
-            class="d-inline-block align-top"
-            alt=""
-          />
-          Forms
-        </a>
-        
-        <nav class="navbar-back">
-          <a button="back" href="./dashboard.html">
-         Back to Dashboard
-          </button>
-        </a>
-      </nav>
-    </header>
-    <main>
-      <div class="container check-in">
-        <!-- select form to view -->
-        <div class="col-md-4 mb-3">
-          TYPE:
-          <select
-            class="form-select"
-            onchange="location=this.value;"
-            aria-label="Check-In-Form"
-          >
-            <option value="forms.html">Choose Form...</option>
-            <option value="#" selected>Check-In Form</option>
-            <option value="reservation-form.html">Reservation Form</option>
-          </select>
+      <nav class="custom-nav">
+        <div class="title-logo-div">
+          <a href="#">
+            <img
+            src="./images/logowhite.png"
+              width="30"
+              height="30"
+              class="d-inline-block align-top"
+              alt=""
+            />
+            Forms
+          </a>
         </div>
-        <form class="row g-3">
-          <!-- left -->
-          <div class="col-md-6">
-            <h3>Customer's Information</h3>
-          </div>
-          <!-- right -->
-          <div class="col-md-6">
-            <h3>Room's Information</h3>
-          </div>
-          <!-- left -->
-          <div class="col-md-6">
-            <div class="row mb-3">
-              <label for="inputTransactionID" class="col-sm-3 col-form-label"
-                >Transaction ID</label
-              >
-              <div class="col-sm-9">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inputTransactionID"
-                />
-              </div>
-            </div>
-          </div>
-          <!-- right -->
-          <div class="col-md-6">
-            <div class="row mb-3">
-              <label for="inputRoomType" class="col-sm-3 col-form-label"
-                >Room Type</label
-              >
-              <div class="col-sm-9">
-                <select class="form-select" id="inputRoomType">
-                  <option selected>Choose...</option>
-                  <option value="Premium">Premium</option>
-                  <option value="Regular">Regular</option>
-                  <option value="RoomType3">Room Type 3</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <!-- left -->
-          <div class="col-md-6">
-            <!-- blank -->
-          </div>
-          <!-- right -->
-          <div class="col-md-6">
-            <div class="row mb-3">
-              <label for="inputRoomNumber" class="col-sm-3 col-form-label"
-                >Room Number</label
-              >
-              <div class="col-sm-9">
-                <select class="form-select" id="inputRoomTNumber">
-                  <option selected>Choose...</option>
-                  <option value="Room1">Room 1</option>
-                  <option value="Room2">Room 2</option>
-                  <option value="Room3">Room 3</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <!-- left -->
-          <div class="col-md-6">
-            <div class="row mb-3">
-              <label for="inputFirstName" class="col-sm-3 col-form-label"
-                >Customer's Name</label
-              >
-              <div class="col-sm-9">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inputFirstName"
-                  placeholder="First Name"
-                />
-              </div>
-            </div>
-          </div>
-          <!-- right -->
-
-          <div class="col-md-6">
-            <!-- blank -->
-          </div>
-          <!-- left -->
-          <div class="col-md-6">
-            <div class="row mb-3">
-              <label for="inputMiddleName" class="col-sm-3 col-form-label">
-                <!-- Middle Name -->
-              </label>
-              <div class="col-sm-9">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inputMiddleName"
-                  placeholder="Middle Name"
-                />
-              </div>
-            </div>
-          </div>
-          <!-- right -->
-          <div class="col-md-6">
-            <h3>Check-In's Information</h3>
-          </div>
-          <!-- left -->
-          <div class="col-md-6">
-            <div class="row mb-3">
-              <label for="inputLastName" class="col-sm-3 col-form-label">
-                <!-- Last Name -->
-              </label>
-              <div class="col-sm-9">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inputLastName"
-                  placeholder="Last Name"
-                />
-              </div>
-            </div>
-          </div>
-          <!-- right -->
-          <div class="col-md-6">
-            <div class="row mb-3">
-              <label for="inputCheckInDate" class="col-sm-3 col-form-label"
-                >Check-In Date</label
-              >
-              <div class="col-sm-9">
-                <input type="date" class="form-control" id="inputCheckInDate" />
-              </div>
-            </div>
-          </div>
-          <!-- left -->
-          <div class="col-md-6">
-            <!-- blank -->
-          </div>
-          <!-- right -->
-          <div class="col-md-6">
-            <div class="row mb-3">
-              <label for="inputDurationOfStay" class="col-sm-3 col-form-label"
-                >Duration Of Stay</label
-              >
-              <div class="col-sm-9">
-                <input
-                  type="number"
-                  class="form-control"
-                  id="inputDurationOfStay"
-                />
-              </div>
-            </div>
-          </div>
-          <!-- left -->
-          <div class="col-md-6">
-            <div class="row mb-3">
-              <label for="inputContactNumber" class="col-sm-3 col-form-label"
-                >Contact Number</label
-              >
-              <div class="col-sm-9">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inputContactNumber"
-                />
-              </div>
-            </div>
-          </div>
-          <!-- right -->
-          <div class="col-md-6">
-            <div class="row mb-3">
-              <label for="inputChechOutDate" class="col-sm-3 col-form-label"
-                >Check-Out Date</label
-              >
-              <div class="col-sm-9">
-                <input
-                  type="date"
-                  class="form-control"
-                  id="inputChechOutDate"
-                />
-              </div>
-            </div>
-          </div>
-          <!-- left -->
-          <div class="col-md-6">
-            <div class="row mb-3">
-              <label for="inputEmail" class="col-sm-3 col-form-label"
-                >Email</label
-              >
-              <div class="col-sm-9">
-                <input type="email" class="form-control" id="inputEmail" />
-              </div>
-            </div>
-          </div>
-          <!-- right -->
-          <div class="col-md-6">
-            <!-- blank -->
-          </div>
-          <!-- left -->
-          <div class="col-md-6">
-            <div class="row mb-3">
-              <label class="col-sm-3 col-form-label" for="selectGender"
-                >Gender</label
-              >
-              <!-- DUNNO WHAT TO PUT IN VALUE -->
-              <div class="col-sm-9">
-                <select class="form-select" id="selectGender">
-                  <option selected>Choose...</option>
-                  <option value="Girl">Female</option>
-                  <option value="Boy">Male</option>
-                  <option value="PreferNotToSay">Prefer Not To Say</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <!-- right -->
-          <div class="col-md-6">
-            <div class="row mb-3">
-              <label for="inputpaymentMethod" class="col-sm-4 col-form-label"
-                >Payment Method</label
-              >
-              <div class="col-sm-8">
-                <select class="form-select" id="inputpaymentMethod">
-                  <option selected>Choose...</option>
-                  <option value="Cash">Cash/Over The Counter</option>
-                  <option value="GCash">GCash</option>
-                  <option value="BankTransfer">Bank Transfer</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <!-- left -->
-          <div class="col-md-6">
-            <div class="row mb-3">
-              <label for="inputAddress" class="col-sm-3 col-form-label"
-                >Address</label
-              >
-              <div class="col-sm-9">
-                <input type="text" class="form-control" id="inputAddress" />
-              </div>
-            </div>
-          </div>
-          <!-- right -->
-          <div class="col-md-6">
-            <div class="row mb-3">
-              <div class="input-group col-md-8">
-                <label for="inputTotalAmount" class="col-sm-4 col-form-label"
-                  >Total Amount</label
+        <div>
+          <nav class="navbar-back">
+            <a button="back" href="./dashboard.html">
+          Back to Dashboard
+            </button>
+          </a>
+          </nav>
+        </div>
+    </header>
+    <main class="container check-in">
+      <div>
+        <form>
+          <div class="whole-form-container">
+            <div class="form-left-div">
+                  <!-- select form to view -->
+              <div class="input-div form-type-div">
+                <h1>
+                  TYPE
+                </h1>
+                
+                <select
+                  class="form-select"
+                  onchange="location=this.value;"
+                  aria-label="Check-In-Form"
                 >
-                <span class="input-group-text">Php.</span>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="inputTotalAmount"
-                  aria-label="Total Amount (to the nearest peso)"
-                />
-                <span class="input-group-text">.00</span>
+                  <option value="forms.html">Choose Form...</option>
+                  <option value="#" selected>Check-In Form</option>
+                  <option value="reservation-form.html">Reservation Form</option>
+                </select>
+              </div>
+
+              <div class="form-div form-part-1">
+                <h3>Customer's Information</h3>
+
+                <div class="input-div transacID-div">
+                  <label for="inputTransactionID" class="col-sm-3 col-form-label"
+                    >Transaction ID</label
+                  >
+                  <div class="transacID-input-div">
+                    <input
+                      type="text"
+                      id="inputTransactionID"
+                    />
+                  </div>
+                </div>
+                
+                <div class="input-div name-div">
+                  <label for="inputFirstName" class="col-sm-3 col-form-label"
+                    >Name</label
+                  >
+                  <div class="name-input-div">
+                    <input
+                      type="text"
+                      id="inputFirstName"
+                      placeholder="First Name"
+                    />
+                    <input
+                      type="text"
+                      id="inputMiddleName"
+                      placeholder="Middle Name"
+                    />
+                    <input
+                      type="text"
+                      id="inputLastName"
+                      placeholder="Last Name"
+                    />
+                  </div>
+                </div>
+                <div class="input-div contact-div">
+                  <label for="inputContactNumber" class="col-sm-3 col-form-label"
+                    >Contact Number</label
+                  >
+                  <div class="contact-input-div">
+                    <input
+                      type="text"
+                      id="inputContactNumber"
+                    />
+                  </div>
+                </div>
+
+                <div class="input-div email-div">
+                  <label for="inputEmail" class="col-sm-3 col-form-label"
+                    >Email</label
+                  >
+                  <div class="email-input-div">
+                    <input type="email"  id="inputEmail" />
+                  </div>
+                </div>
+
+                <div class="input-div gender-div">
+                  <label class="col-sm-3 col-form-label" for="selectGender"
+                    >Gender</label
+                  >
+                  <!-- DUNNO WHAT TO PUT IN VALUE -->
+                  <div class="gender-input-div">
+                    <select class="form-select" id="selectGender">
+                      <option selected>Choose...</option>
+                      <option value="Girl">Female</option>
+                      <option value="Boy">Male</option>
+                      <option value="PreferNotToSay">Prefer Not To Say</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="input-div address-div">
+                  <label for="inputAddress" class="col-sm-3 col-form-label"
+                    >Address</label
+                  >
+                  <div class="address-input-div">
+                    <input type="text"  id="inputAddress" />
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="form-right-div">
+              <div class="form-div form-part-2">
+                <h3>Room's Information</h3>
+    
+                <div class="input-div roomType-div">
+                  <label for="inputRoomType" class="col-sm-3 col-form-label"
+                    >Room Type</label
+                  >
+                  <div class="roomType-input-div">
+                    <select class="form-select" id="inputRoomType">
+                      <option selected>Choose...</option>
+                      <option value="Premium">Premium</option>
+                      <option value="Regular">Regular</option>
+                      <option value="RoomType3">Room Type 3</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="input-div roomNumber-div">
+                  <label for="inputRoomNumber" class="col-sm-3 col-form-label"
+                    >Room Number</label
+                  >
+                  <div class="roomNumber-input-div">
+                    <select class="form-select" id="inputRoomNumber">
+                      <option selected>Choose...</option>
+                      <option value="Room1">Room 1</option>
+                      <option value="Room2">Room 2</option>
+                      <option value="Room3">Room 3</option>
+                    </select>
+                  </div>
+                </div>
+    
+              </div>
+    
+              <div class="form-div form-part-3">
+                <h3>Check-In's Information</h3>
+    
+                <div class="input-div checkin-div">
+                  <label for="inputCheckInDate" class="col-sm-3 col-form-label"
+                    >Check-In Date</label
+                  >
+                  <div class="checkin-input-div">
+                    <input type="date"  id="inputCheckInDate" />
+                  </div>
+                </div>
+    
+                <div class="input-div stay-duration-div">
+                  <label for="inputDurationOfStay" class="col-sm-3 col-form-label"
+                    >Duration Of Stay</label
+                  >
+                  <div class="stay-duration-input-div">
+                    <input
+                      type="number"
+                      id="inputDurationOfStay"
+                    />
+                  </div>
+                </div>
+    
+                <div class="input-div checkout-div">
+                  <label for="inputCheckOutDate" class="col-sm-3 col-form-label"
+                    >Check-Out Date</label
+                  >
+                  <div class="checkout-input-div">
+                    <input
+                      type="date"
+                      id="inputCheckOutDate"
+                    />
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-div form-part-4">
+                <div class="input-div paymethod-div">
+                  <label for="inputPaymentMethod" class="col-sm-3 col-form-label"
+                    >Payment Method</label
+                  >
+                  <div class="paymethod-input-div">
+                    <select class="form-select" id="inputPaymentMethod">
+                      <option selected>Choose...</option>
+                      <option value="Cash">Cash/Over The Counter</option>
+                      <option value="GCash">GCash</option>
+                      <option value="BankTransfer">Bank Transfer</option>
+                    </select>
+                  </div>
+                </div>
+    
+                <div class="input-div totalamount-div">
+                  <label for="inputTotalAmount" class="col-sm-3 col-form-label"
+                    >Total Amount</label
+                  >
+                  <div class="totalamount-input-div">
+                    <span>Php.</span>
+                    <input
+                      type="number"
+                      id="inputTotalAmount"
+                      aria-label="Total Amount (to the nearest peso)"
+                    />
+                    <span>.00</span>
+                  </div>
+                </div>
+    
+                <div class="input-div form-buttons-div">
+                  <button type="submit" >
+                    Check-In
+                  </button>
+                  <button type="reset" >
+                    Reset
+                  </button>
+                  <button type="button" >
+                    <a href="./dashboard.html">Back</a>
+                  </button>
+                </div>
+    
               </div>
             </div>
           </div>
-          <!-- buttons -->
-          <div class="col-12">
-            <div class="row mb-3">
-              <button type="submit" class="btn btn-primary col-md-4">
-                Check-In
-              </button>
-              <button type="reset" class="btn btn-primary col-md-4">
-                Reset
-              </button>
-              <button type="button" class="btn btn-primary col-md-4">
-                <a href="./dashboard.html">Back</a>
-              </button>
-            </div>
-          </div>
+          
+          
+
+          
+
+          
         </form>
-      </div>
+        </div>
+        
     </main>
     <!-- Optional JavaScript; choose one of the two! -->
     <script

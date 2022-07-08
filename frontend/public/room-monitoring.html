@@ -19,17 +19,20 @@
   <body>
     <header>
       <!-- hotel logo and page name -->
-      <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">
-          <img
-          src="./images/logowhite.png"
-            width="30"
-            height="30"
-            class="d-inline-block align-top"
-            alt=""
-          />
-          Room Management
-        </a> 
+      <nav class="custom-nav">
+        <div class="title-logo-div">
+          <a href="#">
+            <img
+            src="./images/logowhite.png"
+              width="30"
+              height="30"
+              class="d-inline-block align-top"
+              alt=""
+            />
+            Room Management
+          </a> 
+        </div>
+        
         <nav class="navbar-back">
           <a button="back" href="./dashboard.html">
          Back to Dashboard
@@ -38,11 +41,11 @@
       </nav>
     </header>
     <main>
-      <div class="container">
+      <div class="container monitoring-container">
         <!-- select monitoring to view -->
-        <div class="col-md-4 mb-3">
+        <div>
           <select
-            class="form-select"
+            class="select-monitoring"
             onchange="location=this.value;"
             aria-label="Monitoring"
           >
@@ -53,48 +56,51 @@
           </select>
         </div>
         <!-- table for monitoring here -->
-        <table class="table table-dark table-hover">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Room Number</th>
-              <th scope="col">Status (Green/Red)</th>
-              <th scope="col">Room Type</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Room 1</td>
-              <td>Green</td>
-              <td>Premium</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Room 2</td>
-              <td>Green</td>
-              <td>Premium</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Room 3</td>
-              <td>Red</td>
-              <td>Premium</td>
-            </tr>
-            <tr>
-              <th scope="row">4</th>
-              <td>Room 4</td>
-              <td>Red</td>
-              <td>Regular</td>
-            </tr>
-            <tr>
-              <th scope="row">5</th>
-              <td>Room 5</td>
-              <td>Red</td>
-              <td>Regular</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-monitoring">
+          <table class="table-monitoring-design">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Room Number</th>
+                <th>Status (Green/Red)</th>
+                <th>Room Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Room 1</td>
+                <td>Green</td>
+                <td>Premium</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Room 2</td>
+                <td>Green</td>
+                <td>Premium</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Room 3</td>
+                <td>Red</td>
+                <td>Premium</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Room 4</td>
+                <td>Red</td>
+                <td>Regular</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Room 5</td>
+                <td>Red</td>
+                <td>Regular</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
       </div>
     </main>
     <!-- Optional JavaScript; choose one of the two! -->
