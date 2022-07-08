@@ -10,7 +10,7 @@ Acorda, Balaguer, Catalan, Gerona, Paingas, and Rayos
 1. Room Types
 2. Room Numbers
 3. Room Statuses
-4. Genders
+4. Bed Types
 5. Payment Methods
 
 ## Monitoring
