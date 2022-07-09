@@ -523,7 +523,10 @@ padding-top: 16px;
     height: 100%;
 }
 
-.table-monitoring-design th,td,thead,tbody
+.table-monitoring-design th,
+.table-monitoring-design td,
+.table-monitoring-design thead,
+.table-monitoring-design tbody
 {
     width: 25%;
     height:20%;
@@ -540,7 +543,8 @@ padding-top: 16px;
     border-bottom: 1px solid white;
 }
 
-.table-monitoring-design th,td{
+.table-monitoring-design th,
+.table-monitoring-design td{
     border-right: 1px solid white;
     font-size: 1.5em;
 }
