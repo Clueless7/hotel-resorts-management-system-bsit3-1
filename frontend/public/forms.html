@@ -13,7 +13,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./styles.css">
-
+    <script src="script.js" defer></script>
     <title>Hotel Management System</title>
   </head>
   <body>
@@ -21,12 +21,12 @@
       <!-- hotel logo and page name -->
       <nav class="custom-nav">
         <div class="title-logo-div">
-          <a href="#">
+          <a href="./dashboard.html">
             <img
             src="./images/logowhite.png"
               width="30"
               height="30"
-              class="d-inline-block align-top"
+              class="d-inline-block align-top rounded-circle"
               alt=""
             />
             Forms
@@ -35,27 +35,31 @@
         <div>
           <nav class="navbar-back">
             <a button="back" href="./dashboard.html">
-           Back to Dashboard
+          Back to Dashboard
             </button>
           </a>
-        </nav>
+          </nav>
         </div>
     </header>
-    <main>
-      <div class="container">
-        <!-- select form to view -->
-        <div class="col-md-4 mb-3">
-          <select
-            class="form-select"
-            onchange="location=this.value;"
-            aria-label="Form"
-          >
-            <option value="#" selected>Choose Form...</option>
-            <option value="check-in-form.html">Check-In Form</option>
-            <option value="reservation-form.html">Reservation Form</option>
-          </select>
-        </div>
-      </div>
+    <main class="container">
+        <form>
+          <!-- select form to view -->
+          <div class="initial-form-type-div">
+            <h1>
+              TYPE
+            </h1>
+            
+            <select
+              class="initial-form-select"
+              onchange="location=this.value;"
+              aria-label="Check-In-Form"
+            >
+              <option value="#" selected>Choose Form...</option>
+              <option value="check-in-form.html">Check-In Form</option>
+              <option value="reservation-form.html">Reservation Form</option>
+            </select>
+          </div>
+        </form>
     </main>
     <!-- Optional JavaScript; choose one of the two! -->
     <script
