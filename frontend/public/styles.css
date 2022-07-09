@@ -82,7 +82,7 @@ body{
 .img-div img {
     border-radius: 15px;
     height: 400px;
-    width: 627px;
+    width: 836px;
 }
 
 .accordion-div{
@@ -171,6 +171,7 @@ body{
 
 .accordion-item{
     border:none;
+    background-color: black;
     margin-bottom: 1rem;
 }
 
@@ -355,6 +356,7 @@ padding-top: 16px;
     margin-bottom:3rem;
 }
 
+
 .form-part-2 .input-div, .form-part-3 .input-div, .form-part-4 .input-div{
     margin-bottom: 1rem;
 }
@@ -372,6 +374,25 @@ padding-top: 16px;
     border:none;
     background-color: black;
 }
+
+.form-div h3{
+    left:-10px;
+    position: relative;
+    background-color: #222222;
+    border-radius: 5px;
+    border: 1px solid white;
+    width:50%;
+    text-align: center;
+}
+
+.form-part-1 h3{
+    top:-30px;
+}
+
+.form-part-2 h3, .form-part-3 h3{
+    top:-20px;
+}
+
 
 .input-div{
     display: flex;
@@ -429,7 +450,7 @@ padding-top: 16px;
 #inputTransactionID, #inputContactNumber, #inputEmail, 
 #selectGender, #inputAddress, #inputRoomType, #inputRoomNumber, 
 #inputCheckInDate, #inputDurationOfStay, #inputCheckOutDate, #inputPaymentMethod,
-#inputTotalAmount{
+#inputTotalAmount, #inputReservationDate{
     margin:0;
     padding:0;
     width:100%;
@@ -446,7 +467,7 @@ padding-top: 16px;
     border-right:1px solid white;
 }
 
-.table-design td:last-child,:last-child{
+.table-design td:last-child, th:last-child{
     border-right:none;
 }
 
@@ -502,7 +523,10 @@ padding-top: 16px;
     height: 100%;
 }
 
-.table-monitoring-design th,td,thead,tbody
+.table-monitoring-design th,
+.table-monitoring-design td,
+.table-monitoring-design thead,
+.table-monitoring-design tbody
 {
     width: 25%;
     height:20%;
@@ -519,7 +543,8 @@ padding-top: 16px;
     border-bottom: 1px solid white;
 }
 
-.table-monitoring-design th,td{
+.table-monitoring-design th,
+.table-monitoring-design td{
     border-right: 1px solid white;
     font-size: 1.5em;
 }
@@ -528,7 +553,7 @@ padding-top: 16px;
     border-bottom-right-radius: 15px;
 }
 
-:first-child{
+.table-monitoring-design td:first-child{
     border-bottom-left-radius: 15px;
 }
 
@@ -536,6 +561,7 @@ padding-top: 16px;
     border-bottom: none;
 }
 
-.table-monitoring-design tr:first-child th:last-child{
+.table-monitoring-design tr:first-child th:last-child, 
+.table-monitoring-design tr td:last-child{
     border-right: none;
 }
