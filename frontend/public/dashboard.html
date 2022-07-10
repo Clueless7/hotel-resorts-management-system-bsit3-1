@@ -26,7 +26,7 @@
             src="./images/logowhite.png"
               width="30"
               height="30"
-              class="d-inline-block align-top"
+              class="d-inline-block align-top rounded-circle"
               alt=""
             />
             DASHBOARD
@@ -44,6 +44,7 @@
     </header>
 
     <main>
+      <div class="container">
         <div class="first-row">
           <!-- hotel image  -->
           <div class="img-div">
@@ -51,7 +52,6 @@
             src="./images/8.png"
               alt="Hotel Image"
             />
-            
           </div>
           <!-- Accordion -->
           <div class="accordion-div">
@@ -71,20 +71,27 @@
                 </h2>
                 <div
                   id="collapseOne"
-                  class="accordion-collapse collapse show"
+                  class="accordion-collapse collapse"
                   aria-labelledby="headingOne"
                   data-bs-parent="#accordionExample"
                 >
                   <div class="accordion-body">
-                    <button type="button" class="btn btn-secondary btn-lg">
-                      <a href="./room-management.html">Room Management</a>
-                    </button>
-                    <button type="button" class="btn btn-secondary btn-lg">
-                      <a href="./forms.html">Reservation Management</a>
-                    </button>
-                    <button type="button" class="btn btn-secondary btn-lg">
-                      Services Management
-                    </button>
+                    <a href="./room-management.html">
+                      <button type="button" class="btn btn-secondary btn-lg">
+                        Room Management
+                      </button>
+                    </a>
+                    <a href="./forms.html">
+                      <button type="button" class="btn btn-secondary btn-lg">
+                        Reservation Management
+                      </button>
+                    </a>
+                    <a href="#">
+                      <button type="button" class="btn btn-secondary btn-lg">
+                        Services Management
+                      </button>
+                    </a>
+                    
                   </div>
                 </div>
               </div>
@@ -108,15 +115,22 @@
                   data-bs-parent="#accordionExample"
                 >
                   <div class="accordion-body">
-                    <button type="button" class="btn btn-secondary btn-lg">
-                      Room Service Management
-                    </button>
-                    <button type="button" class="btn btn-secondary btn-lg">
-                      Hotel Management Staff
-                    </button>
-                    <button type="button" class="btn btn-secondary btn-lg">
-                      Other Staff
-                    </button>
+                    <a href="#">
+                      <button type="button" class="btn btn-secondary btn-lg">
+                        Room Service Management
+                      </button>
+                    </a>
+                    <a href="#">
+                      <button type="button" class="btn btn-secondary btn-lg">
+                        Hotel Management Staff
+                      </button>
+                    </a>
+                    <a href="#">
+                      <button type="button" class="btn btn-secondary btn-lg">
+                        Other Staff
+                      </button>
+                    </a>
+                    
                   </div>
                 </div>
               </div>
@@ -140,66 +154,76 @@
                   data-bs-parent="#accordionExample"
                 >
                   <div class="accordion-body">
-                    <button type="button" class="btn btn-secondary btn-lg">
-                      Reports
-                    </button>
-                    <button type="button" class="btn btn-secondary btn-lg">
-                      Configuration
-                    </button>
-                    <button type="button" class="btn btn-secondary btn-lg">
-                      Account Settings
-                    </button>
+                    <a href="#">
+                      <button type="button" class="btn btn-secondary btn-lg">
+                        Reports
+                      </button>
+                    </a>
+                    <a href="#">
+                      <button type="button" class="btn btn-secondary btn-lg">
+                        Configuration
+                      </button>
+                    </a>
+                    <a href="#">
+                      <button type="button" class="btn btn-secondary btn-lg">
+                        Account Settings
+                      </button>
+                    </a>
+                    
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-          <!-- hotel ongoing reservations -->
-          <div class="second-row">
-            <div class="others-div">
-              <div class="ongoing-reservations">
-                <h5>Ongoing Reservations</h5>
-                <div class="table-inner-diva">
-                  <table class="table-design">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Room Number</th>
-                        <th scope="col">Check-In Date</th>
-                        <th scope="col">Check-Out Date</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td> 
-                        <td>Room 1</td>
-                        <td>July 4</td>
-                        <td>July 30</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Room 20</td>
-                        <td>July 13</td>
-                        <td>July 20</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>Room 30</td>
-                        <td>July 6</td>
-                        <td>August 1</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="rooms-available">
-                  <h5>Number of Rooms Available</h5>
-                  <h1>40</h1>
+        <!-- hotel ongoing reservations -->
+        <div class="second-row">
+          <div class="others-div">
+            <div class="ongoing-reservations">
+              <h5>Ongoing Reservations</h5>
+              <div class="table-inner-diva">
+                <table class="table-design">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Room Number</th>
+                      <th scope="col">Check-In Date</th>
+                      <th scope="col">Check-Out Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td> 
+                      <td>Room 1</td>
+                      <td>July 4</td>
+                      <td>July 30</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>Room 20</td>
+                      <td>July 13</td>
+                      <td>July 20</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>Room 30</td>
+                      <td>July 6</td>
+                      <td>August 1</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
+            <div class="rooms-available">
+                <h5>Number of Rooms Available</h5>
+                <h1>40</h1>
+            </div>
           </div>
+        </div>
+      </div>
+
+
+
     </main>
 
     <!-- Optional JavaScript; choose one of the two! -->

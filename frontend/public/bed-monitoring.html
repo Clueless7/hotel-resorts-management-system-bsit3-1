@@ -19,32 +19,32 @@
   <body>
     <header>
       <!-- hotel logo and page name -->
-      <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">
-          <img
-          src="./images/logowhite.png"
-            width="30"
-            height="30"
-            class="d-inline-block align-top"
-            alt=""
-          />
-          Room Management
-        </a>
-        
+      <nav class="custom-nav">
+        <div class="title-logo-div">
+          <a href="./dashboard.html">
+            <img
+            src="./images/logowhite.png"
+              width="30"
+              height="30"
+              class="d-inline-block align-top rounded-circle"
+              alt=""
+            />
+            Room Management
+          </a> 
+        </div>
         <nav class="navbar-back">
           <a button="back" href="./dashboard.html">
          Back to Dashboard
           </button>
         </a>
-        
       </nav>
     </header>
     <main>
-      <div class="container">
+      <div class="container monitoring-container">
         <!-- select monitoring to view -->
-        <div class="col-md-4 mb-3">
+        <div>
           <select
-            class="form-select"
+            class="select-monitoring"
             onchange="location=this.value;"
             aria-label="Monitoring"
           >
@@ -54,7 +54,7 @@
             <option value="payment-monitoring.html">Payment Monitoring</option>
           </select>
         </div>
-        This is Bed Monitoring
+        Bed monitoring
       </div>
     </main>
     <!-- Optional JavaScript; choose one of the two! -->
