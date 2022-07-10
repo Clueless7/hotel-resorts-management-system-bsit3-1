@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler')
-const Room = require('../models/rooms')
+const Room = require('../models/roomModel')
 
 // Async handler is used to remove try catch block
 // Controllers for each route
