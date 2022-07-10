@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 // Import Controllers
-const { getAllRooms, createRoom } = require('../controller/roomController')
+const { getAllRooms, createRoom } = require('../controllers/roomController')
 
 // Routes
 
