@@ -11,8 +11,9 @@ const roomSchema = mongoose.Schema({
     required: [true, 'Please indicate if room is available (true or false)'],
   },
   roomType: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: [true, 'Please add a room type'],
+    ref: 'RoomType',
   },
 })
 
