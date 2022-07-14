@@ -17,6 +17,7 @@ app.use(express.json())
 // Routes
 app.use('/api/rooms/types', require('./routes/roomTypeRoutes'))
 app.use('/api/rooms', require('./routes/roomRoutes'))
+app.use('/api/beds/types', require('./routes/bedTypeRoutes'))
 app.use('/api/beds', require('./routes/bedRoutes'))
 
 // Serve frontend
