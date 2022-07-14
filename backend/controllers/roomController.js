@@ -6,8 +6,13 @@ const Room = require('../models/roomModel')
 
 // Get all rooms
 const getAllRooms = asyncHandler(async (req, res) => {
-  const rooms = await Room.find()
-  res.json(rooms)
+  const rooms = await Room.find().populate('roomType')
+
+  if (!rooms) {
+    res.status(500)
+    throw new Error('Server error')
+  }
+  res.status(200).json(rooms)
 })
 
 // Get room with id
@@ -15,7 +20,7 @@ const getRoomWithId = asyncHandler(async (req, res) => {
   const room = await Room.findById(req.params.id)
 
   if (!room) {
-    res.send(404)
+    res.status(404)
     throw new Error('Room not found')
   }
 
