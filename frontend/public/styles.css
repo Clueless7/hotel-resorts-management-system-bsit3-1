@@ -337,8 +337,6 @@ tr:hover {
   font-weight: bold;
 }
 
-/* FORMS DEFAULT STYLE */
-/* ADD RESERVATION */
 .reservation-management-form-div {
   background-color: #e9dac1;
   padding: 20px;
@@ -426,7 +424,7 @@ label[for='gender'] {
 }
 .servicesAvailed-div {
   width: 49%;
-  margin-right: 20px;
+  margin: 10px 20px 0px 0px;
 }
 
 .check-OutPayment-div {
@@ -436,45 +434,22 @@ label[for='gender'] {
   width: 100%;
 }
 
-/* 
-.servicesAvailedCheckBox div {
-  display: inline;
-
-  text-align: right;
-} */
-
-/* .servicesAvailedCheckBox label, */
-/* .servicesAvailedCheckBox input {
-  width: 50%;
-  display: inline-flex;
-}
-
-.servicesAvailedCheckBox label {
+.servicesAvailedLabel {
   font-size: 20px;
-  max-width: 50%;
-} */
-
-/* .check-out-div {
-  display: inline-flex;
-  width: 50%;
+  color: #18978f;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 2px;
 }
-.check-OutPayment {
-  width: 49%;
-}
-.servicesAvailedCheckBox {
-  width: 49%;
 
-  margin-right: 20px;
-} */
-
-/* Customize the label (the container) */
 .servicesAvailedCheckBox label {
   display: block;
   position: relative;
   padding-left: 35px;
-  margin-bottom: 12px;
+  margin-bottom: 0px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 18px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
