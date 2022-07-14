@@ -12,6 +12,7 @@ const getAllRooms = asyncHandler(async (req, res) => {
     res.status(500)
     throw new Error('Server error')
   }
+
   res.status(200).json(rooms)
 })
 
@@ -44,36 +45,31 @@ const createRoom = asyncHandler(async (req, res) => {
     roomType,
   })
 
-  // Check if newRoom is successful
-  if (newRoom) {
-    const populatedData = await newRoom.populate('roomType', {
-      _id: 0,
-      roomTypeName: 1,
-      roomTypePrice: 1,
-    })
-
-    if (populatedData) {
-      res.status(201).json(populatedData)
-    } else {
-      res.status(500)
-      throw new Error('Server error')
-    }
-  } else {
+  if (!newRoom) {
     res.status(400)
     throw new Error('Invalid room data')
   }
+
+  const populatedData = await newRoom.populate('roomType')
+
+  if (!populatedData) {
+    res.status(500)
+    throw new Error('Server error')
+  }
+
+  res.status(201).json(populatedData)
 })
 
 // Update a room by id
 const updateRoomById = asyncHandler(async (req, res) => {
   const { roomNumber, roomIsAvailable, roomType } = req.body
 
-  if ((!roomNumber, !roomIsAvailable, !roomType)) {
+  if (!roomNumber || !roomIsAvailable || !roomType) {
     res.status(400)
     throw new Error('Invalid room data')
   }
 
-  const updatedRoom = Room.findByIdAndUpdate(req.params.id, req.body, {
+  const updatedRoom = await Room.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
   })
 
