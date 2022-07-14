@@ -51,32 +51,76 @@
       <div class="container hotel-management-container">
         <div class="page-title-div">
           <div class="page-title-label">
-            <h2>ADD RESERVATIONS</h2>
+            <h2>EDIT CHECK-IN FORM</h2>
           </div>
         </div>
-        <div class="reservation-add-form-div">
+        <div class="reservation-management-form-div">
           <!-- DUNNO ACTION -->
           <form action="/action_page.php">
             <div class="wholeFieldSet">
-              <fieldset>
-                <legend>Customer's Information</legend>
-                <label for="transactionID">Transaction ID</label>
-                <input type="text" id="transactionID" name="transactionID" />
-                <label for="customerName">Customer Name</label>
-                <input type="text" id="customerName" name="customerName" />
-                <label for="contactNumber">Contact Number</label>
-                <input type="number" id="contactNumber" name="contactNumber" />
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" />
-                <label for="gender">Gender</label>
-                <select id="gender" name="gender">
-                  <option value="0">Select Gender:</option>
-                  <option value="1">Male</option>
-                  <option value="2">Female</option>
-                </select>
-                <label for="address">Address</label>
-                <input type="text" id="address" name="address" />
-              </fieldset>
+              <div class="leftFieldSet">
+                <fieldset>
+                  <legend>Customer's Information</legend>
+                  <label for="transactionID">Transaction ID</label>
+                  <select id="transactionID" name="transaction ID">
+                    <option value="0">Select Transaction ID:</option>
+                    <option value="1">transaction01</option>
+                    <option value="2">transaction02</option>
+                    <option value="3">transaction03</option>
+                    <option value="4">transaction04</option>
+                    <option value="5">transaction05</option>
+                    <option value="6">transaction06</option>
+                    <option value="7">transaction07</option>
+                    <option value="8">transaction08</option>
+                    <option value="9">transaction09</option>
+                  </select>
+                  <label for="customerName">Customer Name</label>
+                  <select id="customerName" name="customerName">
+                    <option value="0">Select Customer Name:</option>
+                    <option value="1">customer01</option>
+                    <option value="2">customer02</option>
+                    <option value="3">customer03</option>
+                    <option value="4">customer04</option>
+                    <option value="5">customer05</option>
+                    <option value="6">customer06</option>
+                    <option value="7">customer07</option>
+                    <option value="8">customer08</option>
+                    <option value="9">customer09</option>
+                  </select>
+
+                  <!-- (IN EDIT FORM ONLY) BALI DITO SA CUSTOMER 
+                    NAME OR SA TRANSACTION ID, KUNG ALIN YUNG PINILI 
+                    LALABAS YUNG INFO NUNG CUSTOMER OR NUNG 
+                    TRANSACTION ID. EX: NA SELECT YUNG customer01 
+                    LALABAS YUNG RESERVATION DETAILS NYA DUN SA 
+                    IBANG FIELDS. LIKE KUNG ANONG ROOM PINARESERVE 
+                    NYA, KUNG KELAN YUNG CID NYA, ETC.-->
+
+                  <!-- <label for="customerLName">Last Name</label>
+                  <input
+                    type="text"
+                    id="customerLName"
+                    name="customerLName"
+                    placeholder="Last Name"
+                  /> -->
+                  <label for="contactNumber">Contact Number</label>
+                  <input
+                    type="number"
+                    id="contactNumber"
+                    name="contactNumber"
+                  />
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" />
+                  <label for="gender">Gender</label>
+                  <select id="gender" name="gender">
+                    <option value="0">Select Gender:</option>
+                    <option value="1">Male</option>
+                    <option value="2">Female</option>
+                  </select>
+                  <label for="address">Address</label>
+                  <input type="text" id="address" name="address" />
+                </fieldset>
+              </div>
 
               <div class="rightFieldSet">
                 <fieldset>
@@ -102,7 +146,7 @@
                   </select>
                 </fieldset>
                 <fieldset>
-                  <legend>Reservation's Information</legend>
+                  <legend>Check-In's Information</legend>
                   <label for="check-inDate">Check-In Date</label>
                   <input type="date" id="check-inDate" name="check-inDate" />
                   <label for="check-outDate">Check-Out Date</label>
@@ -119,8 +163,9 @@
               </div>
             </div>
             <div class="form-buttons">
-              <button type="submit" class="add-btn">ADD</button>
+              <button type="submit" class="edit-btn">EDIT</button>
               <button type="reset" class="reset-btn">RESET</button>
+              <button type="button" class="delete-btn">DELETE</button>
               <a href="./hotel-management(reservation-management).html">
                 <button type="button" class="cancel-btn">CANCEL</button>
               </a>
@@ -130,12 +175,10 @@
       </div>
       <div class="content-nav">
         <a href="./hotel-management(reservation-management).html">
-          <button type="button" class="nav-reservation active">
-            RESERVATION
-          </button>
+          <button type="button" class="nav-reservation">RESERVATION</button>
         </a>
         <a href="./hotel-management(reservation-management).html">
-          <button type="button" class="nav-check-in">CHECK-IN</button>
+          <button type="button" class="nav-check-in active">CHECK-IN</button>
         </a>
         <a href="./hotel-management(reservation-management).html">
           <button type="button" class="nav-check-out">CHECK-OUT</button>

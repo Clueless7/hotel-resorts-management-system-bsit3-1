@@ -339,7 +339,7 @@ tr:hover {
 
 /* FORMS DEFAULT STYLE */
 /* ADD RESERVATION */
-.reservation-add-form-div {
+.reservation-management-form-div {
   background-color: #e9dac1;
   padding: 20px;
   max-width: 79%;
@@ -355,24 +355,44 @@ fieldset {
 }
 .wholeFieldSet {
   display: inline-flex;
+  /* max-width: 100%; */
+}
+.rightFieldSet {
+  width: 49%;
+}
+.leftFieldSet {
+  width: 49%;
+
+  margin-right: 20px;
 }
 
 legend {
   color: #18978f;
   font-weight: bold;
-  letter-spacing: 3px;
-  font-size: 23px;
+  letter-spacing: 2px;
+  font-size: 20px;
 }
 
-.reservation-add-form-div label {
+.reservation-management-form-div label {
   font-size: 18px;
   color: black;
   display: block;
   padding: 5px;
 }
 
-.reservation-add-form-div input,
-.reservation-add-form-div select {
+/* label[for='customerLName'] {
+  display: none;
+} */
+
+#customerName {
+  margin: 0px 0px 45px 0px;
+}
+
+label[for='gender'] {
+  margin: 35px 0px 0px 0px;
+}
+.reservation-management-form-div input,
+.reservation-management-form-div select {
   width: 100%;
   padding: 5px;
   border-radius: 3px;
@@ -380,7 +400,7 @@ legend {
   margin: 0px 0px 10px 0px;
 }
 
-.reservation-add-form-div #balance {
+.reservation-management-form-div #balance {
   width: 100%;
 }
 
@@ -398,6 +418,80 @@ legend {
 
 .form-buttons {
   text-align: center;
+  margin-top: 20px;
+}
+
+.check-out-div {
+  display: flex;
+}
+.servicesAvailed-div {
+  width: 49%;
+  margin-right: 20px;
+}
+
+.check-OutPayment-div {
+  width: 49%;
+}
+.check-OutPayment {
+  width: 100%;
+}
+
+/* 
+.servicesAvailedCheckBox div {
+  display: inline;
+
+  text-align: right;
+} */
+
+/* .servicesAvailedCheckBox label, */
+/* .servicesAvailedCheckBox input {
+  width: 50%;
+  display: inline-flex;
+}
+
+.servicesAvailedCheckBox label {
+  font-size: 20px;
+  max-width: 50%;
+} */
+
+/* .check-out-div {
+  display: inline-flex;
+  width: 50%;
+}
+.check-OutPayment {
+  width: 49%;
+}
+.servicesAvailedCheckBox {
+  width: 49%;
+
+  margin-right: 20px;
+} */
+
+/* Customize the label (the container) */
+.servicesAvailedCheckBox label {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 20px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.servicesAvailedCheckBox input {
+  position: absolute;
+  cursor: pointer;
+  height: 30px;
+  width: 20px;
+}
+
+@media screen and (max-width: 1100px) {
+  .content-nav button {
+    font-size: 12px;
+  }
 }
 
 @media screen and (max-width: 900px) {
@@ -432,7 +526,29 @@ legend {
   }
 
   .content-nav button {
-    font-size: 14px;
+    font-size: 9px;
+  }
+
+  .wholeFieldSet {
+    display: block;
+    /* max-width: 100%; */
+  }
+  .rightFieldSet {
+    width: 100%;
+  }
+  .leftFieldSet {
+    width: 100%;
+  }
+  .check-out-div {
+    display: block;
+  }
+  .servicesAvailed-div {
+    width: 100%;
+    /* margin-right: 20px; */
+  }
+
+  .check-OutPayment-div {
+    width: 100%;
   }
 }
 
@@ -485,10 +601,18 @@ legend {
     font-size: 7px;
     padding-inline: 0px;
   }
+  legend {
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 16px;
+  }
 }
 
 /* REMOVE FIXED POSITION OF CONTENT NAV */
 /* FIX CONTENT NAV POSITION */
 /* //MAKE FIELDSETS SIDE BY SIDE */
 /* //MAKE FORM BUTTON GO UNDER FORM INPUTS */
-/* MAKE FORM RESPONSIVE */
+/* //MAKE FORM RESPONSIVE */
+/* FIX TABLE IN DASHBOARD */
+/* FIX HEIGHT */
+/* MAKE CONTENT NAV GO UNDER FORMS WHEN RESIZED */
