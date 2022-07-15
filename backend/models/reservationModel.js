@@ -50,6 +50,10 @@ const reservationSchema = mongoose.Schema({
     type: Number,
     required: [true, 'Invalid balance'],
   },
+  paymentMethod: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'PaymentMethod',
+  },
 })
 
 module.exports = mongoose.model('Reservation', reservationSchema)

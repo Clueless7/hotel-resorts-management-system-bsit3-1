@@ -52,6 +52,10 @@ const getAllReservations = asyncHandler(async (req, res) => {
         ],
       },
     })
+    .populate('paymentMethod', {
+      _id: 0,
+      paymentMethodName: 1,
+    })
 
   if (!reservations) {
     res.status(500)
@@ -134,6 +138,7 @@ const createReservation = asyncHandler(async (req, res) => {
     checkOutDate,
     durationOfStay,
     balance,
+    paymentMethod,
   } = req.body
 
   if (
@@ -148,10 +153,11 @@ const createReservation = asyncHandler(async (req, res) => {
     !checkInDate ||
     !checkOutDate ||
     !durationOfStay ||
-    !balance
+    !balance ||
+    !paymentMethod
   ) {
     res.status(400)
-    throw new Error('Please afill all data')
+    throw new Error('Please fill all data')
   }
 
   const newReservation = await Reservation.create({
@@ -167,6 +173,7 @@ const createReservation = asyncHandler(async (req, res) => {
     checkOutDate,
     durationOfStay,
     balance,
+    paymentMethod,
   })
 
   await newReservation.populate('roomNumber', {
@@ -220,6 +227,11 @@ const createReservation = asyncHandler(async (req, res) => {
     },
   })
 
+  await newReservation.populate('paymentMethod', {
+    _id: 0,
+    paymentMethodName: 1,
+  })
+
   if (newReservation) {
     res.status(201).json(newReservation)
   } else {
@@ -243,6 +255,7 @@ const updateReservationById = asyncHandler(async (req, res) => {
     checkOutDate,
     durationOfStay,
     balance,
+    paymentMethod,
   } = req.body
 
   if (
@@ -257,7 +270,8 @@ const updateReservationById = asyncHandler(async (req, res) => {
     !checkInDate ||
     !checkOutDate ||
     !durationOfStay ||
-    !balance
+    !balance ||
+    !paymentMethod
   ) {
     res.status(400)
     throw new Error('Invalid reservation data')
@@ -320,6 +334,11 @@ const updateReservationById = asyncHandler(async (req, res) => {
         },
       ],
     },
+  })
+
+  await updatedReservation.populate('paymentMethod', {
+    _id: 0,
+    paymentMethodName: 1,
   })
 
   if (!updatedReservation) {
