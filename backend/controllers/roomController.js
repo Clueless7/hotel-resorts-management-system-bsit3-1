@@ -7,7 +7,10 @@ const Room = require('../models/roomModel')
 // Get all rooms
 const getAllRooms = asyncHandler(async (req, res) => {
   const rooms = await Room.find()
-    .populate('roomType')
+    .populate('roomType', {
+      _id: 0,
+      roomTypeName: 1,
+    })
     .populate({
       path: 'bed',
       populate: [
@@ -71,7 +74,10 @@ const createRoom = asyncHandler(async (req, res) => {
     throw new Error('Invalid room data')
   }
 
-  const populatedData = await newRoom.populate('roomType')
+  const populatedData = await newRoom.populate('roomType', {
+    _id: 0,
+    roomTypeName: 1,
+  })
 
   await populatedData.populate({
     path: 'bed',
