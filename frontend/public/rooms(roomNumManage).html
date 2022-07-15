@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="./styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <title>Hotel Management System</title>
+  </head>
+  <body>
+    <aside>
+      <div class="sidenav">
+        <a href="./index.html"><button type="button">Dashboard</button></a>
+        <a href="./rooms(roomStatTable).html">
+          <button type="button" class="active">Rooms</button>
+        </a>
+        <a href="./reservations(reservationTable).html"
+          ><button type="button">Reservations</button></a
+        >
+        <a href="./services.html"><button type="button">Services</button></a>
+        <a href="./reports.html"><button type="button">Reports</button></a>
+        <a href="./login.html"
+          ><button type="button" class="log-out-btn">Log Out</button></a
+        >
+      </div>
+    </aside>
+    <div class="main">
+      <div class="container">
+        <header class="managementsHeader">
+          <div class="hotel-name-label">Elysium</div>
+        </header>
+        <nav class="nav">
+          <ul>
+            <li>
+              <a href="./rooms(roomStatTable).html">Room Status</a>
+            </li>
+            <li></li>
+            <li>
+              <a href="./rooms(roomNumTable).html" class="active"
+                >Room Number</a
+              >
+            </li>
+            <li>
+              <a href="./rooms(roomFloorTable).html">Room Floor</a>
+            </li>
+            <li>
+              <a href="./rooms(roomTypeTable).html">Room Type</a>
+            </li>
+            <li>
+              <a href="./rooms(bedTypeTable).html">Bed Type</a>
+            </li>
+            <li>
+              <a href="./rooms(payMetTable).html">Payment Method</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <section>
+        <div class="content-container">
+          <!-- Search and manage here -->
+          <div class="monitoring-menu">
+            <!-- form buttons here -->
+            <!-- menu here -->
+          </div>
+          <div class="content">
+            <!-- table here -->
+            <div class="newroom-table-div">
+              <div class="form-div">
+                <form>
+                  <label for="room-floor">Room Floor:</label>
+                  <select name="rm-floor" id="rm-floor">
+                    <option value="room-floor">First Floor</option>
+                    <option value="room-floor">Second Floor</option>
+                  </select><br>
+
+                  <label for="room-num">Room Number:</label>
+                  <select name="rm-num" id="rm-floor">
+                    <option value="room-num">Room 1001</option>
+                    <option value="room-num">Room 1002</option>
+                    <option value="room-num">Room 1003</option>
+                    <option value="room-num">Room 1004</option>
+                  </select><br>
+
+                  <label for="rm-size">Room Size:</label>
+                  <input type="text" class="input"><br>
+
+                  <label for="room-type">Room Type:</label>
+                  <select name="rm-type" id="rm-type">
+                    <option value="room-type">Premium</option>
+                    <option value="room-type">Regular</option>
+                  </select><br>
+
+                  <label for="bed-type">Bed Type:</label>
+                  <select name="bed-type" id="bed-type">
+                    <option value="bed-type">King</option>
+                    <option value="bed-type">Queen</option>
+                    <option value="bed-type">Twin</option>
+                    <option value="bed-type">Twin XL</option>
+                  </select><br>
+
+                  <label for="price">Price:</label>
+                  <input type="text" class="input"><br>
+
+                  <div class="radio-btn">
+                    <input type="radio">Smoking <input type="radio">Disabled
+                  </div>
+
+                  <div class="newroom-btn-group">
+                    <a href="./rooms(roomNumTable).html">
+                      <button type="button" class="newroom-btn">BACK</button>
+                    </a>
+                    <a>
+                      <button type="reset" class="newroom-btn">RESET</button>
+                    </a>
+                    <a>
+                      <button type="submit" class="newroom-btn">DELETE</button>
+                    </a>
+                    <a>
+                      <button type="submit" class="newroom-btn">EDIT</button>
+                    </a>
+                    <a>
+                      <button type="submit" class="newroom-btn">ADD</button>
+                    </a>
+                  </div>
+                </form>
+              </div>
+            </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="./styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <title>Hotel Management System</title>
+  </head>
+  <body>
+    <aside>
+      <div class="sidenav">
+        <a href="./index.html"><button type="button">Dashboard</button></a>
+        <a href="./rooms(roomStatTable).html">
+          <button type="button" class="active">Rooms</button>
+        </a>
+        <a href="./reservations(reservationTable).html"
+          ><button type="button">Reservations</button></a
+        >
+        <a href="./services.html"><button type="button">Services</button></a>
+        <a href="./reports.html"><button type="button">Reports</button></a>
+        <a href="./login.html"
+          ><button type="button" class="log-out-btn">Log Out</button></a
+        >
+      </div>
+    </aside>
+    <div class="main">
+      <div class="container">
+        <header class="managementsHeader">
+          <div class="hotel-name-label">Elysium</div>
+        </header>
+        <nav class="nav">
+          <ul>
+            <li>
+              <a href="./rooms(roomStatTable).html">Room Status</a>
+            </li>
+            <li></li>
+            <li>
+              <a href="./rooms(roomNumTable).html">Room Number</a>
+            </li>
+            <li>
+              <a href="./rooms(roomFloorTable).html">Room Floor</a>
+            </li>
+            <li>
+              <a href="./rooms(roomTypeTable).html">Room Type</a>
+            </li>
+            <li>
+              <a href="./rooms(bedTypeTable).html">Bed Type</a>
+            </li>
+            <li>
+              <a href="./rooms(payMetTable).html" class="active"
+                >Payment Method</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <section>
+        <div class="content-container">
+          <!-- Search and manage here -->
+          <div class="monitoring-menu">
+            <!-- menu here -->
+          </div>
+          <div class="content">
+            <!-- table here -->
+            <form>
+              <label for="Payment">Payment Method:</label>
+              <select>
+                <option value="cash">Cash / Over the Counter</option>
+                <option value="gcash">Gcash</option>
+                <option value="bank">Bank Transfer</option></select
+              ><br />
+              <div class="text-input">
+                Add Payment Method: <input type="text" value="" />
+              </div>
+
+              <div class="radio-btn">
+                <input type="radio" />Activate <input type="radio" />Deactivate
+              </div>
+              <div class="newroom-btn-group">
+                <a href="./rooms(payMetTable).html">
+                  <button type="button" class="newroom-btn">BACK</button>
+                </a>
+                <a>
+                  <button type="reset" class="newroom-btn">RESET</button>
+                </a>
+                <a>
+                  <button type="submit" class="newroom-btn">DELETE</button>
+                </a>
+                <a>
+                  <button type="submit" class="newroom-btn">ADD</button>
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
