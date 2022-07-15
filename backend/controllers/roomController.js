@@ -6,7 +6,27 @@ const Room = require('../models/roomModel')
 
 // Get all rooms
 const getAllRooms = asyncHandler(async (req, res) => {
-  const rooms = await Room.find().populate('roomType')
+  const rooms = await Room.find()
+    .populate('roomType')
+    .populate({
+      path: 'bed',
+      populate: [
+        {
+          path: 'bedType',
+          select: {
+            _id: 0,
+            bedTypeName: 1,
+          },
+        },
+        {
+          path: 'bedPrice',
+          select: {
+            _id: 0,
+            bedTypePrice: 1,
+          },
+        },
+      ],
+    })
 
   if (!rooms) {
     res.status(500)
@@ -30,10 +50,10 @@ const getRoomWithId = asyncHandler(async (req, res) => {
 
 // Create a room
 const createRoom = asyncHandler(async (req, res) => {
-  const { roomNumber, roomIsAvailable, roomType } = req.body
+  const { roomNumber, roomIsAvailable, roomType, bed } = req.body
 
   // Check if the body don't have the required keys
-  if ((!roomNumber, !roomIsAvailable, !roomType)) {
+  if (!roomNumber || !roomIsAvailable || !roomType || !bed) {
     res.status(400)
     throw new Error('Please add room number, isAvailable, and type')
   }
@@ -43,6 +63,7 @@ const createRoom = asyncHandler(async (req, res) => {
     roomNumber,
     roomIsAvailable,
     roomType,
+    bed,
   })
 
   if (!newRoom) {
@@ -51,6 +72,26 @@ const createRoom = asyncHandler(async (req, res) => {
   }
 
   const populatedData = await newRoom.populate('roomType')
+
+  await populatedData.populate({
+    path: 'bed',
+    populate: [
+      {
+        path: 'bedType',
+        select: {
+          _id: 0,
+          bedTypeName: 1,
+        },
+      },
+      {
+        path: 'bedPrice',
+        select: {
+          _id: 0,
+          bedTypePrice: 1,
+        },
+      },
+    ],
+  })
 
   if (!populatedData) {
     res.status(500)
@@ -62,9 +103,9 @@ const createRoom = asyncHandler(async (req, res) => {
 
 // Update a room by id
 const updateRoomById = asyncHandler(async (req, res) => {
-  const { roomNumber, roomIsAvailable, roomType } = req.body
+  const { roomNumber, roomIsAvailable, roomType, bed } = req.body
 
-  if (!roomNumber || !roomIsAvailable || !roomType) {
+  if (!roomNumber || !roomIsAvailable || !roomType || !bed) {
     res.status(400)
     throw new Error('Invalid room data')
   }
