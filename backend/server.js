@@ -11,7 +11,7 @@ connectDB()
 const app = express()
 
 // Middlewares for accepting data
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 // Routes

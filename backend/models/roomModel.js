@@ -15,7 +15,7 @@ const roomSchema = mongoose.Schema({
     required: [true, 'Please add a room type'],
     ref: 'RoomType',
   },
-  bed: {
+  roomBed: {
     type: mongoose.Schema.Types.ObjectId,
     required: [true, 'Please add a bed'],
     ref: 'Bed',

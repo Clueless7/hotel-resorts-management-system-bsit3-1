@@ -28,6 +28,16 @@ const getAllBeds = asyncHandler(async (req, res) => {
 const getBedWithId = asyncHandler(async (req, res) => {
   const bed = await Bed.findById(req.params.id)
 
+  await bed.populate('bedType', {
+    _id: 0,
+    bedTypeName: 1,
+  })
+
+  await bed.populate('bedPrice', {
+    _id: 0,
+    bedTypePrice: 1,
+  })
+
   if (!bed) {
     res.send(404)
     throw new Error('Bed not found')
@@ -87,6 +97,16 @@ const updateBedById = asyncHandler(async (req, res) => {
 
   const updatedBed = await Bed.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
+  })
+
+  await updatedBed.populate('bedType', {
+    _id: 0,
+    bedTypeName: 1,
+  })
+
+  await updatedBed.populate('bedPrice', {
+    _id: 0,
+    bedTypePrice: 1,
   })
 
   if (!updatedBed) {
