@@ -6,7 +6,30 @@ const Room = require('../models/roomModel')
 
 // Get all rooms
 const getAllRooms = asyncHandler(async (req, res) => {
-  const rooms = await Room.find().populate('roomType')
+  const rooms = await Room.find()
+    .populate('roomType', {
+      _id: 0,
+      roomTypeName: 1,
+    })
+    .populate({
+      path: 'roomBed',
+      populate: [
+        {
+          path: 'bedType',
+          select: {
+            _id: 0,
+            bedTypeName: 1,
+          },
+        },
+        {
+          path: 'bedPrice',
+          select: {
+            _id: 0,
+            bedTypePrice: 1,
+          },
+        },
+      ],
+    })
 
   if (!rooms) {
     res.status(500)
@@ -20,6 +43,31 @@ const getAllRooms = asyncHandler(async (req, res) => {
 const getRoomWithId = asyncHandler(async (req, res) => {
   const room = await Room.findById(req.params.id)
 
+  await room.populate('roomType', {
+    _id: 0,
+    roomTypeName: 1,
+  })
+
+  await room.populate({
+    path: 'roomBed',
+    populate: [
+      {
+        path: 'bedType',
+        select: {
+          _id: 0,
+          bedTypeName: 1,
+        },
+      },
+      {
+        path: 'bedPrice',
+        select: {
+          _id: 0,
+          bedTypePrice: 1,
+        },
+      },
+    ],
+  })
+
   if (!room) {
     res.status(404)
     throw new Error('Room not found')
@@ -30,10 +78,10 @@ const getRoomWithId = asyncHandler(async (req, res) => {
 
 // Create a room
 const createRoom = asyncHandler(async (req, res) => {
-  const { roomNumber, roomIsAvailable, roomType } = req.body
+  const { roomNumber, roomIsAvailable, roomType, roomBed } = req.body
 
   // Check if the body don't have the required keys
-  if ((!roomNumber, !roomIsAvailable, !roomType)) {
+  if (!roomNumber || !roomIsAvailable || !roomType || !roomBed) {
     res.status(400)
     throw new Error('Please add room number, isAvailable, and type')
   }
@@ -43,6 +91,7 @@ const createRoom = asyncHandler(async (req, res) => {
     roomNumber,
     roomIsAvailable,
     roomType,
+    roomBed,
   })
 
   if (!newRoom) {
@@ -50,7 +99,30 @@ const createRoom = asyncHandler(async (req, res) => {
     throw new Error('Invalid room data')
   }
 
-  const populatedData = await newRoom.populate('roomType')
+  const populatedData = await newRoom.populate('roomType', {
+    _id: 0,
+    roomTypeName: 1,
+  })
+
+  await populatedData.populate({
+    path: 'roomBed',
+    populate: [
+      {
+        path: 'bedType',
+        select: {
+          _id: 0,
+          bedTypeName: 1,
+        },
+      },
+      {
+        path: 'bedPrice',
+        select: {
+          _id: 0,
+          bedTypePrice: 1,
+        },
+      },
+    ],
+  })
 
   if (!populatedData) {
     res.status(500)
@@ -62,15 +134,40 @@ const createRoom = asyncHandler(async (req, res) => {
 
 // Update a room by id
 const updateRoomById = asyncHandler(async (req, res) => {
-  const { roomNumber, roomIsAvailable, roomType } = req.body
+  const { roomNumber, roomIsAvailable, roomType, roomBed } = req.body
 
-  if (!roomNumber || !roomIsAvailable || !roomType) {
+  if (!roomNumber || !roomIsAvailable || !roomType || !roomBed) {
     res.status(400)
     throw new Error('Invalid room data')
   }
 
   const updatedRoom = await Room.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
+  })
+
+  await updatedRoom.populate('roomType', {
+    _id: 0,
+    roomTypeName: 1,
+  })
+
+  await updatedRoom.populate({
+    path: 'roomBed',
+    populate: [
+      {
+        path: 'bedType',
+        select: {
+          _id: 0,
+          bedTypeName: 1,
+        },
+      },
+      {
+        path: 'bedPrice',
+        select: {
+          _id: 0,
+          bedTypePrice: 1,
+        },
+      },
+    ],
   })
 
   if (!updatedRoom) {

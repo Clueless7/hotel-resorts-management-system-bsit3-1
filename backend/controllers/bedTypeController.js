@@ -27,7 +27,7 @@ const createBedType = asyncHandler(async (req, res) => {
   const { bedTypeName, bedTypeSize, bedTypePrice } = req.body
 
   // Check if the body don't have the required keys
-  if ((!bedTypeName, !bedTypeSize, !bedTypePrice)) {
+  if (!bedTypeName || !bedTypeSize || !bedTypePrice) {
     res.status(400)
     throw new Error('Invalid Bed Type data')
   }

@@ -5,6 +5,7 @@ const bedSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: [true, 'Please add bed type'],
     ref: 'BedType',
+    unique: true,
   },
   bedQuantity: {
     type: Number,

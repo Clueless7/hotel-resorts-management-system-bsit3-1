@@ -11,7 +11,7 @@ connectDB()
 const app = express()
 
 // Middlewares for accepting data
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 // Routes
@@ -19,6 +19,8 @@ app.use('/api/rooms/types', require('./routes/roomTypeRoutes'))
 app.use('/api/rooms', require('./routes/roomRoutes'))
 app.use('/api/beds/types', require('./routes/bedTypeRoutes'))
 app.use('/api/beds', require('./routes/bedRoutes'))
+app.use('/api/reservations', require('./routes/reservationRoutes'))
+app.use('/api/paymentmethods', require('./routes/paymentMethodRoutes'))
 
 // Serve frontend
 app.use(express.static(path.join(__dirname, '../frontend/public')))
