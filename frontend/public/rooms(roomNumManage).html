@@ -11,6 +11,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
 
+    <script defer type="module" src="script.js"></script>
     <title>Hotel Management System</title>
   </head>
   <body>
@@ -37,17 +38,12 @@
         </header>
         <nav class="nav">
           <ul>
-            <li>
-              <a href="./rooms(roomStatTable).html">Room Status</a>
-            </li>
+
             <li></li>
             <li>
               <a href="./rooms(roomNumTable).html" class="active"
-                >Room Number</a
+                >Rooms</a
               >
-            </li>
-            <li>
-              <a href="./rooms(roomFloorTable).html">Room Floor</a>
             </li>
             <li>
               <a href="./rooms(roomTypeTable).html">Room Type</a>
@@ -73,45 +69,33 @@
             <div class="newroom-table-div">
               <div class="form-div">
                 <form>
-                  <label for="room-floor">Room Floor:</label>
-                  <select name="rm-floor" id="rm-floor">
-                    <option value="room-floor">First Floor</option>
-                    <option value="room-floor">Second Floor</option>
-                  </select><br>
 
-                  <label for="room-num">Room Number:</label>
-                  <select name="rm-num" id="rm-floor">
-                    <option value="room-num">Room 1001</option>
-                    <option value="room-num">Room 1002</option>
-                    <option value="room-num">Room 1003</option>
-                    <option value="room-num">Room 1004</option>
-                  </select><br>
+                  <label for="room">Room:</label>
+                  <select class="roomDropDown">
+                    <option value="-">-</option>
+                    <option value="Room 1">Room 1</option>
+                    <option value="Room 2">Room 2</option>
+                    <option value="Add new room">
+                      Add new room type
+                    </option></select
+                  ><br />
+                  
+                  <div class="room-container">
+                    <!-- <label for="room-num">Room Number:</label>
+                    <select name="rm-num" id="rm-floor">
+                      <option value="room-num">Room 1001</option>
+                      <option value="room-num">Room 1002</option>
+                      <option value="room-num">Room 1003</option>
+                      <option value="room-num">Room 1004</option>
+                      <option value="room-num">Add</option>
+                    </select><br>
 
-                  <label for="rm-size">Room Size:</label>
-                  <input type="text" class="input"><br>
+                    <label for="price">Price:</label>
+                    <input type="text" class="input"><br> -->
 
-                  <label for="room-type">Room Type:</label>
-                  <select name="rm-type" id="rm-type">
-                    <option value="room-type">Premium</option>
-                    <option value="room-type">Regular</option>
-                  </select><br>
-
-                  <label for="bed-type">Bed Type:</label>
-                  <select name="bed-type" id="bed-type">
-                    <option value="bed-type">King</option>
-                    <option value="bed-type">Queen</option>
-                    <option value="bed-type">Twin</option>
-                    <option value="bed-type">Twin XL</option>
-                  </select><br>
-
-                  <label for="price">Price:</label>
-                  <input type="text" class="input"><br>
-
-                  <div class="radio-btn">
-                    <input type="radio">Smoking <input type="radio">Disabled
                   </div>
-
-                  <div class="newroom-btn-group">
+                  
+                  <div class="newroom-btn-group room">
                     <a href="./rooms(roomNumTable).html">
                       <button type="button" class="newroom-btn">BACK</button>
                     </a>

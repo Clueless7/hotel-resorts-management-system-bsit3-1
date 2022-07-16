@@ -10,7 +10,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-
+    <script type="module" src="./scripts/roomTypeScript.js" defer></script>
     <title>Hotel Management System</title>
   </head>
   <body>
@@ -38,20 +38,13 @@
         <nav class="nav">
           <ul>
             <li>
-              <a href="./rooms(roomStatTable).html">Room Status</a>
-            </li>
-            <li></li>
-            <li>
-              <a href="./rooms(roomNumTable).html">Room Number</a>
-            </li>
-            <li>
-              <a href="./rooms(roomFloorTable).html">Room Floor</a>
+              <a href="./rooms(roomNumTable).html">Rooms</a>
             </li>
             <li>
               <a href="./rooms(roomTypeTable).html" class="active">Room Type</a>
             </li>
             <li>
-              <a href="./rooms(bedTypeTable).html">Bed Type</a>
+              <a href="./rooms(bedTypeTable).html">Room Bed</a>
             </li>
             <li>
               <a href="./rooms(payMetTable).html">Payment Method</a>
@@ -69,14 +62,16 @@
             <!-- table here -->
             <form>
               <label for="roomtype">Room Type:</label>
-              <select>
+              <select class="roomTypeDropDown">
+                <option value="-">-</option>
                 <option value="premium">Premium</option>
-                <option value="regular">Regular</option></select
+                <option value="regular">Regular</option>
+                <option value="Add new room type">
+                  Add new room type
+                </option></select
               ><br />
-              <div class="text-input">
-                Add Room Type: <input type="text" value="" />
-              </div>
-              <div class="newroom-btn-group">
+              <div class="roomtype-container"></div>
+              <div class="newroom-btn-group roomtype">
                 <a href="./rooms(roomTypeTable).html">
                   <button type="button" class="newroom-btn">BACK</button>
                 </a>
@@ -87,7 +82,7 @@
                   <button type="submit" class="newroom-btn">DELETE</button>
                 </a>
                 <a>
-                  <button type="submit" class="newroom-btn">ADD</button>
+                  <button type="submit" class="newroom-btn">EDIT</button>
                 </a>
               </div>
             </form>
