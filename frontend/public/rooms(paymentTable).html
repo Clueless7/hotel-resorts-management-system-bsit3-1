@@ -10,10 +10,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+
     <script
-      src="./scripts/reservationsMonitoring.js"
-      defer
       type="module"
+      defer
+      src="./scripts/paymentMethodMonitoring.js"
     ></script>
     <title>Hotel Management System</title>
   </head>
@@ -22,10 +23,10 @@
       <div class="sidenav">
         <a href="./index.html"><button type="button">Dashboard</button></a>
         <a href="./rooms(roomNumTable).html">
-          <button type="button">Rooms</button>
+          <button type="button" class="active">Rooms</button>
         </a>
-        <a href="./reservations(reservationTable).html"
-          ><button type="button" class="active">Reservations</button></a
+        <a href="./reservations(checkinTable).html"
+          ><button type="button">Reservations</button></a
         >
         <a href="./services.html"><button type="button">Services</button></a>
         <a href="./reports.html"><button type="button">Reports</button></a>
@@ -42,16 +43,18 @@
         <nav class="nav">
           <ul>
             <li>
-              <a href="./reservations(reservationTable).html" class="active"
-                >Reservation</a
+              <a href="./rooms(roomNumTable).html">Rooms</a>
+            </li>
+            <li>
+              <a href="./rooms(roomTypeTable).html">Room Type</a>
+            </li>
+            <li>
+              <a href="./rooms(bedAttributesTable).html">Room Bed</a>
+            </li>
+            <li>
+              <a href="./rooms(paymentTable).html" class="active"
+                >Payment Method</a
               >
-            </li>
-            <li></li>
-            <li>
-              <a href="./reservations(checkinTable).html">Check-In</a>
-            </li>
-            <li>
-              <a href="./reservations(checkoutTable).html">Check-Out</a>
             </li>
           </ul>
         </nav>
@@ -66,13 +69,9 @@
                 <button type="submit"><i class="fa fa-search"></i></button>
               </form>
             </div>
-            <div class="manageButton-div">
-              <button class="manageButton">Manage</button>
-              <div class="manageButton-options">
-                <a href="./reservations(reservationNew).html">NEW</a>
-                <a href="./reservations(reservationEdit).html">EDIT</a>
-              </div>
-            </div>
+            <a href="./rooms(paymentManage).html">
+              <button type="button" class="btn-group-tabs">MANAGE</button>
+            </a>
           </div>
           <div class="content">
             <!-- table here -->
@@ -81,35 +80,14 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Transaction ID</th>
-                    <th scope="col">Customer Name</th>
-                    <th scope="col">Room Number</th>
-                    <th scope="col">Room Type</th>
-                    <th scope="col">Contact Number</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Gender</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Check-In Date</th>
-                    <th scope="col">Check-Out Date</th>
-                    <th scope="col">Duration of Stay</th>
                     <th scope="col">Payment Method</th>
-                    <th scope="col">Balance</th>
+                    <th scope="col">Status</th>
                   </tr>
                 </thead>
+
                 <tbody>
                   <tr>
                     <td>1</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
                     <td>Loading</td>
                     <td>Loading</td>
                   </tr>
