@@ -6,104 +6,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="stylesheet" href="./styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
 
+    <script type="module" defer src="./scripts/index.js"></script>
     <title>Hotel Management System</title>
   </head>
   <body>
     <aside>
       <div class="sidenav">
-        <div class="title-logo-div">
-          <div class="logo-div">
-            <img src="./images/whitelogobluebg.png" />
-          </div>
-          <div class="hotel-name-label">HOTEL NAME HERE</div>
-        </div>
-        <a href="index.html" class="active">DASHBOARD</a>
-        <a href="hotel-management(room-management).html">HOTEL MANAGEMENT</a>
-        <a href="staff-management(hotel-staff-management).html"
-          >STAFF MANAGEMENT</a
+        <a href="./index.html"
+          ><button type="button" class="active">Dashboard</button></a
         >
-        <a href="others.html">OTHERS</a>
+        <a href="./rooms(roomNumTable).html">
+          <button type="button">Rooms</button>
+        </a>
+        <a href="./reservations(reservationTable).html"
+          ><button type="button">Reservations</button></a
+        >
+        <a href="./services.html"><button type="button">Services</button></a>
+        <a href="./reports.html"><button type="button">Reports</button></a>
+        <a href="./login.html"
+          ><button type="button" class="log-out-btn">Log Out</button></a
+        >
       </div>
     </aside>
-    <section>
-      <div class="container dashboard-container">
-        <div class="dashboard-img-div">
-          <img src="./images/8.png" />
-        </div>
+    <div class="main">
+      <div class="container">
+        <header class="dashboardHeader">
+          <div class="hotel-name-label-db">Elysium</div>
+        </header>
+      </div>
+      <section>
+        <div class="dashboard-content-container">
+          <!-- Search and manage here -->
+          <div class="dashboard-table-label">ONGOING RESERVATIONS</div>
+          <div class="dashboard-monitoring-container">
+            <div class="dashboard-content">
+              <!-- table here -->
 
-        <div class="others-div">
-          <div class="ongoing-reservations">
-            <div class="ongoing-reservations-label">ONGOING RESERVATIONS</div>
-            <div class="dashboard-table-container">
-              <table class="ongoing-reservations-table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Room Number</th>
-                    <th scope="col">Check-In Date</th>
-                    <th scope="col">Check-Out Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Room 1001</td>
-                    <td>Aug 04</td>
-                    <td>Aug 15</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Room 2002</td>
-                    <td>Oct 04</td>
-                    <td>Oct 06</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Room 1002</td>
-                    <td>Aug 08</td>
-                    <td>Aug 12</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Room 2001</td>
-                    <td>Dec 30</td>
-                    <td>Jan 02</td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td>Room 2002</td>
-                    <td>July 17</td>
-                    <td>July 23</td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td>Room 2002</td>
-                    <td>July 17</td>
-                    <td>July 23</td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td>Room 2002</td>
-                    <td>July 17</td>
-                    <td>July 23</td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td>Room 2002</td>
-                    <td>July 17</td>
-                    <td>July 23</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="dashboard-table-container">
+                <table class="dashboard-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Room Number</th>
+                      <th scope="col">Check-In Date</th>
+                      <th scope="col">Check-Out Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>Loading</td>
+                      <td>Loading</td>
+                      <td>Loading</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="vacancy-display">
+              <div class="vacancy-display-label">VACANCY</div>
+              <div class="vacancy-display-count">9</div>
             </div>
           </div>
-          <div class="rooms-available">
-            <div class="rooms-available-label">ROOMS AVAILABLE</div>
-            <div class="rooms-available-count">40</div>
-          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </body>
 </html>

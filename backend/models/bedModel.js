@@ -15,6 +15,7 @@ const bedSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: [true, 'Please add bed Price'],
     ref: 'BedType',
+    unique: true,
   },
 })
 

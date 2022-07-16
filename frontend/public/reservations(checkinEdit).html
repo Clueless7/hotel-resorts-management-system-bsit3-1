@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="./styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <title>Hotel Management System</title>
+  </head>
+  <body>
+    <aside>
+      <div class="sidenav">
+        <a href="./index.html"><button type="button">Dashboard</button></a>
+        <a href="./rooms(roomNumTable).html">
+          <button type="button">Rooms</button>
+        </a>
+        <a href="./reservations(reservationTable).html"
+          ><button type="button" class="active">Reservations</button></a
+        >
+        <a href="./services.html"><button type="button">Services</button></a>
+        <a href="./reports.html"><button type="button">Reports</button></a>
+        <a href="./login.html"
+          ><button type="button" class="log-out-btn">Log Out</button></a
+        >
+      </div>
+    </aside>
+    <div class="main">
+      <div class="container">
+        <header class="managementsHeader">
+          <div class="hotel-name-label">Elysium</div>
+        </header>
+        <nav class="nav">
+          <ul>
+            <li>
+              <a href="./reservations(reservationTable).html">Reservation</a>
+            </li>
+            <li></li>
+            <li>
+              <a href="./reservations(checkinTable).html" class="active"
+                >Check-In</a
+              >
+            </li>
+            <li>
+              <a href="./reservations(checkoutTable).html">Check-Out</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <section>
+        <div class="content-container">
+          <!-- Search and manage here -->
+          <div class="monitoring-menu">
+            <!-- menu here -->
+          </div>
+          <div class="content">
+            <!-- table here -->
+            <form action="/action_page.php">
+              <div class="wholeFieldSet">
+                <div class="leftFieldSet">
+                  <fieldset>
+                    <legend>Customer's Information</legend>
+                    <label for="customerName">Customer Name</label>
+                    <input type="text" id="customerName" name="customerName" />
+                    <label for="contactNumber">Contact Number</label>
+                    <input
+                      type="number"
+                      id="contactNumber"
+                      name="contactNumber"
+                    />
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" />
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender">
+                      <option value="0">Select Gender:</option>
+                      <option value="1">Male</option>
+                      <option value="2">Female</option>
+                    </select>
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" />
+                  </fieldset>
+
+                  <fieldset>
+                    <legend>Bedroom Information</legend>
+                    <label for="bedInfo">Bed Type:</label>
+                    <select id="bedInfo" name="bedInfo">
+                      <option value="0">Select Bed Type:</option>
+                      <option value="1">King</option>
+                      <option value="2">Queen</option>
+                      <option value="3">Twin</option>
+                      <option value="4">Twin XL</option>
+                    </select>
+                  </fieldset>
+                </div>
+
+                <div class="rightFieldSet">
+                  <fieldset>
+                    <legend>Room Information</legend>
+                    <label for="roomNumber">Room Number</label>
+                    <select id="roomNumber" name="roomNumber">
+                      <option value="0">Select Room Number:</option>
+                      <option value="1">Room 1001</option>
+                      <option value="2">Room 1002</option>
+                      <option value="3">Room 1003</option>
+                      <option value="4">Room 2001</option>
+                      <option value="5">Room 2002</option>
+                      <option value="6">Room 2003</option>
+                      <option value="7">Room 3001</option>
+                      <option value="8">Room 3002</option>
+                      <option value="9">Room 3003</option>
+                    </select>
+                    <label for="roomType">Room Type</label>
+                    <select id="roomType" name="roomType">
+                      <option value="0">Select Room Type:</option>
+                      <option value="1">Premium</option>
+                      <option value="2">Regular</option>
+                    </select>
+                  </fieldset>
+                  <fieldset>
+                    <legend>Check-In Information</legend>
+                    <label for="check-inDate">Check-In Date</label>
+                    <input type="date" id="check-inDate" name="check-inDate" />
+                    <label for="check-outDate">Check-Out Date</label>
+                    <input
+                      type="date"
+                      id="check-outDate"
+                      name="check-outDate"
+                    />
+                    <label for="durationOfStay">Duration Of Stay</label>
+                    <input
+                      type="number"
+                      id="durationOfStay"
+                      name="durationOfStay"
+                    />
+                  </fieldset>
+                  <label for="paymentMethod">Payment Method</label>
+                  <select id="paymentMethod" name="paymentMethod">
+                    <option value="0">Select Payment Method:</option>
+                    <option value="1">Cash/Over The Counter</option>
+                    <option value="2">GCash</option>
+                    <option value="3">Bank Transfer</option>
+                  </select>
+                  <label for="balance">Balance</label>
+                  <input type="number" id="balance" name="balance" />
+                </div>
+              </div>
+              <div class="form-buttons">
+                <button type="button" class="update-btn">UPDATE</button>
+                <button type="button" class="delete-btn">DELETE</button>
+                <a href="./reservations(checkinTable).html">
+                  <button type="button" class="back-btn">BACK</button>
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

@@ -9,7 +9,6 @@ const getAllRooms = asyncHandler(async (req, res) => {
   const rooms = await Room.find()
     .populate('roomType', {
       _id: 0,
-      roomTypeName: 1,
     })
     .populate({
       path: 'roomBed',

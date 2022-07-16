@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="./styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <script defer type="module" src="./scripts/roomTypeMonitoring.js"></script>
+    <title>Hotel Management System</title>
+  </head>
+  <body>
+    <aside>
+      <div class="sidenav">
+        <a href="./index.html"><button type="button">Dashboard</button></a>
+        <a href="./rooms(roomNumTable).html">
+          <button type="button" class="active">Rooms</button>
+        </a>
+        <a href="./reservations(reservationTable).html"
+          ><button type="button">Reservations</button></a
+        >
+        <a href="./services.html"><button type="button">Services</button></a>
+        <a href="./reports.html"><button type="button">Reports</button></a>
+        <a href="./login.html"
+          ><button type="button" class="log-out-btn">Log Out</button></a
+        >
+      </div>
+    </aside>
+    <div class="main">
+      <div class="container">
+        <header class="managementsHeader">
+          <div class="hotel-name-label">Elysium</div>
+        </header>
+        <nav class="nav">
+          <ul>
+            <li>
+              <a href="./rooms(roomNumTable).html">Rooms</a>
+            </li>
+            <li>
+              <a href="./rooms(roomTypeTable).html" class="active">Room Type</a>
+            </li>
+            <li>
+              <a href="./rooms(bedTypeTable).html">Room Bed</a>
+            </li>
+            <li>
+              <a href="./rooms(payMetTable).html">Payment Method</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <section>
+        <div class="content-container">
+          <!-- Search and manage here -->
+          <div class="monitoring-menu">
+            <div class="searchBar">
+              <form class="searchButton" action="action_page.php">
+                <input type="text" placeholder="Search.." name="search" />
+                <button type="submit"><i class="fa fa-search"></i></button>
+              </form>
+            </div>
+            <a href="./rooms(roomTypeManage).html">
+              <button type="button" class="btn-group-tabs">MANAGE</button>
+            </a>
+          </div>
+          <div class="content">
+            <!-- table here -->
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Room Type</th>
+                    <th scope="col">Room Type Price</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Loading</td>
+                    <td>Loading</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

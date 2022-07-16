@@ -26,7 +26,7 @@ app.use('/api/paymentmethods', require('./routes/paymentMethodRoutes'))
 app.use(express.static(path.join(__dirname, '../frontend/public')))
 app.get('*', (req, res) => {
   res.sendFile(
-    path.resolve(__dirname, '../', 'frontend', 'public', 'index.html')
+    path.resolve(__dirname, '../', 'frontend', 'public', '404error.html')
   )
 })
 

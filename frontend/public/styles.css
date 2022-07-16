@@ -1,60 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400');
 * {
   margin: 0;
   padding: 0;
+  border: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Poppins;
 }
 
 body {
-  width: 100%;
-  height: 100%;
-  background-color: #f0ebe3;
-}
-
-.container {
-  max-width: 83%;
-  height: 100%;
-  margin-left: 17%; /* Same as the width of the sidenav */
-  font-size: 28px;
-  padding: 0px 20px 20px 20px;
-}
-
-/* DEFAULT TABLE STYLE */
-thead th {
-  background-color: #18978f;
-  color: white;
-  font-weight: bold;
-}
-
-table {
-  border-collapse: collapse;
-  width: 100%;
-  background-color: #e9dac1;
-}
-
-th,
-td {
-  text-align: center;
-  border: 2px solid #54bab9;
-}
-
-tr:hover {
-  background-color: #54bab9;
+  max-width: 100%;
+  max-height: 100%;
+  background-color: #eaeaea;
 }
 
 .error-message-container {
   max-width: 100%;
-  background-color: #18978f;
+  background-color: #252a34;
   margin: 0;
   padding: 100px;
 }
 
 .error-message-code,
 .error-message-label {
-  color: white;
+  color: #ff2e63;
   text-align: center;
   font-weight: bold;
   letter-spacing: 5px;
+  text-shadow: 5px 4px 6px #08d9d6;
 }
 
 .error-message-code {
@@ -67,158 +39,137 @@ tr:hover {
   line-height: 70px;
 }
 
-/* sidenav logo and hotel name */
-.title-logo-div {
-  display: block;
-  justify-content: center;
-  margin: 20px 0px 50px 0px;
-  max-width: 100%;
-}
-
-.logo-div {
-  display: flex;
-  justify-content: center;
-  padding: 0px 8px 10px 8px;
-}
-
-.logo-div img {
-  max-width: 150px;
-  border-radius: 500px;
-  margin-inline: 0;
-  padding: 0;
-}
-
-.hotel-name-label {
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-  max-width: 100%;
-  text-align: center;
-  margin-inline: 0;
-  padding-inline: 8px;
-}
-
-/* sidenav navs */
+/* ALL SIDE NAVS HERE */
 .sidenav {
   height: 100%;
-  width: 17%;
+  width: 18%;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #54bab9;
+  background-color: #252a34;
   overflow-x: hidden;
   padding-top: 20px;
 }
-
 .sidenav a {
-  padding: 12px 15px 12px 10px;
   text-decoration: none;
-  font-size: 15px;
+}
+.sidenav button {
+  padding: 8px 0px 8px 0px;
+  width: 90%;
+  font-size: 18px;
   color: white;
   display: block;
   letter-spacing: 1.5px;
-  text-align: center;
+  font-weight: lighter;
+  background: none;
+  margin-inline: 10px;
+  margin-bottom: 3px;
 }
 
-.sidenav a:hover {
-  color: white;
-  background-color: #18978f;
-  font-weight: bold;
-}
-
+.sidenav button:hover,
 .sidenav .active {
+  background-color: #ff2e63;
+  border-radius: 10px;
+}
+
+.sidenav .log-out-btn {
+  color: #08d9d6;
+  font-weight: bold;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 16.5%;
+  margin-bottom: 20px;
+}
+
+.sidenav .log-out-btn:hover {
+  background: none;
+}
+
+/* FOR SIZING OF SCREEN SIDENAV NOT INCLUDED */
+.main {
+  width: 82%;
+  height: 100%;
+  margin-left: 18%;
+  background-color: #eaeaea;
+}
+
+/* HEADERS */
+/* FOR RESPONSIVE IMAGE BACKGROUND (EXCEPT DASHBOARD) */
+.managementsHeader {
+  background: url('./images/3smaller.png') 50% 0 no-repeat;
+  padding: 0;
+  margin: 0;
+  background-repeat: no-repeat;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  position: relative;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/* FOR RESPONSIVE IMAGE BACKGROUND IN DASHBOARD */
+.dashboardHeader {
+  background: url('./images/3.png') 50% 0 no-repeat;
+  padding: 0;
+  margin: 0;
+  background-repeat: no-repeat;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  position: relative;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  border-bottom: 50px solid #ff2e63;
+  box-shadow: 5px 5px #08d9d6;
+}
+
+/* HOTEL NAME (EXCEPT DASHBOARD) */
+.hotel-name-label {
+  font-size: 80px;
+  font-weight: 100;
+  width: 100%;
+  padding: 0px 35px 0px 35px;
+  margin: 0px;
+  height: 100%;
+  text-align: right;
   color: white;
-  background-color: #18978f;
-  font-weight: bold;
+  text-shadow: 5px 5px 4px black;
 }
 
-/* contents */
-.dashboard-img-div img {
-  max-width: 100%;
-  margin: 0px 0px 15px 0px;
-  padding-top: 20px;
+/* HOTEL NAME IN DASHBOARD */
+.hotel-name-label-db {
+  font-size: 100px;
+  font-weight: 100;
+  width: 100%;
+  padding: 45px 35px 10px 35px;
+  margin: 0px;
+  height: 100%;
+  text-align: right;
+  color: white;
+  text-shadow: 5px 5px 4px black;
 }
 
-/* dashboard monitorings */
-.others-div {
-  max-width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding-top: 40px;
-}
-
-.ongoing-reservations {
-  width: 55%;
-}
-
-/* dashboard table */
-.ongoing-reservations-label {
-  font-size: 30px;
-  font-weight: bold;
-  text-align: center;
-  color: #18978f;
-  letter-spacing: 2px;
-  padding-block: 5px;
-}
-
-.dashboard-table-container {
-  overflow-y: auto;
-  height: 225px;
-}
-
-.dashboard-table-container thead th {
-  position: sticky;
-  top: 0;
-}
-
-.ongoing-reservations-table th,
-.ongoing-reservations-table td {
-  padding: 5px 10px;
-  font-size: 20px;
-}
-
-/* Rooms Available */
-.rooms-available {
-  width: 28%;
-}
-
-.rooms-available-label {
-  font-size: 25px;
-  font-weight: bold;
-  text-align: center;
-  color: #18978f;
-  letter-spacing: 2px;
-  border-radius: 30px 30px 0px 0px;
-  background-color: white;
-  padding-block: 10px;
-}
-
-.rooms-available-count {
-  font-size: 130px;
-  font-weight: bold;
-  text-align: center;
-  color: #ffffff;
-  letter-spacing: 2px;
-  border-radius: 0px 0px 30px 30px;
-  background-color: #18978f;
-  padding: 15px 0px 15px 0px;
-}
-
-/* header/topnav */
+/* TOP NAVIGATION STYLES */
 .nav {
-  max-width: 83%;
-  margin-left: 17%;
-  height: 56px;
-  padding: 15px 20px 20px 20px;
-  border-bottom: 5px solid #18978f;
+  width: 100%;
+  padding: 0;
+  background: #ff2e63;
+  margin: 0;
+  border-bottom: 2px solid #08d9d6;
 }
 
 .nav ul {
   width: 100%;
   list-style: none;
   text-align: center;
-  padding: 0;
+  padding: 7px 0px 7px 0px;
   margin: 0;
 }
 
@@ -229,119 +180,368 @@ tr:hover {
 
 .nav a {
   text-decoration: none;
-  color: #18978f;
-  padding: 10px 20px 10px 20px;
-  font-size: 15px;
-  text-align: center;
-}
-
-.nav a:hover {
-  background-color: #18978f;
-  color: white;
-  font-weight: bold;
-}
-
-.nav .active {
-  background-color: #18978f;
-  color: white;
-  font-weight: bold;
-}
-
-/* Hotel Management */
-/* Reservations Management */
-/* Monitoring */
-.content-container {
-  max-width: 79%;
-  /* height: 100%; */
-  float: left;
-  margin: 0px 0px 20px 0px;
-  background-color: #e9dac1;
-  padding: 20px 20px 20px 20px;
-}
-
-.page-title-div {
-  background-color: #54bab9;
-  max-width: 79%;
-  margin-top: 20px;
-}
-
-.page-title-label h2 {
-  color: white;
+  padding: 7px 20px 10px 20px;
+  height: auto;
   font-size: 20px;
-  font-weight: bold;
   text-align: center;
-  padding-block: 20px;
+  color: white;
+  font-weight: lighter;
   margin: 0;
-  letter-spacing: 3px;
-  max-width: 100%;
+  /* height: 50px; */
 }
 
-/* monitoring table */
-
-.reservations-monitoring-table-container {
-  overflow-y: auto;
-  max-height: 400px;
+.nav a:hover,
+.nav .active {
+  background-color: #eaeaea;
+  color: #252a34;
+  border-top: 2px solid #08d9d6;
+  border-inline: 2px solid #08d9d6;
+  font-weight: lighter;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
-.reservations-monitoring-table-container thead th {
-  position: sticky;
-  top: 0;
-}
-.reservations-monitoring-table {
-  white-space: nowrap;
-  background-color: #f0ebe3;
-}
-
-.reservations-monitoring-table th,
-.reservations-monitoring-table td {
-  padding: 10px 10px;
-  font-size: 15px;
-}
-
-/* buttons in left side */
-.content-nav {
+/* DEFAULT FOR ALL CONTENT CONTAINERS */
+section {
+  width: 100%;
   height: 100%;
-  width: 16.5%;
-  position: fixed;
-  z-index: 1;
-  top: 76px;
-  right: 0;
-  overflow-x: hidden;
   padding-right: 20px;
 }
-.content-nav a {
+
+.content-container {
+  background-color: white;
+  margin: 20px 0px 20px 20px;
+  padding: 20px 20px 20px 20px;
+  border-radius: 10px;
+}
+
+/* .dashboard-content-container {
+  background-color: white;
+  margin: 20px 0px 20px 20px;
+  padding: 20px 20px 20px 20px;
+  border-radius: 10px;
+  /* display: flex; */
+/* width: 100%;
+} */
+
+.dashboard-content-container {
+  /* background-color: white; */
+  margin: 0px;
+  padding: 20px 20px 20px 20px;
+  /* border-radius: 10px; */
+  /* display: flex; */
+  width: 100%;
+}
+
+.content {
+  background: #252a34;
+  margin: 20px 20px 0px 0px;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  color: white;
+  border-radius: 10px;
+}
+
+.dashboard-content {
+  /* background: #252a34; */
+  margin: 10px 20px 0px 20px;
+  /* padding: 20px; */
+  width: 100%;
+  height: 100%;
+  color: white;
+  /* border-radius: 10px; */
+}
+
+.monitoring-menu {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.searchBar {
+  width: 50%;
+}
+
+/* Style the search field */
+form.searchButton input[type='text'] {
+  padding: 5px 5px 5px 20px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+/* Style the submit button */
+form.searchButton button {
+  float: left;
+  width: 20%;
+  padding: 5px;
+  background: #08d9d6;
+  color: #252a34;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+form.searchButton button:hover {
+  background: #ff2e63;
+  color: white;
+}
+
+/* Clear floats */
+form.searchButton::after {
+  content: '';
+  clear: both;
+  display: table;
+}
+
+/* DEFAULT STYLE FOR MANAGE BUTTON IN MONITORINGS */
+.manageButton a {
+  text-decoration: none;
+}
+
+.manageButton {
+  color: #252a34;
+  font-size: 17px;
+  padding: 5px 20px 5px 20px;
+  background-color: #08d9d6;
+  border-radius: 10px;
+  border: 1px solid grey;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.manageButton-div {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.manageButton-options {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.manageButton-options a {
+  color: black;
+  padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
-.content-nav button {
-  padding: 15px 10px 15px 10px;
-  font-size: 17px;
+/* Change color of dropdown links on hover */
+.manageButton-options a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.manageButton-div:hover .manageButton-options {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.manageButton-div:hover .manageButton {
+  background-color: #ff2e63;
   color: white;
-  letter-spacing: 1.5 px;
-  text-align: center;
-  background-color: #54bab9;
-  /* margin-bottom: 10px; */
+}
+
+/* DEFAULT TABLE STYLE */
+thead th {
+  background-color: #ff2e63;
+  color: white;
+  font-weight: bold;
+}
+
+table {
+  border-collapse: collapse;
   width: 100%;
-  border: none;
+  background-color: #eaeaea;
+}
+
+td {
+  color: #252a34;
+}
+
+th,
+td {
+  text-align: center;
+  border: 2px solid #08d9d6;
+}
+
+tr:hover {
+  background-color: #08d9d6;
+}
+
+/* MONITORING TABLES (EXCEPT DASHBOARD) */
+.table-label {
+  font-size: 40px;
+  font-weight: bold;
+  padding: 0px;
+  margin: 0px;
+}
+.table-container {
+  overflow-y: auto;
+  max-height: 400px;
+  border-radius: 10px;
+}
+
+.table-container thead th {
+  position: sticky;
+  top: 0;
+}
+.table {
+  white-space: nowrap;
+  background-color: #eaeaea;
+  border-radius: 10px;
+}
+
+.table th,
+.table td {
+  padding: 10px 10px;
+  font-size: 15px;
+}
+
+.table-container {
+  overflow-y: auto;
+  max-height: 400px;
+  border-radius: 10px;
+}
+
+.table-container thead th {
+  position: sticky;
+  top: 0;
+}
+.table {
+  white-space: nowrap;
+  background-color: #eaeaea;
+  border-radius: 10px;
+}
+
+.table th,
+.table td {
+  padding: 10px 10px;
+  font-size: 15px;
+}
+
+/* MONITORING STYLE FOR DASHBOARD */
+.dashboard-monitoring-container {
+  display: flex;
+}
+
+.dashboard-table-label {
+  font-size: 40px;
+  font-weight: bold;
+  padding: 0px;
+  margin: 0px 0px 0px 20px;
+  letter-spacing: 10%;
+}
+
+/* FOR RESPONSIVENESS OF TABLES - FROM HERE */
+.dashboard-table-container {
+  overflow-y: auto;
+  max-height: 400px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 4px #252a34;
+}
+
+.dashboard-table-container thead th {
+  position: sticky;
+  top: 0;
+}
+.dashboard-table {
+  white-space: nowrap;
+  background-color: #eaeaea;
+  /* border-radius: 10px; */
+}
+
+.dashboard-table th,
+.dashboard-table td {
+  padding: 10px 10px;
+  font-size: 15px;
+}
+
+.dashboard-table-container {
+  overflow-y: auto;
+  max-height: 400px;
+  border-radius: 10px;
+}
+
+.dashboard-table-container thead th {
+  position: sticky;
+  top: 0;
+}
+
+/* FOR RESPONSIVENESS OF TABLES - UNTIL HERE */
+.dashboard-table {
+  white-space: nowrap;
+  background-color: #eaeaea;
+  border-radius: 10px;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+  padding: 10px 10px;
+  font-size: 15px;
+}
+
+/* ROOMS AVAILABLE */
+.vacancy-display {
+  width: 25%;
+  text-align: center;
+  color: white;
+  font-weight: 500;
+  padding-top: 10px;
+}
+
+.vacancy-display-label {
+  font-size: 30px;
+  background-color: #ff2e63;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.vacancy-display-count {
+  font-size: 150px;
+  font-weight: 500;
+  background-color: #252a34;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+/*  */
+.checkOutButton a {
+  text-decoration: none;
+}
+
+.checkOutButton {
+  color: #252a34;
+  font-size: 17px;
+  padding: 5px 20px 5px 20px;
+  background-color: #08d9d6;
+  border-radius: 10px;
+  border: 1px solid grey;
+  font-weight: 500;
   letter-spacing: 2px;
-  margin-bottom: 20px;
-}
-.content-nav button:hover {
-  background-color: #18978f;
-  font-weight: bold;
 }
 
-.content-nav .active {
-  background-color: #18978f;
-  font-weight: bold;
+.checkOutButton:hover {
+  background-color: #ff2e63;
+  color: white;
 }
 
-.reservation-management-form-div {
-  background-color: #e9dac1;
-  padding: 20px;
-  max-width: 79%;
-}
 fieldset {
   background-color: #f0ebe3;
   width: 100%;
@@ -350,7 +550,9 @@ fieldset {
   padding: 15px;
   margin: 0px 20px 10px 0px;
   display: inline;
+  color: #252a34;
 }
+
 .wholeFieldSet {
   display: inline-flex;
   /* max-width: 100%; */
@@ -360,37 +562,33 @@ fieldset {
 }
 .leftFieldSet {
   width: 49%;
-
   margin-right: 20px;
 }
 
 legend {
-  color: #18978f;
+  color: #ff2e63;
   font-weight: bold;
   letter-spacing: 2px;
   font-size: 20px;
 }
 
-.reservation-management-form-div label {
-  font-size: 18px;
-  color: black;
+.content label {
+  font-size: 15px;
+  color: #252a34;
   display: block;
   padding: 5px;
 }
-
-/* label[for='customerLName'] {
-  display: none;
-} */
 
 #customerName {
   margin: 0px 0px 45px 0px;
 }
 
 label[for='gender'] {
-  margin: 35px 0px 0px 0px;
+  margin: 40px 0px 0px 0px;
 }
-.reservation-management-form-div input,
-.reservation-management-form-div select {
+
+.content input,
+.content select {
   width: 100%;
   padding: 5px;
   border-radius: 3px;
@@ -398,17 +596,39 @@ label[for='gender'] {
   margin: 0px 0px 10px 0px;
 }
 
-.reservation-management-form-div #balance {
+.content #balance {
   width: 100%;
+  color: white;
+}
+
+label[for='paymentMethod'],
+label[for='balance'] {
+  color: white;
+}
+
+#bedInfo {
+  margin: 0px 0px 12px 0px;
 }
 
 .form-buttons button {
   font-size: 18px;
-  color: white;
+  color: #252a34;
   padding: 5px;
   margin-inline: 15px;
   width: 100px;
-  background-color: #18978f;
+  background-color: #08d9d6;
+  border: none;
+  border-radius: 5px;
+  align-items: center;
+}
+
+.form-buttons .checkOut-btn {
+  font-size: 18px;
+  color: #252a34;
+  padding: 5px;
+  margin-inline: 15px;
+  width: 150px;
+  background-color: #08d9d6;
   border: none;
   border-radius: 5px;
   align-items: center;
@@ -419,175 +639,277 @@ label[for='gender'] {
   margin-top: 20px;
 }
 
-.check-out-div {
-  display: flex;
-}
-.servicesAvailed-div {
-  width: 49%;
-  margin: 10px 20px 0px 0px;
+.form-buttons a {
+  text-decoration: none;
 }
 
-.check-OutPayment-div {
-  width: 49%;
-}
-.check-OutPayment {
-  width: 100%;
+.form-buttons button:hover {
+  background-color: #ff2e63;
+  color: white;
 }
 
-.servicesAvailedLabel {
-  font-size: 20px;
-  color: #18978f;
-  margin-bottom: 10px;
-  text-align: center;
-  font-weight: bold;
+.btn-group-tabs {
+  background-color: #08d9d6;
+  border: 1px solid grey;
+  color: #252a34;
+  font-size: 17px;
+  padding: 5px 20px 5px 20px;
+  /* float: right; */
+  border-radius: 10px;
+  font-weight: 500;
   letter-spacing: 2px;
 }
 
-.servicesAvailedCheckBox label {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 0px;
-  cursor: pointer;
-  font-size: 18px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+.btn-group-tabs:hover {
+  background-color: #ff2e63;
+  color: white;
 }
 
-.servicesAvailedCheckBox input {
+.newroom-table-div {
+  padding: 20px 20px 20px 20px;
+  /* background-color: #e9dac1; */
+  width: 100%;
+}
+.form-div select,
+.form-div label,
+.radio-btn,
+.newroom-btn-group,
+.form-div input {
+  margin-bottom: 20px;
+  font-size: 16px;
+  padding-right: 20px;
+}
+
+.form-div label {
+  color: white;
+}
+
+.newroom-btn {
+  background-color: #08d9d6;
+  /* border: 5px solid #e9dac1; */
+  color: #252a34;
+  font-size: 16px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-block: 5px;
+  width: 100px;
+  /* float: right; */
+  margin-inline: 10px;
+  border-radius: 5px;
+}
+
+/* para sa mga add(manage) sa Room Management*/
+.text-input {
+  font-size: 16px;
+}
+
+.newroom-btn-group {
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.radio-btn {
+  display: inline-flex;
+  width: 25%;
+}
+
+.newroom-btn:hover {
+  background-color: #ff2e63;
+  color: white;
+}
+
+label[for='roomtype'],
+label[for='room-floor'],
+label[for='Payment'],
+label[for='bedtype'] {
+  color: white;
+}
+
+.input-container {
+  padding: 16px 50px 16px 50px;
+  height: 100px;
+  font-size: medium;
+}
+.login-form {
+  padding-top: 30px;
+  border: 3px solid #f1f1f1;
+  width: 520px;
+  height: 580px;
+  margin-left: 35vw;
+  background-color: #000000c9;
+  border-radius: 25px;
+}
+.login-box {
   position: absolute;
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+}
+.login-box h2 {
+  text-align: center;
+  /* font-family: Arial, Helvetica, sans-serif; */
+}
+.wrapper {
+  background-image: url('./images/loginbg.png');
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+  min-height: 100vh;
+  background-size: cover;
+}
+.input-container input[type='text'],
+.input-container input[type='password'] {
+  width: 100%;
+  padding: 14px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 2px solid black;
+  box-sizing: border-box;
+  font-size: medium;
+  border-radius: 20px;
+}
+/* Set a style for all buttons */
+.input-container button {
+  background-color: #04aa6d;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border-radius: 20px;
   cursor: pointer;
-  height: 30px;
-  width: 20px;
+  width: 100%;
+  font-size: medium;
+  font-weight: 700;
+}
+.psw a {
+  color: white;
+}
+.input-container button:hover {
+  opacity: 0.9;
+}
+.input-container button.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+/* The "Forgot password" text */
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+.cancelbtn {
+  width: 100%;
+}
+.hotel-name-div,
+.login-form h2,
+.input-container label {
+  color: white;
+  letter-spacing: 2px;
 }
 
-@media screen and (max-width: 1100px) {
-  .content-nav button {
-    font-size: 12px;
-  }
+.login-form h2 {
+  letter-spacing: 5px;
+}
+.hotel-name-div {
+  text-align: center;
+  font-size: 80px;
+  font-weight: 100;
+  text-shadow: 5px 4px 5px #ff2e63;
 }
 
-@media screen and (max-width: 900px) {
-  .sidenav {
-    padding-top: 15px;
-  }
-  .sidenav a {
-    font-size: 13px;
-  }
-  .hotel-name-label {
-    font-size: 15px;
-  }
-  .logo-div img {
-    max-width: 70px;
-  }
-  .ongoing-reservations-label {
-    font-size: 20px;
-    letter-spacing: 1.5px;
-  }
-  thead {
-    font-size: 15px;
-  }
-  tbody {
-    font-size: 15px;
-  }
-  .rooms-available-label {
-    font-size: 20px;
-    letter-spacing: 1.5px;
-  }
-  .rooms-available-count {
-    font-size: 100px;
-  }
-
-  .content-nav button {
-    font-size: 9px;
-  }
-
-  .wholeFieldSet {
-    display: block;
-    /* max-width: 100%; */
-  }
-  .rightFieldSet {
-    width: 100%;
-  }
-  .leftFieldSet {
-    width: 100%;
-  }
-  .check-out-div {
-    display: block;
-  }
-  .servicesAvailed-div {
-    width: 100%;
-    /* margin-right: 20px; */
-  }
-
-  .check-OutPayment-div {
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 700px) {
-  .sidenav {
-    padding-top: 15px;
-  }
-  .sidenav a {
-    font-size: 9px;
-    padding-inline: 0px;
-  }
-  .hotel-name-label {
-    font-size: 13px;
-  }
-  .logo-div img {
-    max-width: 50px;
-  }
-  .others-div {
-    display: block;
-  }
-  .ongoing-reservations,
-  .rooms-available {
-    width: 100%;
-  }
-  .rooms-available {
-    margin-top: 15px;
-  }
-  /* .ongoing-reservations-label {
-    font-size: 15px;
-    letter-spacing: 1px;
-  }
-  thead {
-    font-size: 13px;
-  }
-  tbody {
-    font-size: 13px;
-  } */
-  .rooms-available-label {
-    font-size: 20px;
-    letter-spacing: 1.5px;
-  }
-  .rooms-available-count {
-    font-size: 100px;
+@media screen and (max-width: 1300px) {
+  .sidenav button {
+    width: 88%;
+    font-size: 18px;
+    /* color: green; */
   }
   .nav a {
-    padding: 10px 15px 10px 15px;
-    font-size: 13px;
-  }
-  .content-nav button {
-    font-size: 7px;
-    padding-inline: 0px;
-  }
-  legend {
-    font-weight: bold;
-    letter-spacing: 1px;
     font-size: 16px;
   }
 }
 
-/* REMOVE FIXED POSITION OF CONTENT NAV */
-/* FIX CONTENT NAV POSITION */
-/* //MAKE FIELDSETS SIDE BY SIDE */
-/* //MAKE FORM BUTTON GO UNDER FORM INPUTS */
-/* //MAKE FORM RESPONSIVE */
-/* FIX TABLE IN DASHBOARD */
-/* FIX HEIGHT */
-/* MAKE CONTENT NAV GO UNDER FORMS WHEN RESIZED */
+@media screen and (max-width: 1100px) {
+  /*  */
+  .sidenav button {
+    width: 86%;
+    font-size: 15px;
+    /* color: pink; */
+    letter-spacing: 1.5px;
+  }
+  .vacancy-display-label {
+    font-size: 25px;
+  }
+  .nav a {
+    padding: 6px 10px 8px 10px;
+  }
+  .nav a:hover,
+  .nav .active {
+    /* border: 2px solid #08d9d6; */
+    border-radius: 8px;
+  }
+  .newroom-btn-group button {
+    display: block;
+    margin: 10px;
+    width: 100%;
+  }
+  .wholeFieldSet {
+    display: block;
+  }
+  .leftFieldSet,
+  .rightFieldSet {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 900px) {
+  .sidenav button {
+    width: 84%;
+    font-size: 15px;
+    /* color: blue; */
+    letter-spacing: 1.3px;
+  }
+  .nav li {
+    display: block;
+    margin-block: 12px;
+  }
+  .dashboard-monitoring-container {
+    display: block;
+  }
+  .vacancy-display {
+    width: 100%;
+    padding-left: 40px;
+  }
+  .form-buttons button {
+    display: block;
+    width: 90%;
+    margin-bottom: 10px;
+  }
+  .checkOut-btn {
+    min-width: 90%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .sidenav button {
+    width: 82%;
+    font-size: 10px;
+    /* color: white; */
+    letter-spacing: 1.3px;
+  }
+  .hotel-name-label {
+    font-size: 40px;
+    text-align: center;
+  }
+  .newroom-btn {
+    margin: 0;
+  }
+  .newroom-btn-group {
+    display: block;
+  }
+}
+.roomtype,
+.room,
+.room-bed,
+.paymentMethod {
+  display: none;
+}

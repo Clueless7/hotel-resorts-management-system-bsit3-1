@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="./styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script
+      src="./scripts/reservationsMonitoring.js"
+      defer
+      type="module"
+    ></script>
+    <title>Hotel Management System</title>
+  </head>
+  <body>
+    <aside>
+      <div class="sidenav">
+        <a href="./index.html"><button type="button">Dashboard</button></a>
+        <a href="./rooms(roomNumTable).html">
+          <button type="button">Rooms</button>
+        </a>
+        <a href="./reservations(reservationTable).html"
+          ><button type="button" class="active">Reservations</button></a
+        >
+        <a href="./services.html"><button type="button">Services</button></a>
+        <a href="./reports.html"><button type="button">Reports</button></a>
+        <a href="./login.html"
+          ><button type="button" class="log-out-btn">Log Out</button></a
+        >
+      </div>
+    </aside>
+    <div class="main">
+      <div class="container">
+        <header class="managementsHeader">
+          <div class="hotel-name-label">Elysium</div>
+        </header>
+        <nav class="nav">
+          <ul>
+            <li>
+              <a href="./reservations(reservationTable).html" class="active"
+                >Reservation</a
+              >
+            </li>
+            <li></li>
+            <li>
+              <a href="./reservations(checkinTable).html">Check-In</a>
+            </li>
+            <li>
+              <a href="./reservations(checkoutTable).html">Check-Out</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <section>
+        <div class="content-container">
+          <!-- Search and manage here -->
+          <div class="monitoring-menu">
+            <div class="searchBar">
+              <form class="searchButton" action="action_page.php">
+                <input type="text" placeholder="Search.." name="search" />
+                <button type="submit"><i class="fa fa-search"></i></button>
+              </form>
+            </div>
+            <div class="manageButton-div">
+              <button class="manageButton">Manage</button>
+              <div class="manageButton-options">
+                <a href="./reservations(reservationNew).html">NEW</a>
+                <a href="./reservations(reservationEdit).html">EDIT</a>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <!-- table here -->
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Transaction ID</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Room Number</th>
+                    <th scope="col">Room Type</th>
+                    <th scope="col">Contact Number</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Check-In Date</th>
+                    <th scope="col">Check-Out Date</th>
+                    <th scope="col">Duration of Stay</th>
+                    <th scope="col">Payment Method</th>
+                    <th scope="col">Balance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Loading</td>
+                    <td>Loading</td>
+                    <td>Loading</td>
+                    <td>Loading</td>
+                    <td>Loading</td>
+                    <td>Loading</td>
+                    <td>Loading</td>
+                    <td>Loading</td>
+                    <td>Loading</td>
+                    <td>Loading</td>
+                    <td>Loading</td>
+                    <td>Loading</td>
+                    <td>Loading</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
