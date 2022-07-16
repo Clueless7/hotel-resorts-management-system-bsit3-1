@@ -11,13 +11,18 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
 
+    <script
+      type="module"
+      defer
+      src="./scripts/paymentMethodMonitoring.js"
+    ></script>
     <title>Hotel Management System</title>
   </head>
   <body>
     <aside>
       <div class="sidenav">
         <a href="./index.html"><button type="button">Dashboard</button></a>
-        <a href="./rooms(roomStatTable).html">
+        <a href="./rooms(roomNumTable).html">
           <button type="button" class="active">Rooms</button>
         </a>
         <a href="./reservations(reservationTable).html"
@@ -83,13 +88,8 @@
                 <tbody>
                   <tr>
                     <td>1</td>
-                    <td>Cash</td>
-                    <td>Activated</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>GCash</td>
-                    <td>Activated</td>
+                    <td>Loading</td>
+                    <td>Loading</td>
                   </tr>
                 </tbody>
               </table>

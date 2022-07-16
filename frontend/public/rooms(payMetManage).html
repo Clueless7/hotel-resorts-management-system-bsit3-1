@@ -10,14 +10,14 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-
+    <script src="./scripts/paymentMethodScript.js" defer type="module"></script>
     <title>Hotel Management System</title>
   </head>
   <body>
     <aside>
       <div class="sidenav">
         <a href="./index.html"><button type="button">Dashboard</button></a>
-        <a href="./rooms(roomStatTable).html">
+        <a href="./rooms(roomNumTable).html">
           <button type="button" class="active">Rooms</button>
         </a>
         <a href="./reservations(reservationTable).html"
@@ -64,19 +64,19 @@
             <!-- table here -->
             <form>
               <label for="Payment">Payment Method:</label>
-              <select>
+              <select class="paymentMethodDropDown">
+                <option value="-">-</option>
                 <option value="cash">Cash / Over the Counter</option>
                 <option value="gcash">Gcash</option>
-                <option value="bank">Bank Transfer</option></select
+                <option value="bank">Bank Transfer</option>
+                <option value="Add new payment method">
+                  Add new payment method
+                </option></select
               ><br />
-              <div class="text-input">
-                Add Payment Method: <input type="text" value="" />
-              </div>
 
-              <div class="radio-btn">
-                <input type="radio" />Activate <input type="radio" />Deactivate
-              </div>
-              <div class="newroom-btn-group">
+              <div class="paymentMethod-container"></div>
+
+              <div class="newroom-btn-group paymentMethod">
                 <a href="./rooms(payMetTable).html">
                   <button type="button" class="newroom-btn">BACK</button>
                 </a>

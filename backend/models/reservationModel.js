@@ -23,6 +23,7 @@ const reservationSchema = mongoose.Schema({
     required: [true, 'Please Add Address'],
   },
   roomNumber: {
+    unique: true,
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Room',
   },

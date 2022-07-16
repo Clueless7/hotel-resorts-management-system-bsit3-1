@@ -907,6 +907,9 @@ span.psw {
     display: block;
   }
 }
-.roomtype {
+.roomtype,
+.room,
+.room-bed,
+.paymentMethod {
   display: none;
 }

@@ -10,14 +10,14 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-
+    <script type="module" src="./scripts/roomBedScript.js" defer></script>
     <title>Hotel Management System</title>
   </head>
   <body>
     <aside>
       <div class="sidenav">
         <a href="./index.html"><button type="button">Dashboard</button></a>
-        <a href="./rooms(roomStatTable).html">
+        <a href="./rooms(roomNumTable).html">
           <button type="button" class="active">Rooms</button>
         </a>
         <a href="./reservations(reservationTable).html"
@@ -45,7 +45,7 @@
               <a href="./rooms(roomTypeTable).html">Room Type</a>
             </li>
             <li>
-              <a href="./rooms(bedTypeTable).html" class="active">Bed Type</a>
+              <a href="./rooms(bedTypeTable).html" class="active">Room Bed</a>
             </li>
             <li>
               <a href="./rooms(payMetTable).html">Payment Method</a>
@@ -63,16 +63,16 @@
             <!-- table here -->
             <form>
               <label for="bedtype">Bed Type:</label>
-              <select>
-                <option value="king">King</option>
-                <option value="queen">Queen</option>
-                <option value="twin">Twin</option>
-                <option value="twinxl">Twin XL</option></select
+              <select class="roomBedDropDown">
+                <option value="-">-</option>
+                <option value="King Size">King Size</option>
+                <option value="Queen Size">Queen Size</option>
+                <option value="Add new bed">Add new bed</option></select
               ><br />
-              <div class="text-input">
-                Add Bed Type <input type="text" value="" />
-              </div>
-              <div class="newroom-btn-group">
+
+              <div class="roomBed-container"></div>
+
+              <div class="newroom-btn-group room-bed">
                 <a href="./rooms(bedTypeTable).html">
                   <button type="button" class="newroom-btn">BACK</button>
                 </a>
