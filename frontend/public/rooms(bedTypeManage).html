@@ -10,7 +10,8 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <script type="module" src="./scripts/roomBedScript.js" defer></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="module" src="./scripts/bedTypeScript.js" defer></script>
     <title>Hotel Management System</title>
   </head>
   <body>
@@ -70,18 +71,13 @@
             <!-- table here -->
             <form>
               <label for="bedtype">Bed Type:</label>
-              <select class="roomBedDropDown">
-                <option value="-">-</option>
-                <option value="King Size">King Size</option>
-                <option value="Queen Size">Queen Size</option>
-                <option value="Add new bed type">
-                  Add new bed type
-                </option></select
+              <select class="bedTypeDropDown">
+                <option value="-">-</option></select
               ><br />
 
-              <div class="roomBed-container"></div>
+              <div class="bedType-container"></div>
 
-              <div class="newroom-btn-group room-bed">
+              <div class="newroom-btn-group bed-type">
                 <a href="./rooms(bedAttributesManage).html">
                   <button type="button" class="newroom-btn">BACK</button>
                 </a>

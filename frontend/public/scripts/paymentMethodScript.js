@@ -1,3 +1,5 @@
+// import fetch.js
+import { getData, postData, putData, deleteData } from './fetch.js'
 // Room type maintenance/manage
 const paymentMethodDropDown = document.querySelector('.paymentMethodDropDown')
 const paymentMethodContainer = document.querySelector(
@@ -8,6 +10,26 @@ const paymentMethodFormButtonsContainer =
 const paymentMethodFormButtons = document.querySelectorAll(
   '.paymentMethod button'
 )
+const form = document.querySelector('form')
+
+dynamicDropDown()
+
+async function dynamicDropDown() {
+  const response = await getData('http://localhost:3000/api/paymentmethods')
+  response.forEach((data) => {
+    const paymentMethodOptions = document.createElement('option')
+    if (data.paymentMethodName) {
+      paymentMethodOptions.value = data.paymentMethodName
+      paymentMethodOptions.innerHTML = `${data.paymentMethodName}`
+      paymentMethodDropDown.append(paymentMethodOptions)
+    }
+  })
+
+  const paymentMethodAdd = document.createElement('option')
+  paymentMethodAdd.value = 'Add new payment method'
+  paymentMethodAdd.innerHTML = 'Add new payment method'
+  paymentMethodDropDown.append(paymentMethodAdd)
+}
 
 paymentMethodDropDown.addEventListener('change', (event) => {
   if (event.target.value === 'Add new payment method') {
@@ -43,4 +65,44 @@ function paymentMethodContainerChange(newVal, oldVal, display) {
       button.setAttribute('style', `display:${display}`)
     }
   })
+
+  const addButton = document.querySelector(
+    '.newroom-btn-group.paymentMethod > a:nth-child(4) > button'
+  )
+  addButton.addEventListener('click', (e) => {
+    e.preventDefault()
+    createPaymentMethod()
+    form.reset()
+  })
+}
+
+async function createPaymentMethod() {
+  const paymentMethodNameValue = document.querySelector(
+    "input[name='paymentMethodName']"
+  ).value
+  const paymentMethodStatusValue =
+    document.querySelector("select[name='paymentMethodIsOnline']").value ===
+    'Inactive'
+      ? 'false'
+      : 'true'
+
+  const dataPost = {
+    paymentMethodName: paymentMethodNameValue,
+    paymentMethodIsOnline: paymentMethodStatusValue,
+  }
+
+  try {
+    const response = await postData(
+      'http://localhost:3000/api/paymentmethods/',
+      dataPost
+    )
+
+    if (response.message) {
+      return swal('Error!', `${response.message}`, 'error')
+    }
+
+    swal('Success', 'Room successfully added', 'success')
+  } catch (error) {
+    swal('Error!', `${error}`, 'error')
+  }
 }

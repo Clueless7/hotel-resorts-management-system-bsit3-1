@@ -10,6 +10,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="module" src="./scripts/roomBedScript.js" defer></script>
     <title>Hotel Management System</title>
   </head>
@@ -73,13 +74,11 @@
           <div class="content">
             <!-- table here -->
             <form>
-              <label for="bedtype">Bed Name:</label>
+              <label for="roomBed">Bed Name:</label>
               <select class="roomBedDropDown">
                 <option value="-">-</option>
-                <option value="King Size">King Size</option>
-                <option value="Queen Size">Queen Size</option>
-                <option value="Add new bed">Add new bed</option></select
-              ><br />
+              </select>
+              <br />
 
               <div class="roomBed-container"></div>
 

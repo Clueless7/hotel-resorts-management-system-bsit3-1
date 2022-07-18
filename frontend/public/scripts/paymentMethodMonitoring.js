@@ -10,7 +10,11 @@ response.forEach((data, index) => {
   const tableRowData = document.createElement('tr')
   tableRowData.innerHTML = `
     <td>${index + 1}</td>
-    <td>${data.paymentMethodName}</td>
+    <td>${
+      data.paymentMethodName
+        ? data.paymentMethodName
+        : 'Payment method does not exist'
+    }</td>
     <td>${data.paymentMethodIsOnline ? 'Active' : 'Inactive'}</td>
   `
   tbody.appendChild(tableRowData)

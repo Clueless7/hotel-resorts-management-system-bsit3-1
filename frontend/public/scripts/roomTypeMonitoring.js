@@ -10,8 +10,12 @@ response.forEach((data, index) => {
   const tableRowData = document.createElement('tr')
   tableRowData.innerHTML = `
     <td>${index + 1}</td>
-    <td>${data.roomTypeName}</td>
-    <td>${data.roomTypePrice}</td>
+    <td>${
+      data.roomTypeName ? data.roomTypeName : 'Room type does not exist'
+    }</td>
+    <td>${
+      data.roomTypePrice ? data.roomTypePrice : 'Room type price does not exist'
+    }</td>
   `
   tbody.appendChild(tableRowData)
 })
