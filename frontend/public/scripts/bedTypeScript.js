@@ -13,7 +13,7 @@ async function dynamicDropDown() {
   response.forEach((data) => {
     const bedTypeOptions = document.createElement('option')
     if (data.bedTypeName) {
-      bedTypeOptions.value = data.bedTypeName
+      bedTypeOptions.value = `${data.bedTypeName}`
       bedTypeOptions.innerHTML = `${data.bedTypeName}`
       bedTypeDropDown.append(bedTypeOptions)
     }
