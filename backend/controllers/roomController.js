@@ -7,9 +7,8 @@ const Room = require('../models/roomModel')
 // Get all rooms
 const getAllRooms = asyncHandler(async (req, res) => {
   const rooms = await Room.find()
-    .populate('roomType', {
-      _id: 0,
-    })
+    .sort({ roomNumber: 'asc' })
+    .populate('roomType')
     .populate({
       path: 'roomBed',
       populate: [

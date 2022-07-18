@@ -10,6 +10,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="module" src="./scripts/roomTypeScript.js" defer></script>
     <title>Hotel Management System</title>
   </head>
@@ -44,10 +45,10 @@
               <a href="./rooms(roomTypeTable).html" class="active">Room Type</a>
             </li>
             <li>
-              <a href="./rooms(bedTypeTable).html">Room Bed</a>
+              <a href="./rooms(bedAttributesTable).html">Room Bed</a>
             </li>
             <li>
-              <a href="./rooms(payMetTable).html">Payment Method</a>
+              <a href="./rooms(paymentTable).html">Payment Method</a>
             </li>
           </ul>
         </nav>
@@ -64,9 +65,6 @@
               <label for="roomtype">Room Type:</label>
               <select class="roomTypeDropDown">
                 <option value="-">-</option>
-                <option value="premium">Premium</option>
-                <option value="regular">Regular</option>
-                <option value="Add new room type">
                   Add new room type
                 </option></select
               ><br />

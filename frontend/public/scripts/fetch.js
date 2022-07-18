@@ -12,6 +12,9 @@ async function postData(url = '', data = {}) {
   try {
     const response = await fetch(url, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(data),
     })
 
@@ -25,6 +28,9 @@ async function putData(url = '', id = '', data = {}) {
   try {
     const response = await fetch(`${url}/${id}`, {
       method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(data),
     })
 

@@ -70,22 +70,21 @@ const getReservationWithId = asyncHandler(async (req, res) => {
   const reservation = await Reservation.findById(req.params.id)
 
   await reservation.populate({
-    path: 'roomType',
-    select: {
-      _id: 0,
-      roomType: 1,
-    },
+    path: 'roomNumber',
     populate: {
       path: 'roomType',
-      select: {
-        _id: 0,
-        roomTypeName: 1,
-      },
     },
   })
 
   await reservation.populate({
-    path: 'bed',
+    path: 'roomType',
+    populate: {
+      path: 'roomType',
+    },
+  })
+
+  await reservation.populate({
+    path: 'roomType',
     select: {
       _id: 0,
       bedType: 1,

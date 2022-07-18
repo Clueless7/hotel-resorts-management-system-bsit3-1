@@ -12,11 +12,20 @@ response.forEach((data, index) => {
   const tableRowData = document.createElement('tr')
   tableRowData.innerHTML = `
     <td>${index + 1}</td>
-    <td>${data.roomNumber}</td>
-    <td>${data.roomType.roomTypeName}</td>
-    <td>${data.roomBed?.bedType?.bedTypeName}</td>
+    <td>${data.roomNumber ? data.roomNumber : 'Room number does not exist'}</td>
+    <td>${
+      data.roomType ? data.roomType.roomTypeName : 'Room type does not exist'
+    }</td>
+    <td>${
+      data.roomBed ? data.roomBed.bedType.bedTypeName : 'Bed does not exist'
+    }</td>
     <td>${data.roomIsAvailable ? 'Available' : 'Unavailable'}</td>
-    <td>${data.roomBed.bedPrice.bedTypePrice + data.roomType.roomTypePrice}</td>
+    <td>${
+      (data.roomType ? data.roomType.roomTypePrice : 0) +
+      (data.roomBed ? data.roomBed.bedPrice.bedTypePrice : 0)
+    }</td>
     `
   tbody.appendChild(tableRowData)
 })
+
+// data.roomBed.bedPrice.bedTypePrice + data.roomType.roomTypePrice

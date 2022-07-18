@@ -10,6 +10,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="module" src="./scripts/roomBedScript.js" defer></script>
     <title>Hotel Management System</title>
   </head>
@@ -45,7 +46,9 @@
               <a href="./rooms(roomTypeTable).html">Room Type</a>
             </li>
             <li>
-              <a href="./rooms(bedAttributesTable).html" class="active">Room Bed</a>
+              <a href="./rooms(bedAttributesTable).html" class="active"
+                >Room Bed</a
+              >
             </li>
             <li>
               <a href="./rooms(paymentTable).html">Payment Method</a>
@@ -56,13 +59,12 @@
       <section>
         <div class="content-container">
           <!-- Search and manage here -->
-        
-        
+
           <div class="monitoring-menu">
             <!-- menu here -->
             <div>
-              <form></form> 
-            </div>  
+              <form></form>
+            </div>
             <div>
               <a href="./rooms(bedTypeManage).html">
                 <button type="button" class="btn-group-tabs">MANAGE</button>
@@ -72,13 +74,11 @@
           <div class="content">
             <!-- table here -->
             <form>
-              <label for="bedtype">Bed Name:</label>
+              <label for="roomBed">Bed Name:</label>
               <select class="roomBedDropDown">
                 <option value="-">-</option>
-                <option value="King Size">King Size</option>
-                <option value="Queen Size">Queen Size</option>
-                <option value="Add new bed">Add new bed</option></select
-              ><br />
+              </select>
+              <br />
 
               <div class="roomBed-container"></div>
 
