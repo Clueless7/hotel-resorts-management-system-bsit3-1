@@ -70,9 +70,17 @@ function roomContainerChange(display1, display2) {
   roomTypeDynamicDropDown(roomTypeDropDown)
   roomBedDynamicDropDown(roomBedDropDown)
 
+  const deleteButton = document.querySelector(
+    '.newroom-btn-group.room > a:nth-child(3) > button'
+  )
   const addButton = document.querySelector(
     '.newroom-btn-group.room > a:nth-child(5) > button'
   )
+
+  deleteButton.addEventListener('click', (e) => {
+    e.preventDefault()
+    deleteRoom()
+  })
   addButton.addEventListener('click', (e) => {
     e.preventDefault()
     createRoom()
@@ -155,4 +163,31 @@ async function createRoom() {
   } catch (error) {
     swal('Error!', `${error}`, 'error')
   }
+}
+
+async function deleteRoom() {
+  const roomResponse = await getData('http://localhost:3000/api/rooms')
+  let roomObjectId
+  roomResponse.forEach((data) => {
+    if (data.roomNumber) {
+      if (data.roomNumber == roomDropDown.value) {
+        roomObjectId = data._id
+      }
+    }
+  })
+  const deleteResponse = await deleteData(
+    'http://localhost:3000/api/rooms/',
+    `${roomObjectId}`
+  )
+  if (deleteResponse.message) {
+    return swal('Error!', `${deleteResponse.message}`, 'error')
+  }
+
+  swal('Success', 'Room successfully deleted!', 'success')
+
+  refreshPage()
+}
+
+function refreshPage() {
+  location.href = 'http://localhost:3000/rooms(roomNumManage).html'
 }

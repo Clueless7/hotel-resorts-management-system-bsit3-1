@@ -60,9 +60,16 @@ function roomBedContainerChange(newVal, oldVal, display) {
   const roomBedTypeDropDown = document.querySelector('#roomBedTypeDropDown')
   roomBedTypeDynamicDropDown(roomBedTypeDropDown)
 
+  const deleteButton = document.querySelector(
+    '.newroom-btn-group.room-bed > a:nth-child(3) > button'
+  )
   const addButton = document.querySelector(
     '.newroom-btn-group.room-bed > a:nth-child(4) > button'
   )
+  deleteButton.addEventListener('click', (e) => {
+    e.preventDefault()
+    deleteRoomBed()
+  })
   addButton.addEventListener('click', (e) => {
     e.preventDefault()
     createRoomBed()
@@ -116,4 +123,31 @@ async function createRoomBed() {
   } catch (error) {
     swal('Error!', `${error}`, 'error')
   }
+}
+
+async function deleteRoomBed() {
+  const roomBedResponse = await getData('http://localhost:3000/api/beds')
+  let roomBedObjectId
+  roomBedResponse.forEach((data) => {
+    if (data.bedType) {
+      if (data.bedType.bedTypeName == roomBedDropDown.value) {
+        roomBedObjectId = data._id
+      }
+    }
+  })
+  const deleteResponse = await deleteData(
+    'http://localhost:3000/api/beds/',
+    `${roomBedObjectId}`
+  )
+  if (deleteResponse.message) {
+    return swal('Error!', `${deleteResponse.message}`, 'error')
+  }
+
+  swal('Success', 'Room Bed successfully deleted!', 'success')
+
+  refreshPage()
+}
+
+function refreshPage() {
+  location.href = 'http://localhost:3000/rooms(bedAttributesManage).html'
 }

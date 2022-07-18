@@ -65,10 +65,16 @@ function paymentMethodContainerChange(newVal, oldVal, display) {
       button.setAttribute('style', `display:${display}`)
     }
   })
-
+  const deleteButton = document.querySelector(
+    '.newroom-btn-group.paymentMethod > a:nth-child(3) > button'
+  )
   const addButton = document.querySelector(
     '.newroom-btn-group.paymentMethod > a:nth-child(4) > button'
   )
+  deleteButton.addEventListener('click', (e) => {
+    e.preventDefault()
+    deletePaymentMethod()
+  })
   addButton.addEventListener('click', (e) => {
     e.preventDefault()
     createPaymentMethod()
@@ -105,4 +111,32 @@ async function createPaymentMethod() {
   } catch (error) {
     swal('Error!', `${error}`, 'error')
   }
+}
+async function deletePaymentMethod() {
+  const paymentMethodResponse = await getData(
+    'http://localhost:3000/api/paymentmethods'
+  )
+  let paymentMethodObjectId
+  paymentMethodResponse.forEach((data) => {
+    if (data.paymentMethodName) {
+      if (data.paymentMethodName == paymentMethodDropDown.value) {
+        paymentMethodObjectId = data._id
+      }
+    }
+  })
+  const deleteResponse = await deleteData(
+    'http://localhost:3000/api/paymentmethods/',
+    `${paymentMethodObjectId}`
+  )
+  if (deleteResponse.message) {
+    return swal('Error!', `${deleteResponse.message}`, 'error')
+  }
+
+  swal('Success', 'Payment method successfully deleted!', 'success')
+
+  refreshPage()
+}
+
+function refreshPage() {
+  location.href = 'http://localhost:3000/rooms(paymentManage).html'
 }
