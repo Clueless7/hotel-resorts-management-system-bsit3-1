@@ -10,7 +10,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <script src="./scripts/roomBedMonitoring.js" type="module" defer></script>
+    <script type="module" src="./scripts/roomBedScript.js" defer></script>
     <title>Hotel Management System</title>
   </head>
   <body>
@@ -25,7 +25,7 @@
         >
         <a href="./services.html"><button type="button">Services</button></a>
         <a href="./reports.html"><button type="button">Reports</button></a>
-        <a href="login.html"
+        <a href="./login.html"
           ><button type="button" class="log-out-btn">Log Out</button></a
         >
       </div>
@@ -37,6 +37,7 @@
         </header>
         <nav class="nav">
           <ul>
+            <li></li>
             <li>
               <a href="./rooms(roomNumTable).html">Rooms</a>
             </li>
@@ -44,10 +45,10 @@
               <a href="./rooms(roomTypeTable).html">Room Type</a>
             </li>
             <li>
-              <a href="./rooms(bedTypeTable).html" class="active">Room Bed</a>
+              <a href="./rooms(bedAttributesTable).html" class="active">Room Bed</a>
             </li>
             <li>
-              <a href="./rooms(payMetTable).html">Payment Method</a>
+              <a href="./rooms(paymentTable).html">Payment Method</a>
             </li>
           </ul>
         </nav>
@@ -55,40 +56,47 @@
       <section>
         <div class="content-container">
           <!-- Search and manage here -->
+        
+        
           <div class="monitoring-menu">
-            <div class="searchBar">
-              <form class="searchButton" action="action_page.php">
-                <input type="text" placeholder="Search.." name="search" />
-                <button type="submit"><i class="fa fa-search"></i></button>
-              </form>
+            <!-- menu here -->
+            <div>
+              <form></form> 
+            </div>  
+            <div>
+              <a href="./rooms(bedTypeManage).html">
+                <button type="button" class="btn-group-tabs">MANAGE</button>
+              </a>
             </div>
-            <a href="./rooms(bedTypeManage).html">
-              <button type="button" class="btn-group-tabs">MANAGE</button>
-            </a>
           </div>
           <div class="content">
             <!-- table here -->
-            <div class="table-container">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Bed Type</th>
-                    <th scope="col">Bed Price</th>
-                    <th scope="col">Bed Quantity</th>
-                  </tr>
-                </thead>
+            <form>
+              <label for="bedtype">Bed Name:</label>
+              <select class="roomBedDropDown">
+                <option value="-">-</option>
+                <option value="King Size">King Size</option>
+                <option value="Queen Size">Queen Size</option>
+                <option value="Add new bed">Add new bed</option></select
+              ><br />
 
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+              <div class="roomBed-container"></div>
+
+              <div class="newroom-btn-group room-bed">
+                <a href="./rooms(bedTypeTable).html">
+                  <button type="button" class="newroom-btn">BACK</button>
+                </a>
+                <a>
+                  <button type="reset" class="newroom-btn">RESET</button>
+                </a>
+                <a>
+                  <button type="submit" class="newroom-btn">DELETE</button>
+                </a>
+                <a>
+                  <button type="submit" class="newroom-btn">ADD</button>
+                </a>
+              </div>
+            </form>
           </div>
         </div>
       </section>

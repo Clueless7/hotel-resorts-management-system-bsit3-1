@@ -10,8 +10,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-
-    <script defer type="module" src="./scripts/roomScript.js"></script>
+    <script src="./scripts/paymentMethodScript.js" defer type="module"></script>
     <title>Hotel Management System</title>
   </head>
   <body>
@@ -38,21 +37,19 @@
         </header>
         <nav class="nav">
           <ul>
-
-            <li></li>
             <li>
-              <a href="./rooms(roomNumTable).html" class="active"
-                >Rooms</a
-              >
+              <a href="./rooms(roomNumTable).html">Rooms</a>
             </li>
             <li>
               <a href="./rooms(roomTypeTable).html">Room Type</a>
             </li>
             <li>
-              <a href="./rooms(bedTypeTable).html">Bed Type</a>
+              <a href="./rooms(bedAttributesTable).html">Bed Type</a>
             </li>
             <li>
-              <a href="./rooms(payMetTable).html">Payment Method</a>
+              <a href="./rooms(paymentTable).html" class="active"
+                >Payment Method</a
+              >
             </li>
           </ul>
         </nav>
@@ -61,47 +58,40 @@
         <div class="content-container">
           <!-- Search and manage here -->
           <div class="monitoring-menu">
-            <!-- form buttons here -->
             <!-- menu here -->
           </div>
           <div class="content">
             <!-- table here -->
-            <div class="newroom-table-div">
-              <div class="form-div">
-                <form>
+            <form>
+              <label for="Payment">Payment Method:</label>
+              <select class="paymentMethodDropDown">
+                <option value="-">-</option>
+                <option value="cash">Cash / Over the Counter</option>
+                <option value="gcash">Gcash</option>
+                <option value="bank">Bank Transfer</option>
+                <option value="Add new payment method">
+                  Add new payment method
+                </option></select
+              ><br />
 
-                  <label for="room">Room:</label>
-                  <select class="roomDropDown">
-                    <option value="-">-</option>
-                    <option value="Room 1">Room 1</option>
-                    <option value="Room 2">Room 2</option>
-                    <option value="Add new room">
-                      Add new room type
-                    </option></select
-                  ><br />
-                  
-                  <div class="room-container"></div>
-                  
-                  <div class="newroom-btn-group room">
-                    <a href="./rooms(roomNumTable).html">
-                      <button type="button" class="newroom-btn">BACK</button>
-                    </a>
-                    <a>
-                      <button type="reset" class="newroom-btn">RESET</button>
-                    </a>
-                    <a>
-                      <button type="submit" class="newroom-btn">DELETE</button>
-                    </a>
-                    <a>
-                      <button type="submit" class="newroom-btn">EDIT</button>
-                    </a>
-                    <a>
-                      <button type="submit" class="newroom-btn">ADD</button>
-                    </a>
-                  </div>
-                </form>
+              <div class="paymentMethod-container"></div>
+
+              <div class="newroom-btn-group paymentMethod">
+                <a href="./rooms(paymentTable).html">
+                  <button type="button" class="newroom-btn">BACK</button>
+                </a>
+                <a>
+                  <button type="reset" class="newroom-btn">RESET</button>
+                </a>
+                <a>
+                  <button type="submit" class="newroom-btn">DELETE</button>
+                </a>
+                <a>
+                  <button type="submit" class="newroom-btn">ADD</button>
+                </a>
               </div>
-            </div>
+            </form>
+          </div>
         </div>
       </section>
     </div>

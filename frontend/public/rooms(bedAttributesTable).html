@@ -10,7 +10,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <script src="./scripts/paymentMethodScript.js" defer type="module"></script>
+    <script src="./scripts/roomBedMonitoring.js" type="module" defer></script>
     <title>Hotel Management System</title>
   </head>
   <body>
@@ -20,12 +20,12 @@
         <a href="./rooms(roomNumTable).html">
           <button type="button" class="active">Rooms</button>
         </a>
-        <a href="./reservations(reservationTable).html"
+        <a href="./reservations(checkinTable).html"
           ><button type="button">Reservations</button></a
         >
         <a href="./services.html"><button type="button">Services</button></a>
         <a href="./reports.html"><button type="button">Reports</button></a>
-        <a href="./login.html"
+        <a href="login.html"
           ><button type="button" class="log-out-btn">Log Out</button></a
         >
       </div>
@@ -44,12 +44,10 @@
               <a href="./rooms(roomTypeTable).html">Room Type</a>
             </li>
             <li>
-              <a href="./rooms(bedTypeTable).html">Bed Type</a>
+              <a href="./rooms(bedAttributesTable).html" class="active">Room Bed</a>
             </li>
             <li>
-              <a href="./rooms(payMetTable).html" class="active"
-                >Payment Method</a
-              >
+              <a href="./rooms(paymentTable).html">Payment Method</a>
             </li>
           </ul>
         </nav>
@@ -58,39 +56,39 @@
         <div class="content-container">
           <!-- Search and manage here -->
           <div class="monitoring-menu">
-            <!-- menu here -->
+            <div class="searchBar">
+              <form class="searchButton" action="action_page.php">
+                <input type="text" placeholder="Search.." name="search" />
+                <button type="submit"><i class="fa fa-search"></i></button>
+              </form>
+            </div>
+            <a href="./rooms(bedAttributesManage).html">
+              <button type="button" class="btn-group-tabs">MANAGE</button>
+            </a>
           </div>
           <div class="content">
             <!-- table here -->
-            <form>
-              <label for="Payment">Payment Method:</label>
-              <select class="paymentMethodDropDown">
-                <option value="-">-</option>
-                <option value="cash">Cash / Over the Counter</option>
-                <option value="gcash">Gcash</option>
-                <option value="bank">Bank Transfer</option>
-                <option value="Add new payment method">
-                  Add new payment method
-                </option></select
-              ><br />
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Bed Name</th>
+                    <th scope="col">Bed Price</th>
+                    <th scope="col">Bed Quantity</th>
+                  </tr>
+                </thead>
 
-              <div class="paymentMethod-container"></div>
-
-              <div class="newroom-btn-group paymentMethod">
-                <a href="./rooms(payMetTable).html">
-                  <button type="button" class="newroom-btn">BACK</button>
-                </a>
-                <a>
-                  <button type="reset" class="newroom-btn">RESET</button>
-                </a>
-                <a>
-                  <button type="submit" class="newroom-btn">DELETE</button>
-                </a>
-                <a>
-                  <button type="submit" class="newroom-btn">ADD</button>
-                </a>
-              </div>
-            </form>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Loading</td>
+                    <td>Loading</td>
+                    <td>Loading</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>
