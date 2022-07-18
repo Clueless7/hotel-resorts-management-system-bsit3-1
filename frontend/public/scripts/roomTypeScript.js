@@ -57,9 +57,19 @@ function roomTypeContainerChange(newVal, oldVal, display) {
       button.setAttribute('style', `display:${display}`)
     }
   })
+
+  const deleteButton = document.querySelector(
+    '.newroom-btn-group.roomtype > a:nth-child(3) > button'
+  )
   const addButton = document.querySelector(
     '.newroom-btn-group.roomtype > a:nth-child(4) > button'
   )
+
+  deleteButton.addEventListener('click', (e) => {
+    e.preventDefault()
+    deleteRoomType()
+  })
+
   addButton.addEventListener('click', (e) => {
     e.preventDefault()
     createRoomType()
@@ -94,4 +104,32 @@ async function createRoomType() {
   } catch (error) {
     swal('Error!', `${error}`, 'error')
   }
+}
+
+async function deleteRoomType() {
+  const roomTypeResponse = await getData(
+    'http://localhost:3000/api/rooms/types'
+  )
+  let roomTypeObjectId
+  roomTypeResponse.forEach((data) => {
+    if (data.roomTypeName) {
+      if (data.roomTypeName == roomTypeDropDown.value) {
+        roomTypeObjectId = data._id
+      }
+    }
+  })
+  const deleteResponse = await deleteData(
+    'http://localhost:3000/api/rooms/types/',
+    `${roomTypeObjectId}`
+  )
+  if (deleteResponse.message) {
+    return swal('Error!', `${deleteResponse.message}`, 'error')
+  }
+
+  swal('Success', 'Room Type successfully deleted!', 'success')
+  refreshPage()
+}
+
+function refreshPage() {
+  location.href = 'http://localhost:3000/rooms(roomTypeManage).html'
 }

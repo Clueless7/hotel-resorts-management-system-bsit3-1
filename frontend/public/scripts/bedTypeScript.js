@@ -54,9 +54,16 @@ function bedTypeContainerChange(newVal, oldVal, display) {
       button.setAttribute('style', `display:${display}`)
     }
   })
+  const deleteButton = document.querySelector(
+    '.newroom-btn-group.bed-type > a:nth-child(3) > button'
+  )
   const addButton = document.querySelector(
     '.newroom-btn-group.bed-type > a:nth-child(4) > button'
   )
+  deleteButton.addEventListener('click', (e) => {
+    e.preventDefault()
+    deleteBedType()
+  })
   addButton.addEventListener('click', (e) => {
     e.preventDefault()
     createBedType()
@@ -95,4 +102,30 @@ async function createBedType() {
   } catch (error) {
     swal('Error!', `${error}`, 'error')
   }
+}
+async function deleteBedType() {
+  const bedTypeResponse = await getData('http://localhost:3000/api/beds/types')
+  let bedTypeObjectId
+  bedTypeResponse.forEach((data) => {
+    if (data.bedTypeName) {
+      if (data.bedTypeName == bedTypeDropDown.value) {
+        bedTypeObjectId = data._id
+      }
+    }
+  })
+  const deleteResponse = await deleteData(
+    'http://localhost:3000/api/beds/types/',
+    `${bedTypeObjectId}`
+  )
+  if (deleteResponse.message) {
+    return swal('Error!', `${deleteResponse.message}`, 'error')
+  }
+
+  swal('Success', 'Bed type successfully deleted!', 'success')
+
+  refreshPage()
+}
+
+function refreshPage() {
+  location.href = 'http://localhost:3000/rooms(bedTypeManage).html'
 }

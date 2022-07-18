@@ -23,7 +23,7 @@ response.forEach((data, index) => {
     data.roomNumber ? data.roomNumber.roomNumber : 'Room number does not exist'
   }</td>
   <td>${
-    data.roomType
+    data.roomType.roomType
       ? data.roomType.roomType.roomTypeName
       : 'Room type does not exist'
   }</td>

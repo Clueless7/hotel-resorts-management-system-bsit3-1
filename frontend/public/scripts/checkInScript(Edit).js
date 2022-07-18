@@ -228,5 +228,11 @@ async function deleteReservation() {
     return swal('Error!', `${deleteResponse.message}`, 'error')
   }
 
-  swal('Success', 'Reservation information successfully updated', 'success')
+  swal('Success', 'Reservation information successfully deleted!', 'success')
+
+  refreshPage()
+}
+
+function refreshPage() {
+  location.href = 'http://localhost:3000/reservations(checkinEdit).html'
 }
