@@ -6,6 +6,8 @@ const roomNumberDropDown = document.querySelector('#roomNumber')
 const paymentMethodDropDown = document.querySelector('#paymentMethod')
 const updateButton = document.querySelector('.form-buttons > button.update-btn')
 const deleteButton = document.querySelector('.form-buttons > button.delete-btn')
+const balanceElement = document.querySelector('#balance')
+const durationOfStayElement = document.querySelector('#durationOfStay')
 
 let executed = false
 
@@ -23,9 +25,11 @@ function setDates(today, checkInDate, checkOutDate) {
     checkOutDate.value = event.target.value
     checkOutDate.setAttribute('min', event.target.value)
     calculateDurationOfStay()
+    calculateBalance2()
   })
   checkOutDate.addEventListener('change', (event) => {
     calculateDurationOfStay()
+    calculateBalance2()
   })
 }
 
@@ -37,7 +41,47 @@ function calculateDurationOfStay() {
   durationOfStay.value = diffDays
 }
 
+// let balance
+
+// async function calculateBalance(event, dOfStay) {
+//   const balanceElement = document.querySelector('#balance')
+//   const allRooms = await getData('http://localhost:3000/api/rooms')
+
+//   allRooms.forEach((data) => {
+//     if (data.roomNumber == event.target.value) {
+//       balance =
+//         (data.roomType ? data.roomType.roomTypePrice : 0) +
+//         (data.roomBed ? data.roomBed.bedPrice.bedTypePrice : 0)
+//     }
+//   })
+//   console.log(dOfStay)
+//   console.log(balance)
+//   balanceElement.value = balance * dOfStay
+// }
+
 dynamicDropDown()
+
+async function calculateBalance2() {
+  const currentRoomIdSelected = roomNumberDropDown.value
+  const allRooms = await getData('http://localhost:3000/api/rooms')
+  let balance
+  let roomPrice
+  let bedPrice
+  let durationOfStay
+
+  allRooms.forEach((data) => {
+    if (data._id == currentRoomIdSelected) {
+      roomPrice = data.roomType.roomTypePrice ?? 0
+      bedPrice = data.roomBed.bedPrice.bedTypePrice ?? 0
+      durationOfStay = durationOfStayElement.value ?? 0
+    }
+  })
+
+  balance = (roomPrice + bedPrice) * durationOfStay
+  balanceElement.value = balance
+}
+
+calculateBalance2()
 
 // Update the contents of the dropdowns
 async function dynamicDropDown() {
@@ -85,6 +129,7 @@ async function dynamicDropDown() {
   addCurrentEditUserInfo()
 
   transactionIdDropDown.addEventListener('change', addCurrentEditUserInfo)
+  roomNumberDropDown.addEventListener('change', calculateBalance2)
 }
 
 async function addCurrentEditUserInfo() {
@@ -131,7 +176,7 @@ async function addCurrentEditUserInfo() {
     reservationUser.address ? reservationUser.address : 'Address not exist'
   }`
   roomNumberElement.value = `${
-    reservationUser.roomNumber.roomNumber
+    reservationUser.roomNumber?.roomNumber
       ? reservationUser.roomNumber.roomNumber
       : 'Room number does not exist'
   }`
@@ -147,19 +192,15 @@ async function addCurrentEditUserInfo() {
       ? reservationUser.paymentMethod
       : 'Payment method does not exist'
   }`
-
-  let total = reservationUser.roomNumber.roomType.roomTypePrice
-    ? reservationUser.roomNumber.roomType.roomTypePrice
-    : 0 + reservationUser.roomType.roomBed.bedPrice.bedTypePrice
-    ? reservationUser.roomType.roomBed.bedPrice.bedTypePrice
-    : 0
-
-  let totalBalance = total * reservationUser.durationOfStay
-  balanceElement.value = totalBalance ? totalBalance : 0
+  balanceElement.value = `${
+    reservationUser.balance ? reservationUser.balance : 'Balance does not exist'
+  }`
 
   const roomOption = document.createElement('option')
-  roomOption.value = `${reservationUser.roomNumber._id}`
-  roomOption.innerHTML = `Current Room - ${reservationUser.roomNumber.roomNumber}`
+  roomOption.value = `${reservationUser.roomNumber?._id}`
+  roomOption.innerHTML = `Current Room - ${
+    reservationUser.roomNumber?.roomNumber ?? 'Room number does not exist'
+  }`
   roomNumberDropDown.prepend(roomOption)
 }
 
@@ -200,6 +241,33 @@ async function updateData() {
     paymentMethod: paymentMethodValue,
   }
 
+  let roomNumber
+  let roomTypeId
+  let roomBedId
+
+  const roomInfo = await getData(
+    'http://localhost:3000/api/rooms',
+    `${roomNumberValue}`
+  )
+
+  roomNumber = roomInfo.roomNumber
+  roomTypeId = roomInfo.roomType._id
+  roomBedId = roomInfo.roomBed._id
+
+  console.log(roomNumber)
+  console.log(roomTypeId)
+  console.log(roomBedId)
+
+  if (roomInfo.message) {
+    return Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: `${response.message}`,
+      showConfirmButton: true,
+      confirmButtonColor: '#ff2e63',
+    })
+  }
+
   const response = await putData(
     'http://localhost:3000/api/reservations',
     `${transactionIdValue}`,
@@ -207,10 +275,49 @@ async function updateData() {
   )
 
   if (response.message) {
-    return swal('Error!', `${response.message}`, 'error')
+    return Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: `${response.message}`,
+      showConfirmButton: true,
+      confirmButtonColor: '#ff2e63',
+    })
   }
 
-  swal('Success', 'Reservation information successfully updated', 'success')
+  Swal.fire({
+    icon: 'success',
+    iconColor: '#54bab9',
+    title: 'Success!',
+    text: 'Reservation successfully updated',
+    showConfirmButton: true,
+    confirmButtonColor: '#ff2e63',
+  })
+    .then(async (result) => {
+      const isAvailable = 'false'
+
+      const updateRoomIsAvailable = await putData(
+        'http://localhost:3000/api/rooms',
+        `${roomNumberValue}`,
+        {
+          roomNumber: roomNumber,
+          roomIsAvailable: isAvailable,
+          roomType: roomTypeId,
+          roomBed: roomBedId,
+        }
+      )
+
+      if (updateRoomIsAvailable.message) {
+        return Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: `${response.message}`,
+          showConfirmButton: true,
+        })
+      }
+    })
+    .then((result) => {
+      location.reload()
+    })
 }
 
 deleteButton.addEventListener('click', (event) => {
@@ -224,15 +331,25 @@ async function deleteReservation() {
     'http://localhost:3000/api/reservations/',
     `${transactionIdValue}`
   )
+
   if (deleteResponse.message) {
-    return swal('Error!', `${deleteResponse.message}`, 'error')
+    return Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: `${error.message}`,
+      showConfirmButton: true,
+      confirmButtonColor: '#ff2e63',
+    })
   }
 
-  swal('Success', 'Reservation information successfully deleted!', 'success')
-
-  refreshPage()
-}
-
-function refreshPage() {
-  location.href = 'http://localhost:3000/reservations(checkinEdit).html'
+  Swal.fire({
+    icon: 'success',
+    iconColor: '#54bab9',
+    title: 'Success!',
+    text: 'Reservation successfully deleted',
+    showConfirmButton: true,
+    confirmButtonColor: '#ff2e63',
+  }).then((result) => {
+    location.reload()
+  })
 }

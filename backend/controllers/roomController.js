@@ -42,7 +42,7 @@ const getRoomWithId = asyncHandler(async (req, res) => {
   const room = await Room.findById(req.params.id)
 
   await room.populate('roomType', {
-    _id: 0,
+    _id: 1,
     roomTypeName: 1,
   })
 

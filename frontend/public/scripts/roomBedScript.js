@@ -36,6 +36,7 @@ roomBedDropDown.addEventListener('change', (event) => {
   } else {
     roomBedContainerDisplay('block', 'flex')
     roomBedContainerChange('EDIT', 'ADD', 'block')
+    setSelectedBedData()
   }
 })
 
@@ -50,9 +51,10 @@ function roomBedContainerChange(newVal, oldVal, display) {
                             Room Bed Quantity: <input type='Number' name='roomBedQuantity'>`
   roomBedContainer.innerHTML = containerContent
   roomBedFormButtons.forEach((button) => {
-    if (button.innerHTML === `${oldVal}`) {
+    if (button.id === `${oldVal}`) {
+      button.id = `${newVal}`
       button.innerHTML = `${newVal}`
-    } else if (button.innerHTML === 'DELETE') {
+    } else if (button.id === 'DELETE') {
       button.setAttribute('style', `display:${display}`)
     }
   })
@@ -60,20 +62,28 @@ function roomBedContainerChange(newVal, oldVal, display) {
   const roomBedTypeDropDown = document.querySelector('#roomBedTypeDropDown')
   roomBedTypeDynamicDropDown(roomBedTypeDropDown)
 
-  const deleteButton = document.querySelector(
-    '.newroom-btn-group.room-bed > a:nth-child(3) > button'
-  )
-  const addButton = document.querySelector(
-    '.newroom-btn-group.room-bed > a:nth-child(4) > button'
-  )
-  deleteButton.addEventListener('click', (e) => {
-    e.preventDefault()
-    deleteRoomBed()
-  })
-  addButton.addEventListener('click', (e) => {
-    e.preventDefault()
-    createRoomBed()
-  })
+  const deleteButton = document.querySelector('.room-bed #DELETE')
+  const addButton = document.querySelector('.room-bed #ADD')
+  const editButton = document.querySelector('.room-bed #EDIT')
+
+  if (deleteButton) {
+    deleteButton.addEventListener('click', (e) => {
+      e.preventDefault()
+      deleteRoomBed()
+    })
+  }
+  if (addButton) {
+    addButton.addEventListener('click', (e) => {
+      e.preventDefault()
+      createRoomBed()
+    })
+  }
+  if (editButton) {
+    editButton.addEventListener('click', (e) => {
+      e.preventDefault()
+      editRoomBed()
+    })
+  }
 }
 
 async function roomBedTypeDynamicDropDown(dropDown) {
@@ -89,6 +99,25 @@ async function roomBedTypeDynamicDropDown(dropDown) {
   })
 }
 
+async function setSelectedBedData() {
+  const roomBedTypeDropDown = document.querySelector('#roomBedTypeDropDown')
+  const roomBedQuantityInputElement = document.querySelector(
+    "input[name='roomBedQuantity']"
+  )
+  const selectedBedName = roomBedDropDown.value
+
+  const selectedBedInfo = await getData('http://localhost:3000/api/beds/')
+
+  selectedBedInfo.forEach((data) => {
+    if (data.bedType.bedTypeName == selectedBedName) {
+      roomBedTypeDropDown.value =
+        data.bedType.bedTypeName ?? 'Bed name does not exist'
+      roomBedQuantityInputElement.value =
+        data.bedQuantity ?? 'Bed size does not exist'
+    }
+  })
+}
+
 async function createRoomBed() {
   const roomBedTypeValue = document.querySelector(
     "select[name='roomBedType']"
@@ -98,31 +127,42 @@ async function createRoomBed() {
   ).value
   let roomBedTypeObjectId
 
-  try {
-    const roomBedTypes = await getData('http://localhost:3000/api/beds/types')
+  const roomBedTypes = await getData('http://localhost:3000/api/beds/types')
 
-    roomBedTypes.forEach((data) => {
-      if (data.bedTypeName) {
-        if (data.bedTypeName.toLowerCase() === roomBedTypeValue.toLowerCase()) {
-          roomBedTypeObjectId = data._id
-        }
+  roomBedTypes.forEach((data) => {
+    if (data.bedTypeName) {
+      if (data.bedTypeName.toLowerCase() === roomBedTypeValue.toLowerCase()) {
+        roomBedTypeObjectId = data._id
       }
-    })
-
-    const dataPost = {
-      bedType: roomBedTypeObjectId, //ObjectID
-      bedQuantity: roomBedQuantityValue,
-      bedPrice: roomBedTypeObjectId, //ObjectID
     }
-    const response = await postData('http://localhost:3000/api/beds', dataPost)
+  })
 
-    if (response.message) {
-      return swal('Error!', `${response.message}`, 'error')
-    }
-    swal('Success', 'Bed successfully added', 'success')
-  } catch (error) {
-    swal('Error!', `${error}`, 'error')
+  const dataPost = {
+    bedType: roomBedTypeObjectId, //ObjectID
+    bedQuantity: roomBedQuantityValue,
+    bedPrice: roomBedTypeObjectId, //ObjectID
   }
+  const response = await postData('http://localhost:3000/api/beds', dataPost)
+
+  if (response.message) {
+    return Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: `${response.message}`,
+      showConfirmButton: true,
+    })
+  }
+
+  Swal.fire({
+    icon: 'success',
+    iconColor: '#54bab9',
+    title: 'Success!',
+    text: 'Room bed successfully Added',
+    showConfirmButton: true,
+    confirmButtonColor: '#ff2e63',
+  }).then((result) => {
+    location.reload()
+  })
 }
 
 async function deleteRoomBed() {
@@ -140,14 +180,84 @@ async function deleteRoomBed() {
     `${roomBedObjectId}`
   )
   if (deleteResponse.message) {
-    return swal('Error!', `${deleteResponse.message}`, 'error')
+    return Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: `${error.message}`,
+      showConfirmButton: true,
+    })
   }
 
-  swal('Success', 'Room Bed successfully deleted!', 'success')
-
-  refreshPage()
+  Swal.fire({
+    icon: 'success',
+    iconColor: '#54bab9',
+    title: 'Success!',
+    text: 'Room bed successfully deleted',
+    showConfirmButton: true,
+    confirmButtonColor: '#ff2e63',
+  }).then((result) => {
+    location.reload()
+  })
 }
 
-function refreshPage() {
-  location.href = 'http://localhost:3000/rooms(bedAttributesManage).html'
+async function editRoomBed() {
+  const roomBedResponse = await getData('http://localhost:3000/api/beds')
+  let roomBedObjectId
+  roomBedResponse.forEach((data) => {
+    if (data.bedType) {
+      if (data.bedType.bedTypeName == roomBedDropDown.value) {
+        roomBedObjectId = data._id
+      }
+    }
+  })
+
+  const roomBedTypeValue = document.querySelector(
+    "select[name='roomBedType']"
+  ).value
+  const roomBedQuantityValue = document.querySelector(
+    "input[name='roomBedQuantity']"
+  ).value
+
+  const roomBedTypes = await getData('http://localhost:3000/api/beds/types')
+  let roomBedTypeObjectId
+
+  roomBedTypes.forEach((data) => {
+    if (data.bedTypeName) {
+      if (data.bedTypeName.toLowerCase() === roomBedTypeValue.toLowerCase()) {
+        roomBedTypeObjectId = data._id
+      }
+    }
+  })
+
+  const dataPost = {
+    bedType: roomBedTypeObjectId,
+    bedQuantity: roomBedQuantityValue,
+    bedPrice: roomBedTypeObjectId,
+  }
+
+  const updateResponse = await putData(
+    'http://localhost:3000/api/beds/',
+    `${roomBedObjectId}`,
+    dataPost
+  )
+  if (updateResponse.message) {
+    return Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: `${error.message}`,
+      showConfirmButton: true,
+      confirmButtonColor: '#ff2e63',
+    })
+  }
+
+  Swal.fire({
+    icon: 'success',
+    iconColor: '#54bab9',
+    title: 'Success!',
+    text: 'Bed successfully updated!',
+    showConfirmButton: true,
+    confirmButtonColor: '#ff2e63',
+  }).then((result) => {
+    location.reload()
+  })
 }

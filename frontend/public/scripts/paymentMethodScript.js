@@ -40,6 +40,7 @@ paymentMethodDropDown.addEventListener('change', (event) => {
   } else {
     paymentMethodContainerDisplay('block', 'flex')
     paymentMethodContainerChange('EDIT', 'ADD', 'block')
+    getPaymentMethodData()
   }
 })
 
@@ -60,26 +61,64 @@ function paymentMethodContainerChange(newVal, oldVal, display) {
   paymentMethodContainer.innerHTML = containerContent
   paymentMethodFormButtons.forEach((button) => {
     if (button.innerHTML === `${oldVal}`) {
+      button.id = `${newVal}`
       button.innerHTML = `${newVal}`
     } else if (button.innerHTML === 'DELETE') {
       button.setAttribute('style', `display:${display}`)
+    } else {
     }
   })
-  const deleteButton = document.querySelector(
-    '.newroom-btn-group.paymentMethod > a:nth-child(3) > button'
+  const deleteButton = document.querySelector('.paymentMethod #DELETE')
+  const addButton = document.querySelector('.paymentMethod #ADD')
+  const editButton = document.querySelector('.paymentMethod #EDIT')
+
+  if (addButton) {
+    addButton.addEventListener('click', (e) => {
+      e.preventDefault()
+      createPaymentMethod()
+    })
+  }
+  if (deleteButton) {
+    deleteButton.addEventListener('click', (e) => {
+      e.preventDefault()
+      deletePaymentMethod()
+    })
+  }
+  if (editButton) {
+    editButton.addEventListener('click', (e) => {
+      e.preventDefault()
+      editPaymentMethod()
+    })
+  }
+}
+
+async function getPaymentMethodData() {
+  const paymentMethodNameValue = document.querySelector(
+    "input[name='paymentMethodName']"
   )
-  const addButton = document.querySelector(
-    '.newroom-btn-group.paymentMethod > a:nth-child(4) > button'
+  const paymentMethodStatusValue = document.querySelector(
+    "select[name='paymentMethodIsOnline']"
   )
-  deleteButton.addEventListener('click', (e) => {
-    e.preventDefault()
-    deletePaymentMethod()
+  const paymentMethodResponse = await getData(
+    'http://localhost:3000/api/paymentmethods'
+  )
+  let paymentMethodObjectId
+  paymentMethodResponse.forEach((data) => {
+    if (data.paymentMethodName) {
+      if (data.paymentMethodName == paymentMethodDropDown.value) {
+        paymentMethodObjectId = data._id
+      }
+    }
   })
-  addButton.addEventListener('click', (e) => {
-    e.preventDefault()
-    createPaymentMethod()
-    form.reset()
-  })
+
+  const getDataById = await getData(
+    'http://localhost:3000/api/paymentmethods',
+    `${paymentMethodObjectId}`
+  )
+  paymentMethodNameValue.value = getDataById.paymentMethodName
+  paymentMethodStatusValue.value = getDataById.paymentMethodIsOnline
+    ? 'Active'
+    : 'Inactive'
 }
 
 async function createPaymentMethod() {
@@ -97,20 +136,31 @@ async function createPaymentMethod() {
     paymentMethodIsOnline: paymentMethodStatusValue,
   }
 
-  try {
-    const response = await postData(
-      'http://localhost:3000/api/paymentmethods/',
-      dataPost
-    )
+  const response = await postData(
+    'http://localhost:3000/api/paymentmethods/',
+    dataPost
+  )
 
-    if (response.message) {
-      return swal('Error!', `${response.message}`, 'error')
-    }
-
-    swal('Success', 'Room successfully added', 'success')
-  } catch (error) {
-    swal('Error!', `${error}`, 'error')
+  if (response.message) {
+    return Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: `${response.message}`,
+      showConfirmButton: true,
+      confirmButtonColor: '#ff2e63',
+    })
   }
+
+  Swal.fire({
+    icon: 'success',
+    iconColor: '#54bab9',
+    title: 'Success!',
+    text: 'Payment method successfully Added',
+    showConfirmButton: true,
+    confirmButtonColor: '#ff2e63',
+  }).then((result) => {
+    location.reload()
+  })
 }
 async function deletePaymentMethod() {
   const paymentMethodResponse = await getData(
@@ -129,14 +179,77 @@ async function deletePaymentMethod() {
     `${paymentMethodObjectId}`
   )
   if (deleteResponse.message) {
-    return swal('Error!', `${deleteResponse.message}`, 'error')
+    return Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: `${error.message}`,
+      showConfirmButton: true,
+      confirmButtonColor: '#ff2e63',
+    })
   }
 
-  swal('Success', 'Payment method successfully deleted!', 'success')
-
-  refreshPage()
+  Swal.fire({
+    icon: 'success',
+    iconColor: '#54bab9',
+    title: 'Success!',
+    text: 'Payment method successfully deleted',
+    showConfirmButton: true,
+    confirmButtonColor: '#ff2e63',
+  }).then((result) => {
+    location.reload()
+  })
 }
 
-function refreshPage() {
-  location.href = 'http://localhost:3000/rooms(paymentManage).html'
+async function editPaymentMethod() {
+  const paymentMethodResponse = await getData(
+    'http://localhost:3000/api/paymentmethods'
+  )
+  let paymentMethodObjectId
+  paymentMethodResponse.forEach((data) => {
+    if (data.paymentMethodName) {
+      if (data.paymentMethodName == paymentMethodDropDown.value) {
+        paymentMethodObjectId = data._id
+      }
+    }
+  })
+
+  const paymentMethodNameValue = document.querySelector(
+    "input[name='paymentMethodName']"
+  ).value
+  const paymentMethodStatusValue =
+    document.querySelector("select[name='paymentMethodIsOnline']").value ===
+    'Inactive'
+      ? 'false'
+      : 'true'
+
+  const dataPost = {
+    paymentMethodName: paymentMethodNameValue,
+    paymentMethodIsOnline: paymentMethodStatusValue,
+  }
+
+  const updateResponse = await putData(
+    'http://localhost:3000/api/paymentmethods',
+    `${paymentMethodObjectId}`,
+    dataPost
+  )
+  if (updateResponse.message) {
+    return Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: `${error.message}`,
+      showConfirmButton: true,
+      confirmButtonColor: '#ff2e63',
+    })
+  }
+
+  Swal.fire({
+    icon: 'success',
+    iconColor: '#54bab9',
+    title: 'Success!',
+    text: 'Payment method successfully updated!',
+    showConfirmButton: true,
+    confirmButtonColor: '#ff2e63',
+  }).then((result) => {
+    location.reload()
+  })
 }

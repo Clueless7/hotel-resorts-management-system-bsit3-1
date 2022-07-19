@@ -13,11 +13,13 @@ function setDates(today, checkInDate, checkOutDate) {
     checkOutDate.value = event.target.value
     checkOutDate.setAttribute('min', event.target.value)
     calculateDurationOfStay()
-    calculateBalance(event, durationOfStay.value)
+    // calculateBalance(event, durationOfStay.value)
+    calculateBalance2()
   })
   checkOutDate.addEventListener('change', (event) => {
     calculateDurationOfStay()
-    calculateBalance(event, durationOfStay.value)
+    // calculateBalance(event, durationOfStay.value)
+    calculateBalance2()
   })
 }
 
@@ -47,22 +49,43 @@ addButton.addEventListener('click', (event) => {
 })
 
 newCheckInRoomNumberDropDown.addEventListener('change', (e) => {
-  calculateBalance(e, durationOfStay.value)
+  calculateBalance2()
 })
 
-async function calculateBalance(event, dOfStay) {
+// async function calculateBalance(event, dOfStay = 0) {
+//   const allRooms = await getData('http://localhost:3000/api/rooms')
+
+//   allRooms.forEach((data) => {
+//     if (data.roomNumber == event.target.value) {
+//       balance =
+//         (data.roomType ? data.roomType.roomTypePrice : 0) +
+//         (data.roomBed ? data.roomBed.bedPrice.bedTypePrice : 0)
+//     }
+//   })
+//   console.log(dOfStay)
+//   balanceElement.value = balance * dOfStay
+// }
+
+async function calculateBalance2() {
   const allRooms = await getData('http://localhost:3000/api/rooms')
+  let balance
+  let roomPrice
+  let bedPrice
+  let durationOfStay
 
   allRooms.forEach((data) => {
-    if (data.roomNumber == event.target.value) {
-      balance =
-        (data.roomType ? data.roomType.roomTypePrice : 0) +
-        (data.roomBed ? data.roomBed.bedPrice.bedTypePrice : 0)
+    if (data.roomNumber == newCheckInRoomNumberDropDown.value) {
+      roomPrice = data.roomType.roomTypePrice ?? 0
+      bedPrice = data.roomBed.bedPrice.bedTypePrice ?? 0
+      durationOfStay = durationOfStayElement.value ?? 0
     }
   })
-  console.log(dOfStay)
-  balanceElement.value = balance * dOfStay
+
+  balance = (roomPrice + bedPrice) * durationOfStay
+  balanceElement.value = balance
 }
+
+calculateBalance2()
 
 async function dynamicDropDown() {
   const roomNumberResponse = await getData('http://localhost:3000/api/rooms')
@@ -148,52 +171,68 @@ async function createReservation() {
     }
   })
 
-  try {
-    const dataPost = {
-      customerName: customerNameValue,
-      contactNumber: contactNumberValue,
-      email: emailValue,
-      gender: genderValue,
-      address: addressValue,
-      roomNumber: roomObjectId, //ObjectId
-      roomType: roomObjectId, //ObjectId
-      roomBed: roomObjectId, //ObjectId
-      checkInDate: checkInDateValue,
-      checkOutDate: checkOutDateValue,
-      durationOfStay: durationOfStayValue,
-      balance: balanceValue,
-      paymentMethod: paymentMethodId,
-    }
-    console.log(dataPost)
-
-    const response = await postData(
-      'http://localhost:3000/api/reservations/',
-      dataPost
-    )
-
-    const isAvailable = 'false'
-
-    const updateRoomIsAvailable = await putData(
-      'http://localhost:3000/api/rooms/',
-      `${roomObjectId}`,
-      {
-        roomNumber: roomData.roomNumber,
-        roomIsAvailable: isAvailable,
-        roomType: roomData.roomType._id,
-        roomBed: roomData.roomBed._id,
-      }
-    )
-
-    if (response.message) {
-      return swal('Error!', `${response.message}`, 'error')
-    }
-
-    if (updateRoomIsAvailable.message) {
-      return swal('Error!', `${updateRoomIsAvailable.message}`, 'error')
-    }
-
-    swal('Success', 'Reservation information successfully updated', 'success')
-  } catch (error) {
-    return swal('Error!', `${error.message}`, 'error')
+  const dataPost = {
+    customerName: customerNameValue,
+    contactNumber: contactNumberValue,
+    email: emailValue,
+    gender: genderValue,
+    address: addressValue,
+    roomNumber: roomObjectId, //ObjectId
+    roomType: roomObjectId, //ObjectId
+    roomBed: roomObjectId, //ObjectId
+    checkInDate: checkInDateValue,
+    checkOutDate: checkOutDateValue,
+    durationOfStay: durationOfStayValue,
+    balance: balanceValue,
+    paymentMethod: paymentMethodId,
   }
+
+  const response = await postData(
+    'http://localhost:3000/api/reservations/',
+    dataPost
+  )
+
+  if (response.message) {
+    return Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: `${response.message}`,
+      showConfirmButton: true,
+    })
+  }
+
+  Swal.fire({
+    icon: 'success',
+    iconColor: '#54bab9',
+    title: 'Success!',
+    text: 'Reservation successfully Added',
+    showConfirmButton: true,
+    confirmButtonColor: '#ff2e63',
+  })
+    .then(async (result) => {
+      const isAvailable = 'false'
+
+      const updateRoomIsAvailable = await putData(
+        'http://localhost:3000/api/rooms/',
+        `${roomObjectId}`,
+        {
+          roomNumber: roomData.roomNumber,
+          roomIsAvailable: isAvailable,
+          roomType: roomData.roomType._id,
+          roomBed: roomData.roomBed._id,
+        }
+      )
+
+      if (updateRoomIsAvailable.message) {
+        return Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: `${response.message}`,
+          showConfirmButton: true,
+        })
+      }
+    })
+    .then((result) => {
+      location.reload()
+    })
 }

@@ -10,7 +10,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./scripts/paymentMethodScript.js" defer type="module"></script>
     <title>Hotel Management System</title>
   </head>
@@ -74,16 +74,16 @@
 
               <div class="newroom-btn-group paymentMethod">
                 <a href="./rooms(paymentTable).html">
-                  <button type="button" class="newroom-btn">BACK</button>
+                  <button type="button" class="newroom-btn" id="BACK">BACK</button>
                 </a>
                 <a>
-                  <button type="reset" class="newroom-btn">RESET</button>
+                  <button type="reset" class="newroom-btn" id="RESET">RESET</button>
                 </a>
                 <a>
-                  <button type="submit" class="newroom-btn">DELETE</button>
+                  <button type="submit" class="newroom-btn" id="DELETE">DELETE</button>
                 </a>
                 <a>
-                  <button type="submit" class="newroom-btn">ADD</button>
+                  <button type="submit" class="newroom-btn" id="EDIT">EDIT</button>
                 </a>
               </div>
             </form>

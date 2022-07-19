@@ -5,7 +5,6 @@ const roomDropDown = document.querySelector('.roomDropDown')
 const roomContainer = document.querySelector('.room-container')
 const roomFormButtonsContainer = document.querySelector('.room')
 const roomFormButtons = document.querySelectorAll('.room button')
-const form = document.querySelector('.content form')
 
 dynamicDropDown()
 
@@ -30,12 +29,13 @@ async function dynamicDropDown() {
 roomDropDown.addEventListener('change', (event) => {
   if (event.target.value === 'Add new Room') {
     roomContainerDisplay('block', 'flex')
-    roomContainerChange('none', 'block')
+    roomContainerChange('ADD', 'EDIT', 'none')
   } else if (event.target.value === '-') {
     roomContainerDisplay('none', 'none')
   } else {
     roomContainerDisplay('block', 'flex')
-    roomContainerChange('block', 'none')
+    roomContainerChange('EDIT', 'ADD', 'block')
+    setSelectedRoomData()
   }
 })
 
@@ -44,7 +44,7 @@ function roomContainerDisplay(display, buttonDisplay) {
   roomFormButtonsContainer.setAttribute('style', `display:${buttonDisplay}`)
 }
 
-function roomContainerChange(display1, display2) {
+function roomContainerChange(newVal, oldVal, display) {
   const containerContent = `Room Number: <input type='Number' name='roomNumber' required> 
                             Room Type: <select name='room-type' id='roomTypeDropDown' required>
                             </select><br>
@@ -56,11 +56,14 @@ function roomContainerChange(display1, display2) {
                             </select><br>`
   roomContainer.innerHTML = containerContent
 
+  roomContainer.innerHTML = containerContent
   roomFormButtons.forEach((button) => {
-    if (button.innerHTML === 'DELETE' || button.innerHTML === 'EDIT') {
-      button.setAttribute('style', `display:${display1}`)
-    } else if (button.innerHTML === 'ADD') {
-      button.setAttribute('style', `display:${display2}`)
+    if (button.innerHTML === `${oldVal}`) {
+      button.id = `${newVal}`
+      button.innerHTML = `${newVal}`
+    } else if (button.innerHTML === 'DELETE') {
+      button.setAttribute('style', `display:${display}`)
+    } else {
     }
   })
 
@@ -70,22 +73,28 @@ function roomContainerChange(display1, display2) {
   roomTypeDynamicDropDown(roomTypeDropDown)
   roomBedDynamicDropDown(roomBedDropDown)
 
-  const deleteButton = document.querySelector(
-    '.newroom-btn-group.room > a:nth-child(3) > button'
-  )
-  const addButton = document.querySelector(
-    '.newroom-btn-group.room > a:nth-child(5) > button'
-  )
+  const deleteButton = document.querySelector('.room #DELETE')
+  const addButton = document.querySelector('.room #ADD')
+  const editButton = document.querySelector('.room #EDIT')
 
-  deleteButton.addEventListener('click', (e) => {
-    e.preventDefault()
-    deleteRoom()
-  })
-  addButton.addEventListener('click', (e) => {
-    e.preventDefault()
-    createRoom()
-    form.reset()
-  })
+  if (addButton) {
+    addButton.addEventListener('click', (e) => {
+      e.preventDefault()
+      createRoom()
+    })
+  }
+  if (deleteButton) {
+    deleteButton.addEventListener('click', (e) => {
+      e.preventDefault()
+      deleteRoom()
+    })
+  }
+  if (editButton) {
+    editButton.addEventListener('click', (e) => {
+      e.preventDefault()
+      editRoom()
+    })
+  }
 }
 
 async function roomTypeDynamicDropDown(dropDown) {
@@ -115,6 +124,35 @@ async function roomBedDynamicDropDown(dropDown) {
   })
 }
 
+async function setSelectedRoomData() {
+  const roomNumberDropDown = document.querySelector('.roomDropDown')
+  const roomNumberInputElement = document.querySelector(
+    "input[name='roomNumber']"
+  )
+  const roomTypeDropDown = document.querySelector('#roomTypeDropDown')
+  const roomRoomBedDropDown = document.querySelector('#roomBedDropDown')
+  const roomStatusDropDown = document.querySelector(
+    "select[name='room-status']"
+  )
+
+  const selectedRoomNumberValue = roomNumberDropDown.value
+
+  const selectedRoomInfo = await getData('http://localhost:3000/api/rooms')
+
+  console.group(selectedRoomInfo)
+
+  selectedRoomInfo.forEach((data) => {
+    if (data.roomNumber == selectedRoomNumberValue) {
+      roomNumberInputElement.value = data.roomNumber ?? '99'
+      roomTypeDropDown.value =
+        data.roomType.roomTypeName ?? 'Room price does not exist'
+      roomRoomBedDropDown.value =
+        data.roomBed.bedType.bedTypeName ?? 'Bed does not exist'
+      roomStatusDropDown.value = data.roomIsAvailable
+    }
+  })
+}
+
 async function createRoom() {
   const roomNumberValue = document.querySelector(
     "input[name='roomNumber']"
@@ -127,42 +165,77 @@ async function createRoom() {
   let roomTypeObjectID
   let roomBedObjectID
 
-  try {
-    const roomTypes = await getData('http://localhost:3000/api/rooms/types')
-    roomTypes.forEach((data) => {
-      if (data.roomTypeName.toLowerCase() === roomTypeValue.toLowerCase()) {
-        roomTypeObjectID = data._id
-      }
-    })
-
-    const roomBed = await getData('http://localhost:3000/api/beds')
-    roomBed.forEach((data) => {
-      if (data.bedType) {
-        if (
-          data.bedType.bedTypeName.toLowerCase() === roomBedValue.toLowerCase()
-        ) {
-          roomBedObjectID = data._id
-        }
-      }
-    })
-
-    const dataPost = {
-      roomNumber: roomNumberValue,
-      roomIsAvailable: roomIsAvailableValue,
-      roomType: roomTypeObjectID, // ObjectId
-      roomBed: roomBedObjectID, // ObjectId
+  const roomTypes = await getData('http://localhost:3000/api/rooms/types')
+  roomTypes.forEach((data) => {
+    if (data.roomTypeName.toLowerCase() === roomTypeValue.toLowerCase()) {
+      roomTypeObjectID = data._id
     }
+  })
 
-    const response = await postData('http://localhost:3000/api/rooms', dataPost)
-
-    if (response.message) {
-      return swal('Error!', `${response.message}`, 'error')
+  let roomBedData
+  const roomBed = await getData('http://localhost:3000/api/beds')
+  roomBed.forEach((data) => {
+    if (data.bedType) {
+      if (
+        data.bedType.bedTypeName.toLowerCase() === roomBedValue.toLowerCase()
+      ) {
+        roomBedObjectID = data._id
+        roomBedData = data
+      }
     }
+  })
 
-    swal('Success', 'Room successfully added', 'success')
-  } catch (error) {
-    swal('Error!', `${error}`, 'error')
+  const dataPost = {
+    roomNumber: roomNumberValue,
+    roomIsAvailable: roomIsAvailableValue,
+    roomType: roomTypeObjectID, // ObjectId
+    roomBed: roomBedObjectID, // ObjectId
   }
+
+  const response = await postData('http://localhost:3000/api/rooms', dataPost)
+
+  console.log(roomBedData)
+  if (response.message) {
+    return Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: `${response.message}`,
+      showConfirmButton: true,
+      confirmButtonColor: '#ff2e63',
+    })
+  }
+
+  Swal.fire({
+    icon: 'success',
+    iconColor: '#54bab9',
+    title: 'Success!',
+    text: 'Room successfully Added',
+    showConfirmButton: true,
+    confirmButtonColor: '#ff2e63',
+  })
+    .then(async (result) => {
+      const decrementBed = await putData(
+        'http://localhost:3000/api/beds',
+        `${roomBedData._id}`,
+        {
+          bedType: roomBedData.bedType._id,
+          bedQuantity: roomBedData.bedQuantity - 1,
+          bedPrice: roomBedData.bedType._id,
+        }
+      )
+
+      if (decrementBed.message) {
+        return Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: `${decrementBed.message}`,
+          showConfirmButton: true,
+        })
+      }
+    })
+    .then((result) => {
+      location.reload()
+    })
 }
 
 async function deleteRoom() {
@@ -180,14 +253,102 @@ async function deleteRoom() {
     `${roomObjectId}`
   )
   if (deleteResponse.message) {
-    return swal('Error!', `${deleteResponse.message}`, 'error')
+    return Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: `${error.message}`,
+      showConfirmButton: true,
+      confirmButtonColor: '#ff2e63',
+    })
   }
 
-  swal('Success', 'Room successfully deleted!', 'success')
-
-  refreshPage()
+  Swal.fire({
+    icon: 'success',
+    iconColor: '#54bab9',
+    title: 'Success!',
+    text: 'Room successfully deleted',
+    showConfirmButton: true,
+    confirmButtonColor: '#ff2e63',
+  }).then((result) => {
+    location.reload()
+  })
 }
 
-function refreshPage() {
-  location.href = 'http://localhost:3000/rooms(roomNumManage).html'
+async function editRoom() {
+  const roomResponse = await getData('http://localhost:3000/api/rooms')
+  let roomObjectId
+  roomResponse.forEach((data) => {
+    if (data.roomNumber) {
+      if (data.roomNumber == roomDropDown.value) {
+        roomObjectId = data._id
+      }
+    }
+  })
+
+  const roomNumberValue = document.querySelector(
+    "input[name='roomNumber']"
+  ).value
+  const roomIsAvailableValue = document.querySelector(
+    "select[name='room-status']"
+  ).value
+
+  const roomTypes = await getData('http://localhost:3000/api/rooms/types')
+  let roomTypeObjectId
+
+  roomTypes.forEach((data) => {
+    if (data.roomTypeName) {
+      if (
+        data.roomTypeName.toLowerCase() === roomTypeDropDown.value.toLowerCase()
+      ) {
+        roomTypeObjectId = data._id
+      }
+    }
+  })
+
+  const roomBeds = await getData('http://localhost:3000/api/beds')
+  let roomBedObjectId
+
+  roomBeds.forEach((data) => {
+    if (data.bedType) {
+      if (
+        data.bedType.bedTypeName.toLowerCase() ===
+        roomBedDropDown.value.toLowerCase()
+      ) {
+        roomBedObjectId = data._id
+      }
+    }
+  })
+
+  const dataPost = {
+    roomNumber: roomNumberValue,
+    roomIsAvailable: roomIsAvailableValue ? 'true' : 'false',
+    roomType: roomTypeObjectId,
+    roomBed: roomBedObjectId,
+  }
+
+  const updateResponse = await putData(
+    'http://localhost:3000/api/rooms',
+    `${roomObjectId}`,
+    dataPost
+  )
+  if (updateResponse.message) {
+    return Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: `${updateResponse.message}`,
+      showConfirmButton: true,
+      confirmButtonColor: '#ff2e63',
+    })
+  }
+
+  Swal.fire({
+    icon: 'success',
+    iconColor: '#54bab9',
+    title: 'Success!',
+    text: 'Room successfully updated!',
+    showConfirmButton: true,
+    confirmButtonColor: '#ff2e63',
+  }).then((result) => {
+    location.reload()
+  })
 }

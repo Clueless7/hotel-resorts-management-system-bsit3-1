@@ -6,15 +6,10 @@ const Bed = require('../models/bedModel')
 
 // Get all room
 const getAllBeds = asyncHandler(async (req, res) => {
-  const beds = await Bed.find()
-    .populate('bedType', {
-      _id: 0,
-      bedTypeName: 1,
-    })
-    .populate('bedPrice', {
-      _id: 0,
-      bedTypePrice: 1,
-    })
+  const beds = await Bed.find().populate('bedType').populate('bedPrice', {
+    _id: 0,
+    bedTypePrice: 1,
+  })
 
   if (!beds) {
     res.status(500)
@@ -29,7 +24,7 @@ const getBedWithId = asyncHandler(async (req, res) => {
   const bed = await Bed.findById(req.params.id)
 
   await bed.populate('bedType', {
-    _id: 0,
+    _id: 1,
     bedTypeName: 1,
   })
 
@@ -68,10 +63,7 @@ const createBed = asyncHandler(async (req, res) => {
     throw new Error('Invalid bed data')
   }
 
-  const populatedData = await newBed.populate('bedType', {
-    _id: 0,
-    bedTypeName: 1,
-  })
+  const populatedData = await newBed.populate('bedType')
 
   await populatedData.populate('bedPrice', {
     _id: 0,
