@@ -44,9 +44,9 @@ function bedTypeContainerDisplay(display, buttonsDisplay) {
 }
 
 function bedTypeContainerChange(newVal, oldVal, display) {
-  const containerContent = `Bed Type Name: <input type='Text' name='bedTypeName'> 
-                            Bed Type Size: <input type='Text' name='bedTypeSize'> 
-                            Bed Type Price: <input type='Number' name='bedTypePrice'>`
+  const containerContent = `Bed Type Name: <input type='Text' name='bedTypeName' required> 
+                            Bed Type Size: <input type='Text' name='bedTypeSize' required> 
+                            Bed Type Price: <input type='Number' name='bedTypePrice' required>`
   bedTypeContainer.innerHTML = containerContent
   bedTypeFormButtons.forEach((button) => {
     if (button.id === `${oldVal}`) {
@@ -57,30 +57,41 @@ function bedTypeContainerChange(newVal, oldVal, display) {
     } else {
     }
   })
+
   const deleteButton = document.querySelector('.bed-type #DELETE')
   const addButton = document.querySelector('.bed-type #ADD')
   const editButton = document.querySelector('.bed-type #EDIT')
 
-  if (deleteButton) {
-    deleteButton.addEventListener('click', (e) => {
-      e.preventDefault()
-      deleteBedType()
-    })
-  }
   if (addButton) {
-    addButton.addEventListener('click', (e) => {
-      e.preventDefault()
-      createBedType()
-    })
+    addButton.removeEventListener('click', editListener)
+    addButton.removeEventListener('click', addListener)
+    addButton.addEventListener('click', addListener)
   }
   if (editButton) {
-    editButton.addEventListener('click', (e) => {
-      e.preventDefault()
-      editBedType()
-    })
+    editButton.removeEventListener('click', addListener)
+    editButton.removeEventListener('click', editListener)
+    editButton.addEventListener('click', editListener)
+  }
+  if (deleteButton) {
+    deleteButton.removeEventListener('click', deleteListener)
+    deleteButton.addEventListener('click', deleteListener)
   }
 }
 
+function addListener(e) {
+  e.preventDefault()
+  createBedType()
+}
+
+function editListener(e) {
+  e.preventDefault()
+  editBedType()
+}
+
+function deleteListener(e) {
+  e.preventDefault()
+  deleteBedType()
+}
 async function setSelectedBedTypeData() {
   const bedTypeNameInputElement = document.querySelector(
     "input[name='bedTypeName']"
@@ -169,7 +180,7 @@ async function deleteBedType() {
     return Swal.fire({
       icon: 'error',
       title: 'Error',
-      text: `${error.message}`,
+      text: `${deleteResponse.message}`,
       showConfirmButton: true,
       confirmButtonColor: '#ff2e63',
     })
@@ -223,7 +234,7 @@ async function editBedType() {
     return Swal.fire({
       icon: 'error',
       title: 'Error',
-      text: `${error.message}`,
+      text: `${updateResponse.message}`,
       showConfirmButton: true,
       confirmButtonColor: '#ff2e63',
     })

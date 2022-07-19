@@ -15,7 +15,7 @@ const getPaymentMethodWithId = asyncHandler(async (req, res) => {
   const paymentMethod = await PaymentMethod.findById(req.params.id)
 
   if (!paymentMethod) {
-    res.send(404)
+    res.status(404)
     throw new Error('Payment method not found')
   }
 

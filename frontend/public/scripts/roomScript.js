@@ -78,23 +78,34 @@ function roomContainerChange(newVal, oldVal, display) {
   const editButton = document.querySelector('.room #EDIT')
 
   if (addButton) {
-    addButton.addEventListener('click', (e) => {
-      e.preventDefault()
-      createRoom()
-    })
-  }
-  if (deleteButton) {
-    deleteButton.addEventListener('click', (e) => {
-      e.preventDefault()
-      deleteRoom()
-    })
+    addButton.removeEventListener('click', editListener)
+    addButton.removeEventListener('click', addListener)
+    addButton.addEventListener('click', addListener)
   }
   if (editButton) {
-    editButton.addEventListener('click', (e) => {
-      e.preventDefault()
-      editRoom()
-    })
+    editButton.removeEventListener('click', addListener)
+    editButton.removeEventListener('click', editListener)
+    editButton.addEventListener('click', editListener)
   }
+  if (deleteButton) {
+    deleteButton.removeEventListener('click', deleteListener)
+    deleteButton.addEventListener('click', deleteListener)
+  }
+}
+
+function addListener(e) {
+  e.preventDefault()
+  createRoom()
+}
+
+function editListener(e) {
+  e.preventDefault()
+  editRoom()
+}
+
+function deleteListener(e) {
+  e.preventDefault()
+  deleteRoom()
 }
 
 async function roomTypeDynamicDropDown(dropDown) {

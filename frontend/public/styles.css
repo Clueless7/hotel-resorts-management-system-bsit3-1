@@ -910,6 +910,7 @@ span.psw {
 .room,
 .room-bed,
 .paymentMethod,
-.bed-type {
+.bed-type,
+.service {
   display: none;
 }

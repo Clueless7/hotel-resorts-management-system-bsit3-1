@@ -48,7 +48,7 @@ function roomBedContainerDisplay(display, buttonsDisplay) {
 function roomBedContainerChange(newVal, oldVal, display) {
   const containerContent = `Room Bed: <select name='roomBedType' id='roomBedTypeDropDown' required>
                             </select><br>
-                            Room Bed Quantity: <input type='Number' name='roomBedQuantity'>`
+                            Room Bed Quantity: <input type='Number' name='roomBedQuantity' required>`
   roomBedContainer.innerHTML = containerContent
   roomBedFormButtons.forEach((button) => {
     if (button.id === `${oldVal}`) {
@@ -66,24 +66,35 @@ function roomBedContainerChange(newVal, oldVal, display) {
   const addButton = document.querySelector('.room-bed #ADD')
   const editButton = document.querySelector('.room-bed #EDIT')
 
-  if (deleteButton) {
-    deleteButton.addEventListener('click', (e) => {
-      e.preventDefault()
-      deleteRoomBed()
-    })
-  }
   if (addButton) {
-    addButton.addEventListener('click', (e) => {
-      e.preventDefault()
-      createRoomBed()
-    })
+    addButton.removeEventListener('click', editListener)
+    addButton.removeEventListener('click', addListener)
+    addButton.addEventListener('click', addListener)
   }
   if (editButton) {
-    editButton.addEventListener('click', (e) => {
-      e.preventDefault()
-      editRoomBed()
-    })
+    editButton.removeEventListener('click', addListener)
+    editButton.removeEventListener('click', editListener)
+    editButton.addEventListener('click', editListener)
   }
+  if (deleteButton) {
+    deleteButton.removeEventListener('click', deleteListener)
+    deleteButton.addEventListener('click', deleteListener)
+  }
+}
+
+function addListener(e) {
+  e.preventDefault()
+  createRoomBed()
+}
+
+function editListener(e) {
+  e.preventDefault()
+  editRoomBed()
+}
+
+function deleteListener(e) {
+  e.preventDefault()
+  deleteRoomBed()
 }
 
 async function roomBedTypeDynamicDropDown(dropDown) {
