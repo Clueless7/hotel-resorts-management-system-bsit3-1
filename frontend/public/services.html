@@ -11,6 +11,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./scripts/disableEnter.js"></script>
+    <script type="module" defer src="./scripts/servicesMonitoring.js"></script>
     <title>Hotel Management System</title>
   </head>
   <body>
@@ -48,9 +50,37 @@
       <section>
         <div class="content-container">
           <!-- Search and manage here -->
-          <div class="monitoring-menu">services here</div>
+          <div class="monitoring-menu">
+            <div class="searchBar">
+              <form class="searchButton">
+                <input type="text" placeholder="Search.." name="search" />
+                <button type="submit"><i class="fa fa-search"></i></button>
+              </form>
+            </div>
+            <a href="./services(serviceManage).html">
+              <button type="button" class="btn-group-tabs">MANAGE</button>
+            </a>
+          </div>
           <div class="content">
             <!-- table here -->
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Service Name</th>
+                    <th scope="col">Service Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Loading</td>
+                    <td>Loading</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>

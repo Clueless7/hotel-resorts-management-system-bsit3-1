@@ -11,8 +11,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="./scripts/disableEnter.js"></script>
-    <script defer type="module" src="./scripts/roomScript.js"></script>
+
+    <script src="./scripts/serviceScript.js" defer type="module"></script>
     <title>Hotel Management System</title>
   </head>
   <body>
@@ -20,12 +20,14 @@
       <div class="sidenav">
         <a href="./index.html"><button type="button">Dashboard</button></a>
         <a href="./rooms(roomNumTable).html">
-          <button type="button" class="active">Rooms</button>
+          <button type="button">Rooms</button>
         </a>
         <a href="./reservations(checkinTable).html"
           ><button type="button">Reservations</button></a
         >
-        <a href="./services.html"><button type="button">Services</button></a>
+        <a href="./services.html"
+          ><button type="button" class="active">Services</button></a
+        >
         <a href="./reports.html"><button type="button">Reports</button></a>
         <a href="./login.html"
           ><button type="button" class="log-out-btn">Log Out</button></a
@@ -39,21 +41,8 @@
         </header>
         <nav class="nav">
           <ul>
-
-            <li></li>
             <li>
-              <a href="./rooms(roomNumTable).html" class="active"
-                >Rooms</a
-              >
-            </li>
-            <li>
-              <a href="./rooms(roomTypeTable).html">Room Type</a>
-            </li>
-            <li>
-              <a href="./rooms(bedAttributesTable).html">Room Bed</a>
-            </li>
-            <li>
-              <a href="./rooms(paymentTable).html">Payment Method</a>
+              <a href="./services.html">Services</a>
             </li>
           </ul>
         </nav>
@@ -62,39 +51,42 @@
         <div class="content-container">
           <!-- Search and manage here -->
           <div class="monitoring-menu">
-            <!-- form buttons here -->
             <!-- menu here -->
           </div>
           <div class="content">
             <!-- table here -->
-            <div class="newroom-table-div">
-              <div class="form-div">
-                <form>
+            <form>
+              <label for="Services">Services:</label>
+              <select class="serviceDropDown">
+                <option value="-">-</option></select
+              ><br />
 
-                  <label for="room">Room:</label>
-                  <select class="roomDropDown">
-                    <option value="-">-</option></select
-                  ><br />
-                  
-                  <div class="room-container"></div>
-                  
-                  <div class="newroom-btn-group room">
-                    <a href="./rooms(roomNumTable).html">
-                      <button type="button" class="newroom-btn" id="BACK">BACK</button>
+              <div class="service-container"></div>
+
+              <div class="newroom-btn-group service">
+                <a href="./services.html">
+                  <button type="button" class="newroom-btn" id="BACK">
+                    BACK
+                  </button>
                 </a>
                 <a>
-                  <button type="reset" class="newroom-btn" id="RESET">RESET</button>
+                  <button type="reset" class="newroom-btn" id="RESET">
+                    RESET
+                  </button>
                 </a>
                 <a>
-                  <button type="submit" class="newroom-btn" id="DELETE">DELETE</button>
+                  <button type="submit" class="newroom-btn" id="DELETE">
+                    DELETE
+                  </button>
                 </a>
                 <a>
-                  <button type="submit" class="newroom-btn" id="EDIT">EDIT</button>
+                  <button type="submit" class="newroom-btn" id="EDIT">
+                    EDIT
+                  </button>
                 </a>
-                  </div>
-                </form>
               </div>
-            </div>
+            </form>
+          </div>
         </div>
       </section>
     </div>

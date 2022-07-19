@@ -1,6 +1,7 @@
 // import fetch.js
 import { getData, postData, putData, deleteData } from './fetch.js'
 // Room type maintenance/manage
+
 const paymentMethodDropDown = document.querySelector('.paymentMethodDropDown')
 const paymentMethodContainer = document.querySelector(
   '.paymentMethod-container'
@@ -10,7 +11,6 @@ const paymentMethodFormButtonsContainer =
 const paymentMethodFormButtons = document.querySelectorAll(
   '.paymentMethod button'
 )
-const form = document.querySelector('form')
 
 dynamicDropDown()
 
@@ -53,8 +53,8 @@ function paymentMethodContainerDisplay(display, buttonsDisplay) {
 }
 
 function paymentMethodContainerChange(newVal, oldVal, display) {
-  const containerContent = `Payment Method Name: <input type='Text' name='paymentMethodName'> 
-                            Payment Method status: <select name='paymentMethodIsOnline'>
+  const containerContent = `Payment Method Name: <input type='Text' name='paymentMethodName' required> 
+                            Payment Method status: <select name='paymentMethodIsOnline' required>
                             <option value='Active'>Active</option>
                             <option value='Inactive'> Inactive</option>
                             </select>`
@@ -73,25 +73,35 @@ function paymentMethodContainerChange(newVal, oldVal, display) {
   const editButton = document.querySelector('.paymentMethod #EDIT')
 
   if (addButton) {
-    addButton.addEventListener('click', (e) => {
-      e.preventDefault()
-      createPaymentMethod()
-    })
-  }
-  if (deleteButton) {
-    deleteButton.addEventListener('click', (e) => {
-      e.preventDefault()
-      deletePaymentMethod()
-    })
+    addButton.removeEventListener('click', editListener)
+    addButton.removeEventListener('click', addListener)
+    addButton.addEventListener('click', addListener)
   }
   if (editButton) {
-    editButton.addEventListener('click', (e) => {
-      e.preventDefault()
-      editPaymentMethod()
-    })
+    editButton.removeEventListener('click', addListener)
+    editButton.removeEventListener('click', editListener)
+    editButton.addEventListener('click', editListener)
+  }
+  if (deleteButton) {
+    deleteButton.removeEventListener('click', deleteListener)
+    deleteButton.addEventListener('click', deleteListener)
   }
 }
 
+function addListener(e) {
+  e.preventDefault()
+  createPaymentMethod()
+}
+
+function editListener(e) {
+  e.preventDefault()
+  editPaymentMethod()
+}
+
+function deleteListener(e) {
+  e.preventDefault()
+  deletePaymentMethod()
+}
 async function getPaymentMethodData() {
   const paymentMethodNameValue = document.querySelector(
     "input[name='paymentMethodName']"
@@ -162,6 +172,7 @@ async function createPaymentMethod() {
     location.reload()
   })
 }
+
 async function deletePaymentMethod() {
   const paymentMethodResponse = await getData(
     'http://localhost:3000/api/paymentmethods'
@@ -182,7 +193,7 @@ async function deletePaymentMethod() {
     return Swal.fire({
       icon: 'error',
       title: 'Error',
-      text: `${error.message}`,
+      text: `${deleteResponse.message}`,
       showConfirmButton: true,
       confirmButtonColor: '#ff2e63',
     })
@@ -236,7 +247,7 @@ async function editPaymentMethod() {
     return Swal.fire({
       icon: 'error',
       title: 'Error',
-      text: `${error.message}`,
+      text: `${updateResponse.message}`,
       showConfirmButton: true,
       confirmButtonColor: '#ff2e63',
     })

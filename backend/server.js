@@ -21,6 +21,7 @@ app.use('/api/beds/types', require('./routes/bedTypeRoutes'))
 app.use('/api/beds', require('./routes/bedRoutes'))
 app.use('/api/reservations', require('./routes/reservationRoutes'))
 app.use('/api/paymentmethods', require('./routes/paymentMethodRoutes'))
+app.use('/api/services', require('./routes/serviceRoutes'))
 
 // Serve frontend
 app.use(express.static(path.join(__dirname, '../frontend/public')))

@@ -48,8 +48,8 @@ function roomTypeContainerDisplay(display, buttonsDisplay) {
 }
 
 function roomTypeContainerChange(newVal, oldVal, display) {
-  const containerContent = `Room Type Name: <input type='Text' name='roomTypeName'> 
-                            Room Type Price: <input type='Number' name='roomTypePrice'>`
+  const containerContent = `Room Type Name: <input type='Text' name='roomTypeName' required> 
+                            Room Type Price: <input type='Number' name='roomTypePrice' required>`
   roomTypeContainer.innerHTML = containerContent
   roomTypeFormButtons.forEach((button) => {
     if (button.innerHTML === `${oldVal}`) {
@@ -66,23 +66,34 @@ function roomTypeContainerChange(newVal, oldVal, display) {
   const editButton = document.querySelector('.roomtype #EDIT')
 
   if (addButton) {
-    addButton.addEventListener('click', (e) => {
-      e.preventDefault()
-      createRoomType()
-    })
-  }
-  if (deleteButton) {
-    deleteButton.addEventListener('click', (e) => {
-      e.preventDefault()
-      deleteRoomType()
-    })
+    addButton.removeEventListener('click', editListener)
+    addButton.removeEventListener('click', addListener)
+    addButton.addEventListener('click', addListener)
   }
   if (editButton) {
-    editButton.addEventListener('click', (e) => {
-      e.preventDefault()
-      editRoomType()
-    })
+    editButton.removeEventListener('click', addListener)
+    editButton.removeEventListener('click', editListener)
+    editButton.addEventListener('click', editListener)
   }
+  if (deleteButton) {
+    deleteButton.removeEventListener('click', deleteListener)
+    deleteButton.addEventListener('click', deleteListener)
+  }
+}
+
+function addListener(e) {
+  e.preventDefault()
+  createRoomType()
+}
+
+function editListener(e) {
+  e.preventDefault()
+  editRoomType()
+}
+
+function deleteListener(e) {
+  e.preventDefault()
+  deleteRoomType()
 }
 
 async function setSelectedBedData() {
@@ -167,7 +178,7 @@ async function deleteRoomType() {
     return Swal.fire({
       icon: 'error',
       title: 'Error',
-      text: `${error.message}`,
+      text: `${deleteResponse.message}`,
       showConfirmButton: true,
     })
   }
@@ -217,7 +228,7 @@ async function editRoomType() {
     return Swal.fire({
       icon: 'error',
       title: 'Error',
-      text: `${error.message}`,
+      text: `${updateResponse.message}`,
       showConfirmButton: true,
       confirmButtonColor: '#ff2e63',
     })
