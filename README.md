@@ -34,16 +34,9 @@ Acorda, Balaguer, Catalan, Gerona, Paingas, and Rayos
 
 ## TODO:
 
-![TrollDespair](https://cdn.betterttv.net/emote/6024574d2eae5518bece2ddd/3x)
+![Trollge](https://cdn.frankerfacez.com/emoticon/568539/4)
 
-- Whole App logic
-- Create schemas
-- Create routes
-- Create controllers
-- Create bed monitoring page
-- Create payment monitoring page
-- Correct check-in form check-in date element
-- Correct reservation form check-in date element
+- Fix Reports Styling
 
 ---
 
