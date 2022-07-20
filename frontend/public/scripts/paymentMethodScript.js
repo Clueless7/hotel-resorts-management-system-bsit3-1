@@ -19,8 +19,11 @@ async function dynamicDropDown() {
   response.forEach((data) => {
     const paymentMethodOptions = document.createElement('option')
     if (data.paymentMethodName) {
-      paymentMethodOptions.value = data.paymentMethodName
-      paymentMethodOptions.innerHTML = `${data.paymentMethodName}`
+      paymentMethodOptions.value =
+        data?.paymentMethodName ?? 'Payment method name does not exist'
+      paymentMethodOptions.innerHTML = `${
+        data?.paymentMethodName ?? 'Payment method name does not exist'
+      }`
       paymentMethodDropDown.append(paymentMethodOptions)
     }
   })
@@ -142,8 +145,8 @@ async function createPaymentMethod() {
       : 'true'
 
   const dataPost = {
-    paymentMethodName: paymentMethodNameValue,
-    paymentMethodIsOnline: paymentMethodStatusValue,
+    paymentMethodName: paymentMethodNameValue ?? '',
+    paymentMethodIsOnline: paymentMethodStatusValue ?? '',
   }
 
   const response = await postData(
@@ -181,7 +184,7 @@ async function deletePaymentMethod() {
   paymentMethodResponse.forEach((data) => {
     if (data.paymentMethodName) {
       if (data.paymentMethodName == paymentMethodDropDown.value) {
-        paymentMethodObjectId = data._id
+        paymentMethodObjectId = data?._id ?? ''
       }
     }
   })
@@ -219,7 +222,7 @@ async function editPaymentMethod() {
   paymentMethodResponse.forEach((data) => {
     if (data.paymentMethodName) {
       if (data.paymentMethodName == paymentMethodDropDown.value) {
-        paymentMethodObjectId = data._id
+        paymentMethodObjectId = data?._id ?? ''
       }
     }
   })

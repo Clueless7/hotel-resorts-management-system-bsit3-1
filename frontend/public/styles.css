@@ -264,30 +264,28 @@ section {
 }
 
 /* Style the search field */
-form.searchButton input[type='text'] {
+/* form.searchButton input[type='text'] {
   padding: 5px 5px 5px 20px;
   font-size: 17px;
   border: 1px solid grey;
   float: left;
   width: 80%;
   background: #f1f1f1;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
+  border=-radius: 10px;
+} */
 
 /* Style the submit button */
-form.searchButton button {
+div.searchButton button {
   float: left;
   width: 20%;
-  padding: 5px;
   background: #08d9d6;
   color: #252a34;
-  font-size: 17px;
+  font-size: 1.5rem;
+  font-weight: bold;
   border: 1px solid grey;
   border-left: none; /* Prevent double borders */
   cursor: pointer;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-radius: 10px;
 }
 
 form.searchButton button:hover {
@@ -913,4 +911,14 @@ span.psw {
 .bed-type,
 .service {
   display: none;
+}
+
+input[type='checkbox'] {
+  width: auto;
+  margin: 0;
+}
+
+.servicesContainer {
+  display: flex;
+  align-items: center;
 }

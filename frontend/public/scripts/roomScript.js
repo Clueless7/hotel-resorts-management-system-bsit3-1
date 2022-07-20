@@ -5,7 +5,7 @@ const roomDropDown = document.querySelector('.roomDropDown')
 const roomContainer = document.querySelector('.room-container')
 const roomFormButtonsContainer = document.querySelector('.room')
 const roomFormButtons = document.querySelectorAll('.room button')
-
+let previousBedName
 dynamicDropDown()
 
 async function dynamicDropDown() {
@@ -127,7 +127,7 @@ async function roomBedDynamicDropDown(dropDown) {
 
   response.forEach((data) => {
     const roomBedOption = document.createElement('option')
-    if (data.bedType) {
+    if (data.bedType && data.bedQuantity > 0) {
       roomBedOption.value = `${data.bedType.bedTypeName}`
       roomBedOption.innerHTML = `${data.bedType.bedTypeName}`
       dropDown.append(roomBedOption)
@@ -162,6 +162,9 @@ async function setSelectedRoomData() {
       roomStatusDropDown.value = data.roomIsAvailable
     }
   })
+
+  previousBedName = roomRoomBedDropDown.value
+  console.log(previousBedName)
 }
 
 async function createRoom() {
@@ -179,7 +182,7 @@ async function createRoom() {
   const roomTypes = await getData('http://localhost:3000/api/rooms/types')
   roomTypes.forEach((data) => {
     if (data.roomTypeName.toLowerCase() === roomTypeValue.toLowerCase()) {
-      roomTypeObjectID = data._id
+      roomTypeObjectID = data?._id ?? ''
     }
   })
 
@@ -190,8 +193,8 @@ async function createRoom() {
       if (
         data.bedType.bedTypeName.toLowerCase() === roomBedValue.toLowerCase()
       ) {
-        roomBedObjectID = data._id
-        roomBedData = data
+        roomBedObjectID = data?._id ?? ''
+        roomBedData = data ?? ''
       }
     }
   })
@@ -229,9 +232,9 @@ async function createRoom() {
         'http://localhost:3000/api/beds',
         `${roomBedData._id}`,
         {
-          bedType: roomBedData.bedType._id,
-          bedQuantity: roomBedData.bedQuantity - 1,
-          bedPrice: roomBedData.bedType._id,
+          bedType: roomBedData.bedType?._id ?? '',
+          bedQuantity: roomBedData?.bedQuantity - 1 ?? '',
+          bedPrice: roomBedData.bedType?._id ?? '',
         }
       )
 
@@ -255,10 +258,23 @@ async function deleteRoom() {
   roomResponse.forEach((data) => {
     if (data.roomNumber) {
       if (data.roomNumber == roomDropDown.value) {
-        roomObjectId = data._id
+        roomObjectId = data?._id ?? ''
       }
     }
   })
+  const roomBedValue = document.querySelector("select[name='room-bed']").value
+  let roomBedData
+  const roomBed = await getData('http://localhost:3000/api/beds')
+  roomBed.forEach((data) => {
+    if (data.bedType) {
+      if (
+        data.bedType.bedTypeName.toLowerCase() === roomBedValue.toLowerCase()
+      ) {
+        roomBedData = data ?? ''
+      }
+    }
+  })
+
   const deleteResponse = await deleteData(
     'http://localhost:3000/api/rooms/',
     `${roomObjectId}`
@@ -280,9 +296,30 @@ async function deleteRoom() {
     text: 'Room successfully deleted',
     showConfirmButton: true,
     confirmButtonColor: '#ff2e63',
-  }).then((result) => {
-    location.reload()
   })
+    .then(async (result) => {
+      const incrementBed = await putData(
+        'http://localhost:3000/api/beds',
+        `${roomBedData._id}`,
+        {
+          bedType: roomBedData.bedType?._id ?? '',
+          bedQuantity: roomBedData?.bedQuantity + 1 ?? '',
+          bedPrice: roomBedData.bedType?._id ?? '',
+        }
+      )
+
+      if (incrementBed.message) {
+        return Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: `${incrementBed.message}`,
+          showConfirmButton: true,
+        })
+      }
+    })
+    .then((result) => {
+      location.reload()
+    })
 }
 
 async function editRoom() {
@@ -291,7 +328,7 @@ async function editRoom() {
   roomResponse.forEach((data) => {
     if (data.roomNumber) {
       if (data.roomNumber == roomDropDown.value) {
-        roomObjectId = data._id
+        roomObjectId = data?._id ?? ''
       }
     }
   })
@@ -318,6 +355,9 @@ async function editRoom() {
 
   const roomBeds = await getData('http://localhost:3000/api/beds')
   let roomBedObjectId
+  let roomBedData
+  let prevRoomBedObjectId
+  let prevRoomBedData
 
   roomBeds.forEach((data) => {
     if (data.bedType) {
@@ -326,6 +366,12 @@ async function editRoom() {
         roomBedDropDown.value.toLowerCase()
       ) {
         roomBedObjectId = data._id
+        roomBedData = data
+      } else if (
+        data.bedType.bedTypeName.toLowerCase() === previousBedName.toLowerCase()
+      ) {
+        prevRoomBedObjectId = data._id
+        prevRoomBedData = data
       }
     }
   })
@@ -359,7 +405,48 @@ async function editRoom() {
     text: 'Room successfully updated!',
     showConfirmButton: true,
     confirmButtonColor: '#ff2e63',
-  }).then((result) => {
-    location.reload()
   })
+    .then(async (result) => {
+      const decrementBed = await putData(
+        'http://localhost:3000/api/beds',
+        `${roomBedData._id}`,
+        {
+          bedType: roomBedData.bedType?._id ?? '',
+          bedQuantity: roomBedData?.bedQuantity - 1 ?? '',
+          bedPrice: roomBedData.bedType?._id ?? '',
+        }
+      )
+
+      if (decrementBed.message) {
+        return Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: `${decrementBed.message}`,
+          showConfirmButton: true,
+        })
+      }
+    })
+    .then(async (result) => {
+      const incrementBed = await putData(
+        'http://localhost:3000/api/beds',
+        `${prevRoomBedData._id}`,
+        {
+          bedType: prevRoomBedData.bedType?._id ?? '',
+          bedQuantity: prevRoomBedData?.bedQuantity + 1 ?? '',
+          bedPrice: prevRoomBedData.bedType?._id ?? '',
+        }
+      )
+
+      if (incrementBed.message) {
+        return Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: `${incrementBed.message}`,
+          showConfirmButton: true,
+        })
+      }
+    })
+    .then((result) => {
+      location.reload()
+    })
 }

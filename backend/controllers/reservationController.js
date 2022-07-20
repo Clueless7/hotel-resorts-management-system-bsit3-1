@@ -198,13 +198,11 @@ const createReservation = asyncHandler(async (req, res) => {
   await newReservation.populate({
     path: 'bed',
     select: {
-      _id: 0,
       bedType: 1,
     },
     populate: {
       path: 'roomBed',
       select: {
-        _id: 0,
         bedType: 1,
       },
       populate: [
@@ -292,13 +290,11 @@ const updateReservationById = asyncHandler(async (req, res) => {
   await updatedReservation.populate({
     path: 'roomType',
     select: {
-      _id: 0,
       roomType: 1,
     },
     populate: {
       path: 'roomType',
       select: {
-        _id: 0,
         roomTypeName: 1,
       },
     },
@@ -307,27 +303,23 @@ const updateReservationById = asyncHandler(async (req, res) => {
   await updatedReservation.populate({
     path: 'bed',
     select: {
-      _id: 0,
       bedType: 1,
     },
     populate: {
       path: 'roomBed',
       select: {
-        _id: 0,
         bedType: 1,
       },
       populate: [
         {
           path: 'bedType',
           select: {
-            _id: 0,
             bedTypeName: 1,
           },
         },
         {
           path: 'bedPrice',
           select: {
-            _id: 0,
             bedTypePrice: 1,
           },
         },

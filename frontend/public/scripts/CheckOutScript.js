@@ -1,10 +1,24 @@
-// import fetch.js
-import { getData, postData, putData, deleteData } from './fetch.js'
-// set check in and check out dates
+import { getData, putData, deleteData } from './fetch.js'
+
+// Select dropdowns, update button, and forms
+const transactionIdDropDown = document.querySelector('#transactionId')
+const roomNumberDropDown = document.querySelector('#roomNumber')
+const paymentMethodDropDown = document.querySelector('#paymentMethod')
+const servicesDiv = document.querySelector('#servicesDiv')
+const checkOutButton = document.querySelector(
+  '.form-buttons > button.checkOut-btn'
+)
+const balanceElement = document.querySelector('#balance')
+const durationOfStayElement = document.querySelector('#durationOfStay')
+
+let executed = false
+
+// For duration of days computation
 let today = new Date().toISOString().split('T')[0]
 const checkInDate = document.querySelector('#check-inDate')
 const checkOutDate = document.querySelector('#check-outDate')
 let durationOfStay = document.querySelector('#durationOfStay')
+
 setDates(today, checkInDate, checkOutDate)
 
 function setDates(today, checkInDate, checkOutDate) {
@@ -13,12 +27,10 @@ function setDates(today, checkInDate, checkOutDate) {
     checkOutDate.value = event.target.value
     checkOutDate.setAttribute('min', event.target.value)
     calculateDurationOfStay()
-    // calculateBalance(event, durationOfStay.value)
     calculateBalance2()
   })
   checkOutDate.addEventListener('change', (event) => {
     calculateDurationOfStay()
-    // calculateBalance(event, durationOfStay.value)
     calculateBalance2()
   })
 }
@@ -29,44 +41,33 @@ function calculateDurationOfStay() {
   const diffTime = Math.abs(date2 - date1)
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
   durationOfStay.value = diffDays
-  console.log(diffDays)
 }
-
-// Select elements for dropdowns
-const newCheckInRoomNumberDropDown = document.querySelector('#roomNumber')
-const newCheckInPaymentMethodDropDown = document.querySelector('#paymentMethod')
-const durationOfStayElement = document.querySelector('#durationOfStay')
-const checkInNewForm = document.querySelector('.content form')
-const balanceElement = document.querySelector('#balance')
-const addButton = document.querySelector('.form-buttons > button.add-btn')
-let balance
 dynamicDropDown()
 
-addButton.addEventListener('click', (event) => {
-  event.preventDefault()
-  createReservation()
-  checkInNewForm.reset()
-})
-
-newCheckInRoomNumberDropDown.addEventListener('change', (e) => {
-  calculateBalance2()
-})
-
-// async function calculateBalance(event, dOfStay = 0) {
-//   const allRooms = await getData('http://localhost:3000/api/rooms')
-
-//   allRooms.forEach((data) => {
-//     if (data.roomNumber == event.target.value) {
-//       balance =
-//         (data.roomType ? data.roomType.roomTypePrice : 0) +
-//         (data.roomBed ? data.roomBed.bedPrice.bedTypePrice : 0)
-//     }
-//   })
-//   console.log(dOfStay)
-//   balanceElement.value = balance * dOfStay
-// }
-
 async function calculateBalance2() {
+  const currentRoomIdSelected = roomNumberDropDown.value
+  const servicesResponse = await getData('http://localhost:3000/api/services')
+  const Services = document.querySelectorAll('.servicesContainer input')
+  let checkedServices = []
+
+  Services.forEach((service) => {
+    if (service.checked) {
+      checkedServices.push(service)
+    }
+  })
+
+  let totalServiceBalance = 0
+
+  checkedServices.forEach((checkedService) => {
+    servicesResponse.forEach((data) => {
+      if (data.serviceName) {
+        if (data.serviceName == checkedService.id) {
+          totalServiceBalance += data.servicePrice
+        }
+      }
+    })
+  })
+
   const allRooms = await getData('http://localhost:3000/api/rooms')
   let balance
   let roomPrice
@@ -74,130 +75,196 @@ async function calculateBalance2() {
   let durationOfStay
 
   allRooms.forEach((data) => {
-    if (data.roomNumber == newCheckInRoomNumberDropDown.value) {
-      roomPrice = data.roomType.roomTypePrice ?? 0
-      bedPrice = data.roomBed.bedPrice.bedTypePrice ?? 0
+    if (data._id == currentRoomIdSelected) {
+      roomPrice = data.roomType?.roomTypePrice ?? 0
+      bedPrice = data.roomBed.bedPrice?.bedTypePrice ?? 0
       durationOfStay = durationOfStayElement.value ?? 0
     }
   })
 
-  balance = (roomPrice + bedPrice) * durationOfStay
+  if (totalServiceBalance) {
+    balance = (roomPrice + bedPrice) * durationOfStay + totalServiceBalance
+  } else {
+    balance = (roomPrice + bedPrice) * durationOfStay
+  }
+
   balanceElement.value = balance
 }
 
 calculateBalance2()
 
+// Update the contents of the dropdowns
 async function dynamicDropDown() {
-  const roomNumberResponse = await getData('http://localhost:3000/api/rooms')
-  const paymentMethodResponse = await getData(
+  const transactionIdOptions = await getData(
+    'http://localhost:3000/api/reservations'
+  )
+  const roomOptions = await getData('http://localhost:3000/api/rooms')
+  const paymentMethodsOptions = await getData(
     'http://localhost:3000/api/paymentmethods'
   )
+  const servicesOptions = await getData('http://localhost:3000/api/services')
+  // Create dynamic dropdown for customer name
+  transactionIdOptions.forEach((data) => {
+    const transactionIdOption = document.createElement('option')
+    if (data.customerName && data._id) {
+      transactionIdOption.value = `${data?._id ?? ''}`
+      transactionIdOption.innerHTML = `${data?.customerName ?? ''}`
+      transactionIdDropDown.append(transactionIdOption)
+    }
+  })
 
-  roomNumberResponse.forEach((data) => {
-    const newCheckInRoomNumberOption = document.createElement('option')
-    if (data.roomNumber) {
-      if (data.roomIsAvailable === true) {
-        newCheckInRoomNumberOption.value = `${data.roomNumber}`
-        newCheckInRoomNumberOption.innerHTML = `${data.roomNumber}`
-        newCheckInRoomNumberDropDown.append(newCheckInRoomNumberOption)
+  // Create dynamic dropdown for room numbers
+  roomOptions.forEach((data) => {
+    const roomOption = document.createElement('option')
+    if (data.roomNumber && data._id) {
+      // Only show available rooms
+      if (data.roomIsAvailable) {
+        roomOption.value = `${data?._id ?? ''}`
+        roomOption.innerHTML = `${data?.roomNumber ?? ''}`
+        roomNumberDropDown.append(roomOption)
       }
     }
   })
 
-  paymentMethodResponse.forEach((data) => {
-    const newCheckInPaymentMethodOption = document.createElement('option')
-    if (data.paymentMethodName) {
-      newCheckInPaymentMethodOption.value = `${data.paymentMethodName}`
-      newCheckInPaymentMethodOption.innerHTML = `${data.paymentMethodName}`
-      newCheckInPaymentMethodDropDown.append(newCheckInPaymentMethodOption)
+  // Create dynamic dropdown for payment methods
+  paymentMethodsOptions.forEach((data) => {
+    const paymentMethodsOption = document.createElement('option')
+    if (data.paymentMethodName && data._id) {
+      paymentMethodsOption.value = `${data?._id ?? ''}`
+      paymentMethodsOption.innerHTML = `${
+        data?.paymentMethodName ?? 'Payment method name does not exist'
+      }`
+      paymentMethodDropDown.append(paymentMethodsOption)
     }
   })
+
+  // Create Dynamic Checkbox for services
+  servicesOptions.forEach((data) => {
+    const servicesContainer = document.createElement('div')
+    servicesContainer.classList.add('servicesContainer')
+    const servicesLabel = document.createElement('label')
+    const servicesCheckbox = document.createElement('input')
+    servicesCheckbox.setAttribute('type', 'checkbox')
+    if (data.serviceName) {
+      servicesLabel.setAttribute('for', `${data.serviceName}`)
+      servicesLabel.innerHTML = `${data.serviceName}`
+      servicesCheckbox.id = `${data.serviceName}`
+      servicesCheckbox.name = `${data.serviceName}`
+      servicesCheckbox.addEventListener('change', checkBoxListener)
+      servicesContainer.append(servicesCheckbox)
+      servicesContainer.append(servicesLabel)
+      servicesDiv.append(servicesContainer)
+    }
+  })
+
+  addCurrentEditUserInfo()
+
+  transactionIdDropDown.addEventListener('change', addCurrentEditUserInfo)
+  roomNumberDropDown.addEventListener('change', calculateBalance2)
 }
 
-// create a reservation
-
-async function createReservation() {
-  const customerNameValue = document.querySelector(
-    "input[name='customerName']"
-  ).value
-  const contactNumberValue = document.querySelector(
-    "input[name='contactNumber']"
-  ).value
-  const emailValue = document.querySelector("input[name='email']").value
-  const genderValue = document.querySelector("select[name='gender']").value
-  const addressValue = document.querySelector("input[name='address']").value
-  const roomNumberValue = document.querySelector(
-    "select[name='roomNumber']"
-  ).value
-  let roomObjectId
-  const checkInDateValue = document.querySelector(
-    "input[name='check-inDate']"
-  ).value
-  const checkOutDateValue = document.querySelector(
-    "input[name='check-outDate']"
-  ).value
-  const durationOfStayValue = document.querySelector(
-    "input[name='durationOfStay']"
-  ).value
-  const paymentMethodValue = document.querySelector(
-    "select[name='paymentMethod']"
-  ).value
-  let paymentMethodId
-  const balanceValue = document.querySelector("input[name='balance']").value
-  let roomData
-
-  const roomResponse = await getData('http://localhost:3000/api/rooms')
-  const paymentMethodResponse = await getData(
-    'http://localhost:3000/api/paymentmethods'
-  )
-
-  roomResponse.forEach((data) => {
-    if (data.roomNumber) {
-      if (data.roomNumber == roomNumberValue) {
-        roomObjectId = data._id
-        roomData = data
-      }
-    }
-  })
-
-  paymentMethodResponse.forEach((data) => {
-    if (data.paymentMethodName) {
-      if (
-        data.paymentMethodName.toLowerCase() ===
-        paymentMethodValue.toLowerCase()
-      ) {
-        paymentMethodId = data._id
-      }
-    }
-  })
-
-  const dataPost = {
-    customerName: customerNameValue,
-    contactNumber: contactNumberValue,
-    email: emailValue,
-    gender: genderValue,
-    address: addressValue,
-    roomNumber: roomObjectId, //ObjectId
-    roomType: roomObjectId, //ObjectId
-    roomBed: roomObjectId, //ObjectId
-    checkInDate: checkInDateValue,
-    checkOutDate: checkOutDateValue,
-    durationOfStay: durationOfStayValue,
-    balance: balanceValue,
-    paymentMethod: paymentMethodId,
+function checkBoxListener(e) {
+  e.preventDefault
+  if (this.checked) {
+    console.log('checked')
+    calculateBalance2()
+  } else {
+    console.log('unchecked')
+    calculateBalance2()
   }
+}
 
-  const response = await postData(
-    'http://localhost:3000/api/reservations/',
-    dataPost
+async function addCurrentEditUserInfo() {
+  if (!executed) {
+    executed = true
+  }
+  roomNumberDropDown.removeChild(roomNumberDropDown.firstElementChild)
+
+  const transactionIdValue = document.querySelector('#transactionId').value
+  const customerNameElement = document.querySelector('#customerName')
+  const contactNumberElement = document.querySelector('#contactNumber')
+  const emailElement = document.querySelector('#email')
+  const genderElement = document.querySelector('#gender')
+  const addressElement = document.querySelector('#address')
+  const roomNumberElement = document.querySelector('#roomNumber')
+  const checkInDateElement = document.querySelector('#check-inDate')
+  const checkOutDateElement = document.querySelector('#check-outDate')
+  const durationOfStayElement = document.querySelector('#durationOfStay')
+  const paymentMethodElement = document.querySelector('#paymentMethod')
+  const balanceElement = document.querySelector('#balance')
+
+  const reservationUser = await getData(
+    'http://localhost:3000/api/reservations',
+    `${transactionIdValue}`
   )
 
-  if (response.message) {
+  customerNameElement.value = `${
+    reservationUser.customerName
+      ? reservationUser.customerName
+      : 'Customer name does not exist'
+  }`
+  contactNumberElement.value = `${
+    reservationUser.contactNumber
+      ? reservationUser.contactNumber
+      : 'Contact number does not exist'
+  }`
+  emailElement.value = `${
+    reservationUser.email ? reservationUser.email : 'Email does not exist'
+  }`
+  genderElement.value = `${
+    reservationUser.gender ? reservationUser.gender : 'Gender does not exist'
+  }`
+  addressElement.value = `${
+    reservationUser.address ? reservationUser.address : 'Address not exist'
+  }`
+  roomNumberElement.value = `${
+    reservationUser.roomNumber?.roomNumber
+      ? reservationUser.roomNumber.roomNumber
+      : 'Room number does not exist'
+  }`
+  checkInDateElement.valueAsDate = new Date(`${reservationUser.checkInDate}`)
+  checkOutDateElement.valueAsDate = new Date(`${reservationUser.checkOutDate}`)
+  durationOfStayElement.value = `${
+    reservationUser.durationOfStay
+      ? reservationUser.durationOfStay
+      : 'Duration of stay does not exist'
+  }`
+  paymentMethodElement.value = `${
+    reservationUser.paymentMethod
+      ? reservationUser.paymentMethod
+      : 'Payment method does not exist'
+  }`
+  balanceElement.value = `${
+    reservationUser.balance ? reservationUser.balance : 'Balance does not exist'
+  }`
+
+  const roomOption = document.createElement('option')
+  roomOption.value = `${reservationUser.roomNumber?._id}`
+  roomOption.innerHTML = `Current Room - ${
+    reservationUser.roomNumber?.roomNumber ?? 'Room number does not exist'
+  }`
+  roomNumberDropDown.prepend(roomOption)
+}
+
+checkOutButton.addEventListener('click', (e) => {
+  e.preventDefault()
+  checkOutReservation()
+})
+
+async function checkOutReservation() {
+  const transactionIdValue = document.querySelector('#transactionId').value
+  const deleteResponse = await deleteData(
+    'http://localhost:3000/api/reservations/',
+    `${transactionIdValue}`
+  )
+
+  if (deleteResponse.message) {
     return Swal.fire({
       icon: 'error',
       title: 'Error',
-      text: `${response.message}`,
+      text: `${error.message}`,
       showConfirmButton: true,
+      confirmButtonColor: '#ff2e63',
     })
   }
 
@@ -205,34 +272,44 @@ async function createReservation() {
     icon: 'success',
     iconColor: '#54bab9',
     title: 'Success!',
-    text: 'Reservation successfully Added',
+    text: 'CheckOut Successful',
     showConfirmButton: true,
     confirmButtonColor: '#ff2e63',
+  }).then((result) => {
+    location.reload()
   })
-    .then(async (result) => {
-      const isAvailable = 'false'
+  setRoomToAvailable()
+}
 
-      const updateRoomIsAvailable = await putData(
-        'http://localhost:3000/api/rooms/',
-        `${roomObjectId}`,
-        {
-          roomNumber: roomData.roomNumber,
-          roomIsAvailable: isAvailable,
-          roomType: roomData.roomType._id,
-          roomBed: roomData.roomBed._id,
-        }
-      )
+async function setRoomToAvailable() {
+  const transactionIdValue = document.querySelector('#transactionId').value
 
-      if (updateRoomIsAvailable.message) {
-        return Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: `${response.message}`,
-          showConfirmButton: true,
-        })
-      }
-    })
-    .then((result) => {
-      location.reload()
-    })
+  const customerInfo = await getData(
+    'http://localhost:3000/api/reservations',
+    `${transactionIdValue}`
+  )
+
+  const roomObjectId = customerInfo.roomNumber?._id ?? ''
+  const roomNumber = customerInfo.roomNumber?.roomNumber ?? ''
+  const roomTypeObjectId = customerInfo.roomNumber.roomType?._id ?? ''
+  const roomBedObjectId = customerInfo.roomNumber?.roomBed ?? ''
+
+  const newRoomData = {
+    roomNumber,
+    roomIsAvailable: 'true',
+    roomType: roomTypeObjectId,
+    roomBed: roomBedObjectId,
+  }
+
+  const editedRoom = await putData(
+    'http://localhost:3000/api/rooms',
+    `${roomObjectId}`,
+    newRoomData
+  )
+
+  if (editedRoom.message) {
+    throw new Error(
+      'Cannot add the bed quantity and make room status to available'
+    )
+  }
 }

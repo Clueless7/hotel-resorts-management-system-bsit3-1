@@ -97,8 +97,10 @@ async function dynamicDropDown() {
     const newCheckInRoomNumberOption = document.createElement('option')
     if (data.roomNumber) {
       if (data.roomIsAvailable === true) {
-        newCheckInRoomNumberOption.value = `${data.roomNumber}`
-        newCheckInRoomNumberOption.innerHTML = `${data.roomNumber}`
+        newCheckInRoomNumberOption.value = `${data?.roomNumber ?? ''}`
+        newCheckInRoomNumberOption.innerHTML = `${
+          data?.roomNumber ?? 'Room number does not exist'
+        }`
         newCheckInRoomNumberDropDown.append(newCheckInRoomNumberOption)
       }
     }
@@ -107,8 +109,10 @@ async function dynamicDropDown() {
   paymentMethodResponse.forEach((data) => {
     const newCheckInPaymentMethodOption = document.createElement('option')
     if (data.paymentMethodName) {
-      newCheckInPaymentMethodOption.value = `${data.paymentMethodName}`
-      newCheckInPaymentMethodOption.innerHTML = `${data.paymentMethodName}`
+      newCheckInPaymentMethodOption.value = `${data?.paymentMethodName ?? ''}`
+      newCheckInPaymentMethodOption.innerHTML = `${
+        data?.paymentMethodName ?? 'Payment method does not exist'
+      }`
       newCheckInPaymentMethodDropDown.append(newCheckInPaymentMethodOption)
     }
   })
@@ -154,8 +158,8 @@ async function createReservation() {
   roomResponse.forEach((data) => {
     if (data.roomNumber) {
       if (data.roomNumber == roomNumberValue) {
-        roomObjectId = data._id
-        roomData = data
+        roomObjectId = data?._id ?? ''
+        roomData = data ?? ''
       }
     }
   })
@@ -166,7 +170,7 @@ async function createReservation() {
         data.paymentMethodName.toLowerCase() ===
         paymentMethodValue.toLowerCase()
       ) {
-        paymentMethodId = data._id
+        paymentMethodId = data?._id ?? ''
       }
     }
   })
