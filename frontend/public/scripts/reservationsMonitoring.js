@@ -47,9 +47,11 @@ response.forEach((data, index) => {
   }</td>
   <td>${data.balance ? data.balance : 'Balance does not exist'}</td>
 `
-  if (new Date(data.checkInDate) > new Date(Date.now())) {
-    tbody[1].appendChild(tableRowData)
-  } else {
-    tbody[0].appendChild(tableRowData)
+  if (new Date(data.checkOutDate) >= new Date(Date.now())) {
+    if (new Date(data.checkInDate) > new Date(Date.now())) {
+      tbody[1].appendChild(tableRowData)
+    } else {
+      tbody[0].appendChild(tableRowData)
+    }
   }
 })

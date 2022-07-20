@@ -71,8 +71,8 @@ async function calculateBalance2() {
 
   allRooms.forEach((data) => {
     if (data._id == currentRoomIdSelected) {
-      roomPrice = data.roomType.roomTypePrice ?? 0
-      bedPrice = data.roomBed.bedPrice.bedTypePrice ?? 0
+      roomPrice = data.roomType?.roomTypePrice ?? 0
+      bedPrice = data.roomBed.bedPrice?.bedTypePrice ?? 0
       durationOfStay = durationOfStayElement.value ?? 0
     }
   })
@@ -96,10 +96,14 @@ async function dynamicDropDown() {
   // Create dynamic dropdown for customer name
   transactionIdOptions.forEach((data) => {
     const transactionIdOption = document.createElement('option')
-    if (data.customerName && data._id) {
-      transactionIdOption.value = `${data._id}`
-      transactionIdOption.innerHTML = `${data.customerName}`
-      transactionIdDropDown.append(transactionIdOption)
+    if (data.customerName && data?._id) {
+      transactionIdOption.value = `${data?._id ?? ''}`
+      transactionIdOption.innerHTML = `${
+        data?.customerName ?? 'Customer name does not exist'
+      }`
+      if (new Date(data.checkOutDate) >= new Date(Date.now())) {
+        transactionIdDropDown.append(transactionIdOption)
+      }
     }
   })
 
@@ -109,8 +113,10 @@ async function dynamicDropDown() {
     if (data.roomNumber && data._id) {
       // Only show available rooms
       if (data.roomIsAvailable) {
-        roomOption.value = `${data._id}`
-        roomOption.innerHTML = `${data.roomNumber}`
+        roomOption.value = `${data?._id ?? ''}`
+        roomOption.innerHTML = `${
+          data?.roomNumber ?? 'Room number does not exist'
+        }`
         roomNumberDropDown.append(roomOption)
       }
     }
@@ -120,8 +126,10 @@ async function dynamicDropDown() {
   paymentMethodsOptions.forEach((data) => {
     const paymentMethodsOption = document.createElement('option')
     if (data.paymentMethodName && data._id) {
-      paymentMethodsOption.value = `${data._id}`
-      paymentMethodsOption.innerHTML = `${data.paymentMethodName}`
+      paymentMethodsOption.value = `${data?._id ?? ''}`
+      paymentMethodsOption.innerHTML = `${
+        data?.paymentMethodName ?? 'Payment method name does not exist'
+      }`
       paymentMethodDropDown.append(paymentMethodsOption)
     }
   })
@@ -212,6 +220,8 @@ updateButton.addEventListener('click', (e) => {
 
 // Get all values then call fetch
 async function updateData() {
+  setRoomToAvailable()
+
   const transactionIdValue = document.querySelector('#transactionId').value
   const customerNameValue = document.querySelector('#customerName').value
   const contactNumberValue = document.querySelector('#contactNumber').value
@@ -250,19 +260,15 @@ async function updateData() {
     `${roomNumberValue}`
   )
 
-  roomNumber = roomInfo.roomNumber
-  roomTypeId = roomInfo.roomType._id
-  roomBedId = roomInfo.roomBed._id
-
-  console.log(roomNumber)
-  console.log(roomTypeId)
-  console.log(roomBedId)
+  roomNumber = roomInfo?.roomNumber ?? ''
+  roomTypeId = roomInfo.roomType?._id ?? ''
+  roomBedId = roomInfo.roomBed?._id ?? ''
 
   if (roomInfo.message) {
     return Swal.fire({
       icon: 'error',
       title: 'Error',
-      text: `${response.message}`,
+      text: `${roomInfo.message}`,
       showConfirmButton: true,
       confirmButtonColor: '#ff2e63',
     })
@@ -352,4 +358,71 @@ async function deleteReservation() {
   }).then((result) => {
     location.reload()
   })
+}
+
+// async function addBedQuantity() {
+//   const transactionIdValue = document.querySelector('#transactionId').value
+
+//   const customerInfo = await getData(
+//     'http://localhost:3000/api/reservations',
+//     `${transactionIdValue}`
+//   )
+
+//   const roomBedObjectId = customerInfo.roomNumber?.roomBed ?? ''
+
+//   const roomBedInfo = await getData(
+//     'http://localhost:3000/api/beds',
+//     `${roomBedObjectId}`
+//   )
+
+//   const newBedData = {
+//     bedType: roomBedInfo.bedType?._id ?? '',
+//     bedQuantity: roomBedInfo?.bedQuantity + 1 ?? '',
+//     bedPrice: roomBedInfo.bedType?._id ?? '',
+//   }
+
+//   const editedBed = await putData(
+//     'http://localhost:3000/api/beds',
+//     `${roomBedObjectId}`,
+//     newBedData
+//   )
+
+//   if (editedBed.message) {
+//     throw new Error(
+//       'Cannot add the bed quantity and make room status to available'
+//     )
+//   }
+// }
+
+async function setRoomToAvailable() {
+  const transactionIdValue = document.querySelector('#transactionId').value
+
+  const customerInfo = await getData(
+    'http://localhost:3000/api/reservations',
+    `${transactionIdValue}`
+  )
+
+  const roomObjectId = customerInfo.roomNumber?._id ?? ''
+  const roomNumber = customerInfo.roomNumber?.roomNumber ?? ''
+  const roomTypeObjectId = customerInfo.roomNumber.roomType?._id ?? ''
+  const roomBedObjectId = customerInfo.roomNumber?.roomBed ?? ''
+
+  const newRoomData = {
+    roomNumber,
+    roomIsAvailable: 'true',
+    roomType: roomTypeObjectId,
+    roomBed: roomBedObjectId,
+  }
+
+  const editedRoom = await putData(
+    'http://localhost:3000/api/rooms',
+    `${roomObjectId}`,
+    newRoomData
+  )
+
+  if (editedRoom.message) {
+    throw new Error(
+      'Cannot add the bed quantity and make room status to available'
+    )
+  }
 }

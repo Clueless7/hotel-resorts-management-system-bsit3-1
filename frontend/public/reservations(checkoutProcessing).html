@@ -10,6 +10,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <script type="module" src="./scripts/CheckOutScript.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./scripts/disableEnter.js"></script>
     <title>Hotel Management System</title>
@@ -62,6 +63,8 @@
                 <div class="leftFieldSet">
                   <fieldset>
                     <legend>Customer's Information</legend>
+                    <label for="transactionId">Customer Name</label>
+                    <select name="transactionId" id="transactionId"></select>
                     <label for="customerName">Customer Name</label>
                     <input type="text" id="customerName" name="customerName" />
                     <label for="contactNumber">Contact Number</label>
@@ -74,24 +77,16 @@
                     <input type="email" id="email" name="email" />
                     <label for="gender">Gender</label>
                     <select id="gender" name="gender">
-                      <option value="0">Select Gender:</option>
-                      <option value="1">Male</option>
-                      <option value="2">Female</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Others">Others</option>
                     </select>
                     <label for="address">Address</label>
                     <input type="text" id="address" name="address" />
                   </fieldset>
 
-                  <fieldset>
-                    <legend>Bedroom Information</legend>
-                    <label for="bedInfo">Bed Type:</label>
-                    <select id="bedInfo" name="bedInfo">
-                      <option value="0">Select Bed Type:</option>
-                      <option value="1">King</option>
-                      <option value="2">Queen</option>
-                      <option value="3">Twin</option>
-                      <option value="4">Twin XL</option>
-                    </select>
+                  <fieldset id="servicesDiv">
+                    <legend>Services Availed</legend>
                   </fieldset>
                 </div>
 
@@ -100,22 +95,7 @@
                     <legend>Room Information</legend>
                     <label for="roomNumber">Room Number</label>
                     <select id="roomNumber" name="roomNumber">
-                      <option value="0">Select Room Number:</option>
-                      <option value="1">Room 1001</option>
-                      <option value="2">Room 1002</option>
-                      <option value="3">Room 1003</option>
-                      <option value="4">Room 2001</option>
-                      <option value="5">Room 2002</option>
-                      <option value="6">Room 2003</option>
-                      <option value="7">Room 3001</option>
-                      <option value="8">Room 3002</option>
-                      <option value="9">Room 3003</option>
-                    </select>
-                    <label for="roomType">Room Type</label>
-                    <select id="roomType" name="roomType">
-                      <option value="0">Select Room Type:</option>
-                      <option value="1">Premium</option>
-                      <option value="2">Regular</option>
+                      <option value="-">-</option>
                     </select>
                   </fieldset>
                   <fieldset>
@@ -133,17 +113,15 @@
                       type="number"
                       id="durationOfStay"
                       name="durationOfStay"
+                      disabled
                     />
                   </fieldset>
                   <label for="paymentMethod">Payment Method</label>
                   <select id="paymentMethod" name="paymentMethod">
-                    <option value="0">Select Payment Method:</option>
-                    <option value="1">Cash/Over The Counter</option>
-                    <option value="2">GCash</option>
-                    <option value="3">Bank Transfer</option>
+                    <option value="-">-</option>
                   </select>
                   <label for="balance">Balance</label>
-                  <input type="number" id="balance" name="balance" />
+                  <input type="number" id="balance" name="balance" disabled />
                 </div>
               </div>
               <div class="form-buttons">

@@ -13,8 +13,12 @@ async function dynamicDropDown() {
   response.forEach((data) => {
     const roomBedOptions = document.createElement('option')
     if (data.bedType) {
-      roomBedOptions.value = data.bedType.bedTypeName
-      roomBedOptions.innerHTML = `${data.bedType.bedTypeName}`
+      roomBedOptions.value = `${
+        data.bedType?.bedTypeName ?? 'Bed name does not exist'
+      }`
+      roomBedOptions.innerHTML = `${
+        data.bedType?.bedTypeName ?? 'Bed type name does not exist'
+      }`
       roomBedDropDown.append(roomBedOptions)
     }
   })
@@ -143,7 +147,7 @@ async function createRoomBed() {
   roomBedTypes.forEach((data) => {
     if (data.bedTypeName) {
       if (data.bedTypeName.toLowerCase() === roomBedTypeValue.toLowerCase()) {
-        roomBedTypeObjectId = data._id
+        roomBedTypeObjectId = data?._id ?? ''
       }
     }
   })
@@ -182,7 +186,7 @@ async function deleteRoomBed() {
   roomBedResponse.forEach((data) => {
     if (data.bedType) {
       if (data.bedType.bedTypeName == roomBedDropDown.value) {
-        roomBedObjectId = data._id
+        roomBedObjectId = data?._id ?? ''
       }
     }
   })
@@ -217,7 +221,7 @@ async function editRoomBed() {
   roomBedResponse.forEach((data) => {
     if (data.bedType) {
       if (data.bedType.bedTypeName == roomBedDropDown.value) {
-        roomBedObjectId = data._id
+        roomBedObjectId = data?._id ?? ''
       }
     }
   })
@@ -235,7 +239,7 @@ async function editRoomBed() {
   roomBedTypes.forEach((data) => {
     if (data.bedTypeName) {
       if (data.bedTypeName.toLowerCase() === roomBedTypeValue.toLowerCase()) {
-        roomBedTypeObjectId = data._id
+        roomBedTypeObjectId = data?._id ?? ''
       }
     }
   })

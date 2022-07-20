@@ -121,8 +121,8 @@ async function createService() {
   ).value
 
   const dataPost = {
-    serviceName: serviceNameValue,
-    servicePrice: servicePriceValue,
+    serviceName: serviceNameValue ?? '',
+    servicePrice: servicePriceValue ?? '',
   }
 
   const response = await postData(
@@ -194,7 +194,7 @@ async function editService() {
   serviceResponse.forEach((data) => {
     if (data.serviceName) {
       if (data.serviceName == serviceDropDown.value) {
-        editServiceObjectId = data._id
+        editServiceObjectId = data._id ?? ''
       }
     }
   })
@@ -207,8 +207,8 @@ async function editService() {
   ).value
 
   const dataPost = {
-    serviceName: serviceNameValue,
-    servicePrice: servicePriceValue,
+    serviceName: serviceNameValue ?? '',
+    servicePrice: servicePriceValue ?? '',
   }
 
   const updateResponse = await putData(

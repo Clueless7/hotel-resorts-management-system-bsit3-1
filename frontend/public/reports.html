@@ -12,6 +12,9 @@
     />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./scripts/disableEnter.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+    <script type="module" defer src="./scripts/reports.js"></script>
     <title>Hotel Management System</title>
   </head>
   <body>
@@ -49,9 +52,54 @@
       <section>
         <div class="content-container">
           <!-- Search and manage here -->
-          <div class="monitoring-menu">reports here</div>
-          <div class="content">
-            <!-- table here -->
+          <div class="monitoring-menu">
+            <button class="btn-group-tabs" id="reservations-report">
+              Reservations report
+            </button>
+            <button class="btn-group-tabs" id="rooms-report">
+              Rooms report
+            </button>
+          </div>
+          <div class="content" style="display: none">
+            <div class="table-container">
+              <table class="table" id="reservations-table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Transaction ID</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Room Number</th>
+                    <th scope="col">Room Type</th>
+                    <th scope="col">Contact Number</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Check-In Date</th>
+                    <th scope="col">Check-Out Date</th>
+                    <th scope="col">Duration of Stay</th>
+                    <th scope="col">Payment Method</th>
+                    <th scope="col">Balance</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <br />
+            <div class="table-container">
+              <table class="table" id="rooms-table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Room Number</th>
+                    <th scope="col">Room Type</th>
+                    <th scope="col">Room Bed</th>
+                    <th scope="col">Room Status</th>
+                    <th scope="col">Room Price</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>

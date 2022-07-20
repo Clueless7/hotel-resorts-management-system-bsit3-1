@@ -15,7 +15,7 @@ const getBedTypeWithId = asyncHandler(async (req, res) => {
   const bedtype = await BedType.findById(req.params.id)
 
   if (!bedtype) {
-    res.send(404)
+    res.status(404)
     throw new Error('Bed Type not found')
   }
 

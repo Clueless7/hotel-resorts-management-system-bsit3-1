@@ -13,8 +13,8 @@ async function dynamicDropDown() {
   response.forEach((data) => {
     const roomTypeOptions = document.createElement('option')
     if (data.roomTypeName) {
-      roomTypeOptions.value = data.roomTypeName
-      roomTypeOptions.innerHTML = `${data.roomTypeName}`
+      roomTypeOptions.value = data?.roomTypeName ?? ''
+      roomTypeOptions.innerHTML = `${data?.roomTypeName ?? ''}`
       roomTypeDropDown.append(roomTypeOptions)
     }
   })
@@ -112,9 +112,9 @@ async function setSelectedBedData() {
   selectedRoomTypeInfo.forEach((data) => {
     if (data.roomTypeName == selectedRoomTypeNameValue) {
       roomTypeNameInputElement.value =
-        data.roomTypeName ?? 'Room type name does not exist'
+        data?.roomTypeName ?? 'Room type name does not exist'
       roomTypePriceInputElement.value =
-        data.roomTypePrice ?? 'Room price does not exist'
+        data?.roomTypePrice ?? 'Room price does not exist'
     }
   })
 }
@@ -166,7 +166,7 @@ async function deleteRoomType() {
   roomTypeResponse.forEach((data) => {
     if (data.roomTypeName) {
       if (data.roomTypeName == roomTypeDropDown.value) {
-        roomTypeObjectId = data._id
+        roomTypeObjectId = data?._id ?? ''
       }
     }
   })
@@ -203,7 +203,7 @@ async function editRoomType() {
   roomTypeResponse.forEach((data) => {
     if (data.roomTypeName) {
       if (data.roomTypeName == roomTypeDropDown.value) {
-        roomTypeObjectId = data._id
+        roomTypeObjectId = data._id ?? ''
       }
     }
   })
