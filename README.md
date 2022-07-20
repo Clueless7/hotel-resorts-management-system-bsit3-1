@@ -26,9 +26,8 @@ Acorda, Balaguer, Catalan, Gerona, Paingas, and Rayos
 
 ## Reports
 
-1. Daily Report
-2. Weekly Report
-3. Monthly Report
+1. Reservation Reports
+2. Rooms Reports
 
 ---
 
