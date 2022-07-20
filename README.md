@@ -17,7 +17,10 @@ Acorda, Balaguer, Catalan, Gerona, Paingas, and Rayos
 
 1. Room
 2. Bed
-3. Payment
+3. Room Types
+4. Bed Types
+5. Reservation
+6. Payment
 
 ## Transaction
 
