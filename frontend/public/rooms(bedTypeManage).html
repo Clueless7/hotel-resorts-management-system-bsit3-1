@@ -12,11 +12,7 @@
     />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./scripts/disableEnter.js"></script>
-    <script
-      type="module"
-      defer
-      src="./scripts/paymentMethodMonitoring.js"
-    ></script>
+    <script type="module" src="./scripts/bedTypeScript.js" defer></script>
     <title>Hotel Management System</title>
   </head>
   <body>
@@ -43,6 +39,7 @@
         </header>
         <nav class="nav">
           <ul>
+            <li></li>
             <li>
               <a href="./rooms(roomNumTable).html">Rooms</a>
             </li>
@@ -50,52 +47,61 @@
               <a href="./rooms(roomTypeTable).html">Room Type</a>
             </li>
             <li>
-              <a href="./rooms(bedAttributesTable).html">Room Bed</a>
+              <a href="./rooms(bedAttributesTable).html" class="active"
+                >Room Bed</a
+              >
             </li>
             <li>
-              <a href="./rooms(paymentTable).html" class="active"
-                >Payment Method</a
-              >
+              <a href="./rooms(paymentTable).html">Payment Method</a>
             </li>
           </ul>
         </nav>
       </div>
       <section>
         <div class="content-container">
+          <h1>Bed Types Maintenance</h1>
           <!-- Search and manage here -->
+
           <div class="monitoring-menu">
-            <div class="searchBar">
-              <div class="searchButton">
-                <a href="./rooms(paymentTable).html">
-                  <button>⟳</button>
-                </a>
-              </div>
+            <!-- menu here -->
+            <div>
+              <form></form>
             </div>
-            <a href="./rooms(paymentManage).html">
-              <button type="button" class="btn-group-tabs">MANAGE</button>
-            </a>
+            <div></div>
           </div>
           <div class="content">
             <!-- table here -->
-            <div class="table-container">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Payment Method</th>
-                    <th scope="col">Status</th>
-                  </tr>
-                </thead>
+            <form>
+              <label for="bedtype">Bed Type:</label>
+              <select class="bedTypeDropDown">
+                <option value="-">-</option></select
+              ><br />
 
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+              <div class="bedType-container"></div>
+
+              <div class="newroom-btn-group bed-type">
+                <a href="./rooms(bedAttributesManage).html">
+                  <button type="button" class="newroom-btn" id="BACK">
+                    BACK
+                  </button>
+                </a>
+                <a>
+                  <button type="reset" class="newroom-btn" id="RESET">
+                    RESET
+                  </button>
+                </a>
+                <a>
+                  <button type="submit" class="newroom-btn" id="DELETE">
+                    DELETE
+                  </button>
+                </a>
+                <a>
+                  <button type="submit" class="newroom-btn" id="EDIT">
+                    EDIT
+                  </button>
+                </a>
+              </div>
+            </form>
           </div>
         </div>
       </section>
