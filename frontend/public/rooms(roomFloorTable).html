@@ -12,11 +12,6 @@
     />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./scripts/disableEnter.js"></script>
-    <script
-      type="module"
-      defer
-      src="./scripts/paymentMethodMonitoring.js"
-    ></script>
     <title>Hotel Management System</title>
   </head>
   <body>
@@ -43,19 +38,23 @@
         </header>
         <nav class="nav">
           <ul>
+            <li></li>
             <li>
               <a href="./rooms(roomNumTable).html">Rooms</a>
+            </li>
+            <li>
+              <a href="./rooms(roomFloorTable).html" class="active"
+                >Room Floor</a
+              >
             </li>
             <li>
               <a href="./rooms(roomTypeTable).html">Room Type</a>
             </li>
             <li>
-              <a href="./rooms(bedAttributesTable).html">Room Bed</a>
+              <a href="./rooms(bedTypeTable).html">Bed Type</a>
             </li>
             <li>
-              <a href="./rooms(paymentTable).html" class="active"
-                >Payment Method</a
-              >
+              <a href="./rooms(paymentTable).html">Payment Method</a>
             </li>
           </ul>
         </nav>
@@ -65,13 +64,12 @@
           <!-- Search and manage here -->
           <div class="monitoring-menu">
             <div class="searchBar">
-              <div class="searchButton">
-                <a href="./rooms(paymentTable).html">
-                  <button>⟳</button>
-                </a>
-              </div>
+              <form class="searchButton">
+                <input type="text" placeholder="Search.." name="search" />
+                <button type="submit"><i class="fa fa-search"></i></button>
+              </form>
             </div>
-            <a href="./rooms(paymentManage).html">
+            <a href="./rooms(roomFloorManage).html">
               <button type="button" class="btn-group-tabs">MANAGE</button>
             </a>
           </div>
@@ -82,16 +80,18 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Payment Method</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Room Floor</th>
                   </tr>
                 </thead>
 
                 <tbody>
                   <tr>
                     <td>1</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
+                    <td>First Floor</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Second Floor</td>
                   </tr>
                 </tbody>
               </table>

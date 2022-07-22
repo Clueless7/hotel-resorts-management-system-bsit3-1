@@ -12,11 +12,6 @@
     />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./scripts/disableEnter.js"></script>
-    <script
-      type="module"
-      defer
-      src="./scripts/paymentMethodMonitoring.js"
-    ></script>
     <title>Hotel Management System</title>
   </head>
   <body>
@@ -26,7 +21,7 @@
         <a href="./rooms(roomNumTable).html">
           <button type="button" class="active">Rooms</button>
         </a>
-        <a href="./reservations(checkinTable).html"
+        <a href="./reservations(reservationTable).html"
           ><button type="button">Reservations</button></a
         >
         <a href="./services.html"><button type="button">Services</button></a>
@@ -50,12 +45,10 @@
               <a href="./rooms(roomTypeTable).html">Room Type</a>
             </li>
             <li>
-              <a href="./rooms(bedAttributesTable).html">Room Bed</a>
+              <a href="./rooms(bedTypeTable).html">Room Bed</a>
             </li>
             <li>
-              <a href="./rooms(paymentTable).html" class="active"
-                >Payment Method</a
-              >
+              <a href="./rooms(paymentTable).html">Payment Method</a>
             </li>
           </ul>
         </nav>
@@ -63,18 +56,6 @@
       <section>
         <div class="content-container">
           <!-- Search and manage here -->
-          <div class="monitoring-menu">
-            <div class="searchBar">
-              <div class="searchButton">
-                <a href="./rooms(paymentTable).html">
-                  <button>⟳</button>
-                </a>
-              </div>
-            </div>
-            <a href="./rooms(paymentManage).html">
-              <button type="button" class="btn-group-tabs">MANAGE</button>
-            </a>
-          </div>
           <div class="content">
             <!-- table here -->
             <div class="table-container">
@@ -82,16 +63,23 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Payment Method</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Room Number</th>
+                    <th scope="col">Room Type</th>
+                    <th scope="col">Room Status</th>
                   </tr>
                 </thead>
-
                 <tbody>
                   <tr>
                     <td>1</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
+                    <td>Room 1001</td>
+                    <td>Premium</td>
+                    <td>Occupied</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Room 1002</td>
+                    <td>Regular</td>
+                    <td>Vacant</td>
                   </tr>
                 </tbody>
               </table>
