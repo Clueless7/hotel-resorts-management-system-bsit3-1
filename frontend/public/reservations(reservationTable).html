@@ -14,8 +14,8 @@
     <script src="./scripts/disableEnter.js"></script>
     <script
       src="./scripts/reservationsMonitoring.js"
-      type="module"
       defer
+      type="module"
     ></script>
     <title>Hotel Management System</title>
   </head>
@@ -43,13 +43,12 @@
         </header>
         <nav class="nav">
           <ul>
+            <li></li>
             <li>
-              <a href="./reservations(checkinTable).html" class="active"
-                >Check-In</a
-              >
+              <a href="./reservations(checkinTable).html">Check-In</a>
             </li>
             <li>
-              <a href="./reservations(checkoutProcessing).html">Check-Out</a>
+              <a href="./reservations(checkoutTable).html">Check-Out</a>
             </li>
           </ul>
         </nav>
@@ -59,67 +58,21 @@
           <!-- Search and manage here -->
           <div class="monitoring-menu">
             <div class="searchBar">
-              <div class="searchButton">
-                <a href="./reservations(checkinTable).html">
-                  <button>⟳</button>
-                </a>
-              </div>
+              <form class="searchButton">
+                <input type="text" placeholder="Search.." name="search" />
+                <button type="submit"><i class="fa fa-search"></i></button>
+              </form>
             </div>
             <div class="manageButton-div">
               <button class="manageButton">Manage</button>
               <div class="manageButton-options">
-                <a href="./reservations(checkinNew).html">NEW</a>
-                <a href="./reservations(checkinEdit).html">EDIT</a>
+                <a href="./reservations(reservationNew).html">NEW</a>
+                <a href="./reservations(reservationEdit).html">EDIT</a>
               </div>
             </div>
           </div>
           <div class="content">
             <!-- table here -->
-            <h1>Check-Ins</h1>
-            <div class="table-container">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Transaction ID</th>
-                    <th scope="col">Customer Name</th>
-                    <th scope="col">Room Number</th>
-                    <th scope="col">Room Type</th>
-                    <th scope="col">Contact Number</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Gender</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Check-In Date</th>
-                    <th scope="col">Check-Out Date</th>
-                    <th scope="col">Duration of Stay</th>
-                    <th scope="col">Payment Method</th>
-                    <th scope="col">Balance</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                    <td>Loading</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="content">
-            <!-- table here -->
-            <h1>Reservations</h1>
             <div class="table-container">
               <table class="table">
                 <thead>

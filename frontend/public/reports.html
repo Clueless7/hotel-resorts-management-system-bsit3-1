@@ -31,15 +31,15 @@
         <a href="./reports.html"
           ><button type="button" class="active">Reports</button></a
         >
-        <!-- <a href="./login.html"
-          ><button type="button" class="log-out-btn">Log Out</button>
-        </a> -->
+        <a href="./login.html"
+          ><button type="button" class="log-out-btn">Log Out</button></a
+        >
       </div>
     </aside>
     <div class="main">
       <div class="container">
         <header class="managementsHeader">
-          <div class="hotel-name-label">BSIT Hotel</div>
+          <div class="hotel-name-label">Elysium</div>
         </header>
         <nav class="nav">
           <ul>
@@ -53,40 +53,51 @@
         <div class="content-container">
           <!-- Search and manage here -->
           <div class="monitoring-menu">
-            <!-- <button class="btn-group-tabs" id="reservations-report">
+            <button class="btn-group-tabs" id="reservations-report">
               Reservations report
             </button>
             <button class="btn-group-tabs" id="rooms-report">
               Rooms report
-            </button> -->
+            </button>
           </div>
-          <div class="reports-content">
-            <div class="reports-table-container">
-              <table class="reports-table" id="report-table">
+          <div class="content" style="display: none">
+            <div class="table-container">
+              <table class="table" id="reservations-table">
                 <thead>
                   <tr>
-                    <th scope="col">Report Title</th>
-                    <th scope="col">File</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Transaction ID</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Room Number</th>
+                    <th scope="col">Room Type</th>
+                    <th scope="col">Contact Number</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Check-In Date</th>
+                    <th scope="col">Check-Out Date</th>
+                    <th scope="col">Duration of Stay</th>
+                    <th scope="col">Payment Method</th>
+                    <th scope="col">Balance</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody></tbody>
+              </table>
+            </div>
+            <br />
+            <div class="table-container">
+              <table class="table" id="rooms-table">
+                <thead>
                   <tr>
-                    <td>Reservations Report</td>
-                    <td>
-                      <button class="btn-group-tabs" id="reservations-report">
-                        DOWNLOAD
-                      </button>
-                    </td>
+                    <th scope="col">#</th>
+                    <th scope="col">Room Number</th>
+                    <th scope="col">Room Type</th>
+                    <th scope="col">Room Bed</th>
+                    <th scope="col">Room Status</th>
+                    <th scope="col">Room Price</th>
                   </tr>
-                  <tr>
-                    <td>Rooms Report</td>
-                    <td>
-                      <button class="btn-group-tabs" id="rooms-report">
-                        DOWNLOAD
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
+                </thead>
+                <tbody></tbody>
               </table>
             </div>
           </div>

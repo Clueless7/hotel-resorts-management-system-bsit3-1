@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="./styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./scripts/disableEnter.js"></script>
+    <title>Hotel Management System</title>
+  </head>
+  <body>
+    <aside>
+      <div class="sidenav">
+        <a href="./index.html"><button type="button">Dashboard</button></a>
+        <a href="./rooms(roomNumTable).html">
+          <button type="button">Rooms</button>
+        </a>
+        <a href="./reservations(reservationTable).html"
+          ><button type="button" class="active">Reservations</button></a
+        >
+        <a href="./services.html"><button type="button">Services</button></a>
+        <a href="./reports.html"><button type="button">Reports</button></a>
+        <a href="./login.html"
+          ><button type="button" class="log-out-btn">Log Out</button></a
+        >
+      </div>
+    </aside>
+    <div class="main">
+      <div class="container">
+        <header class="managementsHeader">
+          <div class="hotel-name-label">Elysium</div>
+        </header>
+        <nav class="nav">
+          <ul>
+            <li></li>
+            <li>
+              <a href="./reservations(checkinTable).html">Check-In</a>
+            </li>
+            <li>
+              <a href="./reservations(checkoutTable).html" class="active"
+                >Check-Out</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <section>
+        <div class="content-container">
+          <!-- Search and manage here -->
+          <div class="monitoring-menu">
+            <div class="searchBar">
+              <form class="searchButton">
+                <input type="text" placeholder="Search.." name="search" />
+                <button type="submit"><i class="fa fa-search"></i></button>
+              </form>
+            </div>
+            <a href="./reservations(checkoutProcessing).html">
+              <button type="button" class="checkOutButton">Check-Out</button>
+            </a>
+          </div>
+          <div class="content">
+            <!-- table here -->
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Transaction ID</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Room Number</th>
+                    <th scope="col">Room Type</th>
+                    <th scope="col">Contact Number</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Check-In Date</th>
+                    <th scope="col">Check-Out Date</th>
+                    <th scope="col">Duration of Stay</th>
+                    <th scope="col">Payment Method</th>
+                    <th scope="col">Balance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>ci098</td>
+                    <td>James Potter</td>
+                    <td>Room 1002</td>
+                    <td>Premium</td>
+                    <td>09123456789</td>
+                    <td>prongspotter@gmail.com</td>
+                    <td>Male</td>
+                    <td>Godric's Hollow</td>
+                    <td>10/04/22</td>
+                    <td>10/12/22</td>
+                    <td>8</td>
+                    <td>Bank Transfer</td>
+                    <td>14800</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>ci099</td>
+                    <td>Lily Evans</td>
+                    <td>Room 2002</td>
+                    <td>Premium</td>
+                    <td>09456789123</td>
+                    <td>lilyevans@gmail.com</td>
+                    <td>Female</td>
+                    <td>Godric's Hollow</td>
+                    <td>11/21/22</td>
+                    <td>11/27/22</td>
+                    <td>7</td>
+                    <td>GCash</td>
+                    <td>13800</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>ci097</td>
+                    <td>Syrius Black</td>
+                    <td>Room 3001</td>
+                    <td>Regular</td>
+                    <td>09987654321</td>
+                    <td>imsyriuslypadfoot@gmail.com</td>
+                    <td>Male</td>
+                    <td>12 Grimmauld Place</td>
+                    <td>07/17/22</td>
+                    <td>07/20/22</td>
+                    <td>4</td>
+                    <td>Bank Transfer</td>
+                    <td>6600</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>ci096</td>
+                    <td>Remus Lupin</td>
+                    <td>Room 3002</td>
+                    <td>Premium</td>
+                    <td>09567123489</td>
+                    <td>moonylupin@gmail.com</td>
+                    <td>Male</td>
+                    <td>Azkaban</td>
+                    <td>08/09/22</td>
+                    <td>08/10/22</td>
+                    <td>2</td>
+                    <td>Cash</td>
+                    <td>8800</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>ci095</td>
+                    <td>Peter Pettigrew</td>
+                    <td>Room 1001</td>
+                    <td>Regular</td>
+                    <td>09341256879</td>
+                    <td>traitorwormtail@gmail.com</td>
+                    <td>Male</td>
+                    <td>The Burrow</td>
+                    <td>09/17/22</td>
+                    <td>09/17/22</td>
+                    <td>1</td>
+                    <td>Cash</td>
+                    <td>1200</td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>ci094</td>
+                    <td>Marlene McKinnon</td>
+                    <td>Room 2001</td>
+                    <td>Premium</td>
+                    <td>09897645321</td>
+                    <td>marlenemckinnon@gmail.com</td>
+                    <td>Female</td>
+                    <td>Herne Bay, Kent</td>
+                    <td>09/06/22</td>
+                    <td>09/08/22</td>
+                    <td>3</td>
+                    <td>GCash</td>
+                    <td>4800</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
