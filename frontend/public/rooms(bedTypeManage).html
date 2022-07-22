@@ -12,7 +12,7 @@
     />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./scripts/disableEnter.js"></script>
-    <script type="module" src="./scripts/roomBedScript.js" defer></script>
+    <script type="module" src="./scripts/bedTypeScript.js" defer></script>
     <title>Hotel Management System</title>
   </head>
   <body>
@@ -28,8 +28,8 @@
         <a href="./services.html"><button type="button">Services</button></a>
         <a href="./reports.html"><button type="button">Reports</button></a>
         <!-- <a href="./login.html"
-          ><button type="button" class="log-out-btn">Log Out</button>
-        </a> -->
+          ><button type="button" class="log-out-btn">Log Out</button></a
+        > -->
       </div>
     </aside>
     <div class="main">
@@ -59,34 +59,28 @@
       </div>
       <section>
         <div class="content-container">
+          <h1>Bed Types Maintenance</h1>
           <!-- Search and manage here -->
 
           <div class="monitoring-menu">
-            <h1>Room Bed Maintenance</h1>
-
             <!-- menu here -->
             <div>
               <form></form>
             </div>
-            <div>
-              <a href="./rooms(bedTypeManage).html">
-                <button type="button" class="btn-group-tabs">MANAGE</button>
-              </a>
-            </div>
+            <div></div>
           </div>
           <div class="content">
             <!-- table here -->
             <form>
-              <label for="roomBed">Bed Name:</label>
-              <select class="roomBedDropDown">
-                <option value="-">-</option>
-              </select>
-              <br />
+              <label for="bedtype">Bed Type:</label>
+              <select class="bedTypeDropDown">
+                <option value="-">-</option></select
+              ><br />
 
-              <div class="roomBed-container"></div>
+              <div class="bedType-container"></div>
 
-              <div class="newroom-btn-group room-bed">
-                <a href="./rooms(bedAttributesTable).html">
+              <div class="newroom-btn-group bed-type">
+                <a href="./rooms(bedAttributesManage).html">
                   <button type="button" class="newroom-btn" id="BACK">
                     BACK
                   </button>
