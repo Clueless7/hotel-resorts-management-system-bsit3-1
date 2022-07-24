@@ -557,7 +557,7 @@ fieldset {
 
 .wholeFieldSet {
   display: inline-flex;
-  /* max-width: 100%; */
+  width: 100%;
 }
 .rightFieldSet {
   width: 49%;
