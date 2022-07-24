@@ -424,23 +424,25 @@ async function editRoom() {
       }
     })
     .then(async (result) => {
-      const incrementBed = await putData(
-        'http://localhost:3000/api/beds',
-        `${prevRoomBedObjectId}`,
-        {
-          bedType: prevRoomBedData.bedType?._id ?? '',
-          bedQuantity: prevRoomBedData?.bedQuantity + 1 ?? '',
-          bedPrice: prevRoomBedData.bedType?._id ?? '',
-        }
-      )
+      if (prevRoomBedData && prevRoomBedObjectId && previousBedName) {
+        const incrementBed = await putData(
+          'http://localhost:3000/api/beds',
+          `${prevRoomBedObjectId}`,
+          {
+            bedType: prevRoomBedData.bedType?._id ?? '',
+            bedQuantity: prevRoomBedData?.bedQuantity + 1 ?? '',
+            bedPrice: prevRoomBedData.bedType?._id ?? '',
+          }
+        )
 
-      if (incrementBed.message) {
-        return Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: `${incrementBed.message}`,
-          showConfirmButton: true,
-        })
+        if (incrementBed.message) {
+          return Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: `${incrementBed.message}`,
+            showConfirmButton: true,
+          })
+        }
       }
     })
     .then((result) => {
