@@ -29,7 +29,6 @@ function calculateDurationOfStay() {
   const diffTime = Math.abs(date2 - date1)
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
   durationOfStay.value = diffDays
-  console.log(diffDays)
 }
 
 // Select elements for dropdowns

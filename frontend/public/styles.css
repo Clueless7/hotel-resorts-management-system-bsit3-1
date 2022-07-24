@@ -13,6 +13,10 @@ body {
   background-color: #eaeaea;
 }
 
+button {
+  cursor: pointer;
+}
+
 .error-message-container {
   max-width: 100%;
   background-color: #252a34;

@@ -31,8 +31,6 @@ async function dynamicDropDown() {
 
 roomBedDropDown.addEventListener('change', (event) => {
   if (event.target.value === 'Add new bed') {
-    console.log(roomBedContainer)
-    console.log(roomBedFormButtonsContainer)
     roomBedContainerDisplay('block', 'flex')
     roomBedContainerChange('ADD', 'EDIT', 'none')
   } else if (event.target.value === '-') {

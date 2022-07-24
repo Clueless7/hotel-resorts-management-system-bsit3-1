@@ -328,6 +328,7 @@ async function updateData() {
 
 deleteButton.addEventListener('click', (event) => {
   event.preventDefault()
+  setRoomToAvailable()
   deleteReservation()
 })
 
@@ -397,32 +398,37 @@ async function deleteReservation() {
 async function setRoomToAvailable() {
   const transactionIdValue = document.querySelector('#transactionId').value
 
-  const customerInfo = await getData(
+  const reservationResponse = await getData(
     'http://localhost:3000/api/reservations',
     `${transactionIdValue}`
   )
 
-  const roomObjectId = customerInfo.roomNumber?._id ?? ''
-  const roomNumber = customerInfo.roomNumber?.roomNumber ?? ''
-  const roomTypeObjectId = customerInfo.roomNumber.roomType?._id ?? ''
-  const roomBedObjectId = customerInfo.roomNumber?.roomBed ?? ''
-
-  const newRoomData = {
-    roomNumber,
-    roomIsAvailable: 'true',
-    roomType: roomTypeObjectId,
-    roomBed: roomBedObjectId,
-  }
-
-  const editedRoom = await putData(
+  const roomResponse = await getData(
     'http://localhost:3000/api/rooms',
-    `${roomObjectId}`,
-    newRoomData
+    `${reservationResponse.roomNumber._id}`
   )
 
-  if (editedRoom.message) {
-    throw new Error(
-      'Cannot add the bed quantity and make room status to available'
-    )
+  const isAvailable = 'true'
+
+  const dataPost = {
+    roomNumber: roomResponse.roomNumber,
+    roomIsAvailable: isAvailable,
+    roomType: roomResponse.roomType,
+    roomBed: roomResponse.roomBed,
+  }
+
+  const updateRoomIsAvailable = await putData(
+    'http://localhost:3000/api/rooms',
+    `${roomResponse._id}`,
+    dataPost
+  )
+
+  if (updateRoomIsAvailable.message) {
+    return Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: `${updateRoomIsAvailable.message}`,
+      showConfirmButton: true,
+    })
   }
 }

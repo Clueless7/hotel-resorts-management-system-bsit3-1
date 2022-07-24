@@ -164,7 +164,6 @@ async function setSelectedRoomData() {
   })
 
   previousBedName = roomRoomBedDropDown.value
-  console.log(previousBedName)
 }
 
 async function createRoom() {
@@ -208,7 +207,6 @@ async function createRoom() {
 
   const response = await postData('http://localhost:3000/api/rooms', dataPost)
 
-  console.log(roomBedData)
   if (response.message) {
     return Swal.fire({
       icon: 'error',
@@ -375,10 +373,9 @@ async function editRoom() {
       }
     }
   })
-
   const dataPost = {
     roomNumber: roomNumberValue,
-    roomIsAvailable: roomIsAvailableValue ? 'true' : 'false',
+    roomIsAvailable: roomIsAvailableValue,
     roomType: roomTypeObjectId,
     roomBed: roomBedObjectId,
   }
@@ -429,7 +426,7 @@ async function editRoom() {
     .then(async (result) => {
       const incrementBed = await putData(
         'http://localhost:3000/api/beds',
-        `${prevRoomBedData._id}`,
+        `${prevRoomBedObjectId}`,
         {
           bedType: prevRoomBedData.bedType?._id ?? '',
           bedQuantity: prevRoomBedData?.bedQuantity + 1 ?? '',
