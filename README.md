@@ -8,10 +8,11 @@ Acorda, Balaguer, Catalan, Gerona, Paingas, and Rayos
 ## Maintenance
 
 1. Room Types
-2. Room Numbers
-3. Room Statuses
+2. Rooms
+3. Beds
 4. Bed Types
 5. Payment Methods
+6. Services
 
 ## Monitoring
 
@@ -21,11 +22,12 @@ Acorda, Balaguer, Catalan, Gerona, Paingas, and Rayos
 4. Bed Types
 5. Reservation
 6. Payment
+7. Services
 
 ## Transaction
 
 1. Check-In
-2. Reservation
+2. Check-Out
 
 ## Reports
 
