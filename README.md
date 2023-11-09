@@ -38,9 +38,7 @@ Acorda, Balaguer, Catalan, Gerona, Paingas, and Rayos
 
 ## TODO:
 
-![TrolleFace](https://cdn.frankerfacez.com/emoticon/622440/4)
-
-- Fix Bugs
+- None (Won't fix anything)
 
 ---
 
